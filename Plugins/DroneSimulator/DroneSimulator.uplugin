@@ -45,5 +45,6 @@
 			"LoadingPhase": "Default"
 		}
 	],
-	"Plugins": []
+	"Plugins": [{ "Name": "EnhancedInput", "Enabled": true }]
 }
+
