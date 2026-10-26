@@ -12,6 +12,9 @@ public class DroneSimTest : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
+		// The HID subsystem seeds user calibration from this loose file on first launch.
+		RuntimeDependencies.Add("$(ProjectDir)/DroneInputMappings.json", StagedFileType.NonUFS);
+
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		

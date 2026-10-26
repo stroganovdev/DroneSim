@@ -24,4 +24,3 @@ if ($BuildExitCode -eq 0) {
 }
 
 exit $BuildExitCode
-
