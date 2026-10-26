@@ -1,0 +1,38 @@
+# Unreal-generated data (including plugins)
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+.vs/
+.idea/
+.vscode/
+*.sln
+*.slnx
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+*.VC.VC.opendb
+UpgradeLog*.htm
+
+# Local backups and caches
+/Backup/
+*.backup_*
+*.bak
+*.tmp
+__pycache__/
+*.py[cod]
+
+# Local credentials and machine settings
+.env
+.env.*
+!.env.example
+*.user
+*.DotSettings.user
+/.codex/
+/.agents/
+
+# Per-user Unreal content
+/Content/Developers/
+/Content/Collections/

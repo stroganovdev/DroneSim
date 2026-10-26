@@ -1,0 +1,55 @@
+{
+  "profiles": [
+    {
+      "device_uid": "\\\\?\\hid#vid_1209&pid_4f54#6&231f86bd&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}",
+      "mappings": [
+        {
+          "axis": "HID_0001_0030",
+          "game_axis": 4,
+          "is_inverted": false
+        },
+        {
+          "axis": "HID_0001_0031",
+          "game_axis": 3,
+          "is_inverted": false
+        },
+        {
+          "axis": "HID_0001_0032",
+          "game_axis": 1,
+          "is_inverted": false
+        },
+        {
+          "axis": "HID_0001_0033",
+          "game_axis": 2,
+          "is_inverted": false
+        }
+      ],
+      "calibration": [
+        {
+          "axis": "HID_0001_0030",
+          "min": -1.0,
+          "max": 1.0,
+          "center": 0.0
+        },
+        {
+          "axis": "HID_0001_0031",
+          "min": -1.0,
+          "max": 1.0,
+          "center": 0.0
+        },
+        {
+          "axis": "HID_0001_0032",
+          "min": -1.0,
+          "max": 1.0,
+          "center": -1.0
+        },
+        {
+          "axis": "HID_0001_0033",
+          "min": -1.0,
+          "max": 1.0,
+          "center": 0.0
+        }
+      ]
+    }
+  ]
+}
