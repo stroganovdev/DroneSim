@@ -21,6 +21,9 @@ void FDroneGamepadSettings::Sanitize()
 float FDroneGamepadSettings::Normalize(float Value, bool ThrottleAxis) const
 {
     if (!FMath::IsFinite(Value)) return 0.f;
+    // Stick throttle uses the full travel like an FPV radio: down=0, centre=0.5, up=1.
+    const bool Trigger = Throttle == EKeys::Gamepad_LeftTriggerAxis || Throttle == EKeys::Gamepad_RightTriggerAxis;
+    if (ThrottleAxis && !Trigger) return (FMath::Clamp(Value, -1.f, 1.f) + 1.f) * 0.5f;
     const float D = FMath::Clamp(Deadzone, 0.f, 0.4f);
     Value = FMath::Clamp(Value, ThrottleAxis ? 0.f : -1.f, 1.f);
     return FMath::Sign(Value) * FMath::Max(0.f, FMath::Abs(Value) - D) / (1.f - D);
@@ -59,7 +62,8 @@ float FDroneGamepadSource::ReadAxis(EDroneInputAxis Axis, EThrottleCalibrationSp
     const auto* Values = Devices.Find(Selected);
     const FKey Key = Axis == EDroneInputAxis::Throttle ? Settings.Throttle : Axis == EDroneInputAxis::Yaw ? Settings.Yaw
         : Axis == EDroneInputAxis::Pitch ? Settings.Pitch : Settings.Roll;
-    float Value = Settings.Normalize(Values ? Values->FindRef(Key) : 0.f, Axis == EDroneInputAxis::Throttle);
+    if (!Values || !Values->Contains(Key)) return Zero;
+    float Value = Settings.Normalize(Values->FindRef(Key), Axis == EDroneInputAxis::Throttle);
     if (Axis == EDroneInputAxis::Pitch && Settings.InvertPitch) Value = -Value;
     return Axis == EDroneInputAxis::Throttle && Space == EThrottleCalibrationSpace::PositiveNegative ? Value * 2.f - 1.f : Value;
 }

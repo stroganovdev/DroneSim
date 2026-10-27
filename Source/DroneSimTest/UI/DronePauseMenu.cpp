@@ -157,7 +157,7 @@ void UDronePauseMenu::SelectSection(int32 Section)
         Content->AddChildToVerticalBox(DeviceReadout)->SetPadding(FMargin(0, 0, 0, 20));
         if (Draft.ControlSource == TEXT("Gamepad"))
         {
-            Content->AddChildToVerticalBox(Text(WidgetTree, TEXT("По умолчанию: RT — газ, левый стик X — поворот, правый стик — тангаж/крен. Отпущенный RT даёт нулевой газ. Для газа на стике используется только его положительная половина; центр — ноль."), 14))->SetPadding(FMargin(0,0,0,12));
+            Content->AddChildToVerticalBox(Text(WidgetTree, TEXT("Как на FPV-пульте: левый стик вверх/вниз — газ, влево/вправо — поворот. Правый — тангаж/крен. Газ: внизу 0%, в центре 50%, вверху 100%. Пружина Xbox возвращает газ к 50%: для нуля держите стик внизу."), 14))->SetPadding(FMargin(0,0,0,12));
             const EDroneInputAxis Axes[] = {EDroneInputAxis::Throttle, EDroneInputAxis::Yaw, EDroneInputAxis::Pitch, EDroneInputAxis::Roll};
             const TCHAR* Labels[] = {TEXT("Газ"), TEXT("Поворот"), TEXT("Тангаж"), TEXT("Крен")};
             const FKey Keys[] = {Draft.Gamepad.Throttle,Draft.Gamepad.Yaw,Draft.Gamepad.Pitch,Draft.Gamepad.Roll};

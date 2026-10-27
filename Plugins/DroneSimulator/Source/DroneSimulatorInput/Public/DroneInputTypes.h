@@ -98,7 +98,7 @@ USTRUCT(BlueprintType)
 struct DRONESIMULATORINPUT_API FDroneGamepadSettings
 {
     GENERATED_BODY()
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Throttle = EKeys::Gamepad_RightTriggerAxis;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Throttle = EKeys::Gamepad_LeftY;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Yaw = EKeys::Gamepad_LeftX;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Pitch = EKeys::Gamepad_RightY;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Roll = EKeys::Gamepad_RightX;

@@ -72,8 +72,13 @@ void UDroneSettingsSubsystem::Initialize(FSubsystemCollectionBase& Collection)
     {
         if (auto* Saved = Cast<UDroneFlightSettingsSave>(UGameplayStatics::LoadGameFromSlot(DroneSettingsSaveSlot, 0)))
         {
-            FutureVersion = Saved->Version > 1;
-            if (!FutureVersion) Current = Saved->Settings;
+            FutureVersion = Saved->Version > 2;
+            if (!FutureVersion)
+            {
+                Current = Saved->Settings;
+                if (Saved->Version < 2 && Current.Gamepad.Throttle == EKeys::Gamepad_RightTriggerAxis)
+                    Current.Gamepad.Throttle = EKeys::Gamepad_LeftY;
+            }
             else LastError = TEXT("Сохранение создано более новой версией. Оно не будет перезаписано.");
         }
         else LastError = TEXT("Не удалось прочитать настройки. Использован стандартный профиль.");
@@ -110,6 +115,7 @@ bool UDroneSettingsSubsystem::CommitDraft()
     if (!Known) { LastError = TEXT("Выбранный источник управления недоступен."); return false; }
     Sanitize(Draft);
     auto* Saved = Cast<UDroneFlightSettingsSave>(UGameplayStatics::CreateSaveGameObject(UDroneFlightSettingsSave::StaticClass()));
+    Saved->Version = 2;
     Saved->Settings = Draft;
     if (!UGameplayStatics::SaveGameToSlot(Saved, DroneSettingsSaveSlot, 0))
     {

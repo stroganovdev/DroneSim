@@ -56,6 +56,12 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDroneGamepadNormalizationTest,"DroneSimTest.In
 bool FDroneGamepadNormalizationTest::RunTest(const FString& Parameters)
 {
     FDroneGamepadSettings Settings;
+    TestEqual(TEXT("Default throttle uses left vertical stick"),Settings.Throttle,EKeys::Gamepad_LeftY);
+    TestEqual(TEXT("Stick down is zero"),Settings.Normalize(-1,true),0.f);
+    TestEqual(TEXT("Stick centre is half throttle"),Settings.Normalize(0,true),.5f);
+    TestEqual(TEXT("Stick up is full throttle"),Settings.Normalize(1,true),1.f);
+    TestEqual(TEXT("Lower half of travel is usable"),Settings.Normalize(-.5f,true),.25f);
+    Settings.Throttle=EKeys::Gamepad_RightTriggerAxis;
     TestEqual(TEXT("Released trigger is zero"),Settings.Normalize(0,true),0.f);
     TestEqual(TEXT("Full trigger is full throttle"),Settings.Normalize(1,true),1.f);
     TestEqual(TEXT("Negative stick throttle never produces thrust"),Settings.Normalize(-1,true),0.f);
@@ -63,7 +69,7 @@ bool FDroneGamepadNormalizationTest::RunTest(const FString& Parameters)
     TestEqual(TEXT("Full negative rotation preserved"),Settings.Normalize(-1,false),-1.f);
     TestEqual(TEXT("NaN is zero"),Settings.Normalize(std::numeric_limits<float>::quiet_NaN(),false),0.f);
     Settings.Throttle=EKeys::SpaceBar; Settings.Deadzone=std::numeric_limits<float>::quiet_NaN(); Settings.Sanitize();
-    TestEqual(TEXT("Invalid binding uses RT"),Settings.Throttle,EKeys::Gamepad_RightTriggerAxis);
+    TestEqual(TEXT("Invalid binding uses left Y"),Settings.Throttle,EKeys::Gamepad_LeftY);
     TestEqual(TEXT("Invalid deadzone restored"),Settings.Deadzone,.12f);
     Settings.Deadzone=99; Settings.Sanitize();
     TestEqual(TEXT("Deadzone bounded"),Settings.Deadzone,.4f);
