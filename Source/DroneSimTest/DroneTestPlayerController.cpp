@@ -22,6 +22,8 @@ void ADroneTestPlayerController::SetupInputComponent()
     Super::SetupInputComponent();
     auto& Binding = InputComponent->BindKey(EKeys::Tab, IE_Pressed, this, &ADroneTestPlayerController::TogglePauseMenu);
     Binding.bExecuteWhenPaused = true;
+    auto& GamepadPause = InputComponent->BindKey(EKeys::Gamepad_Special_Left, IE_Pressed, this, &ADroneTestPlayerController::TogglePauseMenu);
+    GamepadPause.bExecuteWhenPaused = true;
 }
 void ADroneTestPlayerController::TogglePauseMenu()
 {

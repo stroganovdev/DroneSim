@@ -31,6 +31,22 @@ namespace
         T->SetAutoWrapText(true);
         return T;
     }
+    void StyleCombo(UComboBoxString* Combo)
+    {
+        auto Rows = Combo->GetItemStyle();
+        Rows.SetTextColor(FSlateColor(FLinearColor(0.90f,0.94f,1.f)));
+        Rows.SetSelectedTextColor(FSlateColor(FLinearColor::White));
+        Combo->SetItemStyle(Rows);
+    }
+    FString AxisLabel(FKey Key)
+    {
+        if (Key == EKeys::Gamepad_LeftX) return TEXT("Левый стик — горизонталь");
+        if (Key == EKeys::Gamepad_LeftY) return TEXT("Левый стик — вертикаль");
+        if (Key == EKeys::Gamepad_RightX) return TEXT("Правый стик — горизонталь");
+        if (Key == EKeys::Gamepad_RightY) return TEXT("Правый стик — вертикаль");
+        if (Key == EKeys::Gamepad_LeftTriggerAxis) return TEXT("LT — левый курок");
+        return TEXT("RT — правый курок");
+    }
     UButton* Button(UWidgetTree* Tree, const FString& Label, FName Name = NAME_None)
     {
         auto* B = Tree->ConstructWidget<UButton>(UButton::StaticClass(), Name);
@@ -46,6 +62,19 @@ namespace
 void UDroneSettingBinding::Changed(float Value)
 {
     if (Settings) Settings->SetDraftNumber(Key, Value);
+}
+void UDroneGamepadAxisBinding::Changed(FString Selected, ESelectInfo::Type SelectionType)
+{
+    if (!Settings) return;
+    auto Value = Settings->GetDraft().Gamepad;
+    for (FKey Key : FDroneGamepadSettings::AxisKeys()) if (AxisLabel(Key) == Selected)
+    {
+        if (Axis == EDroneInputAxis::Throttle) Value.Throttle = Key;
+        if (Axis == EDroneInputAxis::Yaw) Value.Yaw = Key;
+        if (Axis == EDroneInputAxis::Pitch) Value.Pitch = Key;
+        if (Axis == EDroneInputAxis::Roll) Value.Roll = Key;
+    }
+    Settings->SetDraftGamepad(Value);
 }
 void UDronePauseMenu::NativeOnInitialized()
 {
@@ -77,7 +106,7 @@ void UDronePauseMenu::NativeOnInitialized()
     auto* Tabs = WidgetTree->ConstructWidget<UHorizontalBox>(); Layout->AddChildToVerticalBox(Tabs)->SetPadding(FMargin(0, 0, 0, 18));
     auto* B = Button(WidgetTree, TEXT("Управление"), TEXT("ControlsTab")); B->OnClicked.AddDynamic(this, &UDronePauseMenu::Controls); Tabs->AddChildToHorizontalBox(B)->SetPadding(FMargin(0, 0, 8, 0));
     B = Button(WidgetTree, TEXT("Коптер"), TEXT("AircraftTab")); B->OnClicked.AddDynamic(this, &UDronePauseMenu::Aircraft); Tabs->AddChildToHorizontalBox(B)->SetPadding(FMargin(0, 0, 8, 0));
-    B = Button(WidgetTree, TEXT("Пульт"), TEXT("RadioTab")); B->OnClicked.AddDynamic(this, &UDronePauseMenu::Radio); Tabs->AddChildToHorizontalBox(B)->SetPadding(FMargin(0, 0, 8, 0));
+    B = Button(WidgetTree, TEXT("Ввод"), TEXT("RadioTab")); B->OnClicked.AddDynamic(this, &UDronePauseMenu::Radio); Tabs->AddChildToHorizontalBox(B)->SetPadding(FMargin(0, 0, 8, 0));
     B = Button(WidgetTree, TEXT("Камера"), TEXT("CameraTab")); B->OnClicked.AddDynamic(this, &UDronePauseMenu::Camera); Tabs->AddChildToHorizontalBox(B);
     auto* Scroll = WidgetTree->ConstructWidget<UScrollBox>();
     auto* ScrollSlot = Layout->AddChildToVerticalBox(Scroll); ScrollSlot->SetSize(FSlateChildSize(ESlateSizeRule::Fill));
@@ -95,8 +124,9 @@ void UDronePauseMenu::SelectSection(int32 Section)
 {
     if (!Content || !Settings) return;
     ActiveSection = FMath::Clamp(Section, 0, 3);
-    Content->ClearChildren(); Bindings.Empty(); DeviceReadout = nullptr;
-    const FString Names[] = {TEXT("Управление"), TEXT("Физика коптера"), TEXT("RadioMaster и другие HID-пульты"), TEXT("Камера")};
+    Content->ClearChildren();
+    AxisBindings.Empty(); SourcePicker = nullptr; SourceIds.Empty(); Bindings.Empty(); DeviceReadout = nullptr;
+    const FString Names[] = {TEXT("Управление"), TEXT("Физика коптера"), TEXT("Устройства управления"), TEXT("Камера")};
     Content->AddChildToVerticalBox(Text(WidgetTree, Names[ActiveSection], 23))->SetPadding(FMargin(0, 0, 0, 8));
     if (ActiveSection == 0)
     {
@@ -111,13 +141,57 @@ void UDronePauseMenu::SelectSection(int32 Section)
         Content->AddChildToVerticalBox(Text(WidgetTree, TEXT("Эти изменения применяются с возвратом на старт. Рама, моторы и винты: профиль Meteor75 Pro; параметры меняют только текущий экземпляр коптера."), 14))->SetPadding(FMargin(0, 0, 0, 12));
     if (ActiveSection == 2)
     {
-        DeviceReadout = Text(WidgetTree, TEXT("Ожидание HID-данных…"), 18);
+        auto* Input = GetGameInstance()->GetSubsystem<UDroneInputSubsystem>();
+        const auto Draft = Settings->GetDraft();
+        Content->AddChildToVerticalBox(Text(WidgetTree, TEXT("Источник управления (вступит в силу после «Применить»)"), 16));
+        SourcePicker = WidgetTree->ConstructWidget<UComboBoxString>();
+        StyleCombo(SourcePicker);
+        if (Input) for (const auto& Source : Input->GetControlSources())
+        {
+            SourceIds.Add(Source.Id); SourcePicker->AddOption(Source.Label.ToString());
+            if (Source.Id == Draft.ControlSource) SourcePicker->SetSelectedOption(Source.Label.ToString());
+        }
+        SourcePicker->OnSelectionChanged.AddDynamic(this, &UDronePauseMenu::SourceChanged);
+        Content->AddChildToVerticalBox(SourcePicker)->SetPadding(FMargin(0,4,0,12));
+        DeviceReadout = Text(WidgetTree, TEXT("Ожидание данных…"), 16);
         Content->AddChildToVerticalBox(DeviceReadout)->SetPadding(FMargin(0, 0, 0, 20));
-        Content->AddChildToVerticalBox(Text(WidgetTree, TEXT("Mode 2: левый стик — газ и поворот; правый — тангаж и крен. Показания обновляются и на паузе. USB-подключение проверяется плагином каждые 2 секунды."), 16))->SetPadding(FMargin(0, 0, 0, 16));
-        auto* B = Button(WidgetTree, TEXT("Открыть ручную калибровку"), TEXT("CalibrationButton"));
-        B->OnClicked.AddDynamic(this, &UDronePauseMenu::OpenCalibration); Content->AddChildToVerticalBox(B);
-        Content->AddChildToVerticalBox(Text(WidgetTree, TEXT("Для готового профиля Pocket повторная калибровка не нужна. После закрытия калибровки вы вернётесь в меню паузы."), 14))->SetPadding(FMargin(0, 10, 0, 0));
+        if (Draft.ControlSource == TEXT("Gamepad"))
+        {
+            Content->AddChildToVerticalBox(Text(WidgetTree, TEXT("По умолчанию: RT — газ, левый стик X — поворот, правый стик — тангаж/крен. Отпущенный RT даёт нулевой газ. Для газа на стике используется только его положительная половина; центр — ноль."), 14))->SetPadding(FMargin(0,0,0,12));
+            const EDroneInputAxis Axes[] = {EDroneInputAxis::Throttle, EDroneInputAxis::Yaw, EDroneInputAxis::Pitch, EDroneInputAxis::Roll};
+            const TCHAR* Labels[] = {TEXT("Газ"), TEXT("Поворот"), TEXT("Тангаж"), TEXT("Крен")};
+            const FKey Keys[] = {Draft.Gamepad.Throttle,Draft.Gamepad.Yaw,Draft.Gamepad.Pitch,Draft.Gamepad.Roll};
+            for (int32 Index=0; Index<4; ++Index)
+            {
+                auto* Row = WidgetTree->ConstructWidget<UHorizontalBox>();
+                auto* LabelSlot = Row->AddChildToHorizontalBox(Text(WidgetTree,Labels[Index],16)); LabelSlot->SetSize(FSlateChildSize(ESlateSizeRule::Fill));
+                auto* Picker = WidgetTree->ConstructWidget<UComboBoxString>();
+                StyleCombo(Picker);
+                for (FKey Key : FDroneGamepadSettings::AxisKeys()) Picker->AddOption(AxisLabel(Key));
+                Picker->SetSelectedOption(AxisLabel(Keys[Index]));
+                auto* Binding = NewObject<UDroneGamepadAxisBinding>(this); Binding->Settings=Settings; Binding->Axis=Axes[Index]; AxisBindings.Add(Binding);
+                Picker->OnSelectionChanged.AddDynamic(Binding,&UDroneGamepadAxisBinding::Changed);
+                Row->AddChildToHorizontalBox(Picker); Content->AddChildToVerticalBox(Row)->SetPadding(FMargin(0,3));
+            }
+            auto* Reset = Button(WidgetTree,TEXT("Сброс раскладки Xbox"));
+            Reset->OnClicked.AddDynamic(this,&UDronePauseMenu::ResetGamepadLayout); Content->AddChildToVerticalBox(Reset);
+            auto* Row = WidgetTree->ConstructWidget<UHorizontalBox>();
+            Row->AddChildToHorizontalBox(Text(WidgetTree,TEXT("Мёртвая зона стиков и курка"),16))->SetSize(FSlateChildSize(ESlateSizeRule::Fill));
+            auto* Spin=WidgetTree->ConstructWidget<USpinBox>(); Spin->SetMinValue(0); Spin->SetMaxValue(0.4f); Spin->SetDelta(0.01f); Spin->SetValue(Draft.Gamepad.Deadzone);
+            Spin->SetForegroundColor(FSlateColor(FLinearColor(0.03f,0.05f,0.08f)));
+            Spin->OnValueChanged.AddDynamic(this,&UDronePauseMenu::GamepadDeadzoneChanged); Row->AddChildToHorizontalBox(Spin); Content->AddChildToVerticalBox(Row);
+            auto* Invert=WidgetTree->ConstructWidget<UCheckBox>(); Invert->SetIsChecked(Draft.Gamepad.InvertPitch);
+            Invert->SetContent(Text(WidgetTree,TEXT("Инверсия тангажа геймпада"),16));
+            Invert->OnCheckStateChanged.AddDynamic(this,&UDronePauseMenu::GamepadPitchChanged); Content->AddChildToVerticalBox(Invert);
+        }
+        else if (Draft.ControlSource == TEXT("Radio"))
+        {
+            Content->AddChildToVerticalBox(Text(WidgetTree,TEXT("Pocket Mode 2: левый стик — газ/поворот, правый — тангаж/крен. USB-подключение проверяется каждые 2 секунды. Для Pocket с готовым профилем повторная калибровка не нужна."),14));
+            auto* B=Button(WidgetTree,TEXT("Открыть ручную калибровку"),TEXT("CalibrationButton"));
+            B->OnClicked.AddDynamic(this,&UDronePauseMenu::OpenCalibration); Content->AddChildToVerticalBox(B);
+        }
     }
+
     for (const auto& D : UDroneSettingsSubsystem::Descriptors()) if (D.Section == ActiveSection)
     {
         auto* Row = WidgetTree->ConstructWidget<UHorizontalBox>();
@@ -147,21 +221,17 @@ void UDronePauseMenu::NativeTick(const FGeometry& Geometry, float DeltaTime)
     if (DeviceReadout)
     {
         auto* Input = GetGameInstance()->GetSubsystem<UDroneInputSubsystem>();
-        FString Devices;
-        if (Input) for (const auto& Device : Input->get_all_devices()) if (!Device.device_uid.IsEmpty())
-        {
-            Devices += FString::Printf(TEXT("%s  •  %s\n"), *Device.device_name, Input->is_device_calibrated(Device.device_id) ? TEXT("Профиль загружен") : TEXT("Без калибровки"));
-        }
-        if (Devices.IsEmpty()) Devices = TEXT("Пульт не обнаружен. Включите Pocket → верхний USB → USB Joystick.\n");
-        if (Input) Devices += FString::Printf(TEXT("\nГаз: %.0f%%     Поворот: %+.2f     Тангаж: %+.2f     Крен: %+.2f"),
-            Input->get_calibrated_axis_value(EDroneInputAxis::Throttle) * 100.f,
-            Input->get_calibrated_axis_value(EDroneInputAxis::Yaw), Input->get_calibrated_axis_value(EDroneInputAxis::Pitch), Input->get_calibrated_axis_value(EDroneInputAxis::Roll));
+        const FName Source = Settings->GetDraft().ControlSource;
+        FString Devices = Input ? Input->GetControlSourceStatus(Source) : TEXT("Система ввода недоступна");
+        if (Input) Devices += FString::Printf(TEXT("\nГаз: %.0f%%   Поворот: %+.2f   Тангаж: %+.2f   Крен: %+.2f"),
+            Input->PreviewControlAxis(Source,EDroneInputAxis::Throttle)*100.f,
+            Input->PreviewControlAxis(Source,EDroneInputAxis::Yaw),Input->PreviewControlAxis(Source,EDroneInputAxis::Pitch),Input->PreviewControlAxis(Source,EDroneInputAxis::Roll));
         DeviceReadout->SetText(FText::FromString(Devices));
     }
 }
 FReply UDronePauseMenu::NativeOnPreviewKeyDown(const FGeometry& Geometry, const FKeyEvent& Event)
 {
-    if (Event.GetKey() == EKeys::Tab)
+    if (Event.GetKey() == EKeys::Tab || Event.GetKey() == EKeys::Gamepad_Special_Left)
     {
         ResumeFlight(); return FReply::Handled();
     }
@@ -182,3 +252,23 @@ void UDronePauseMenu::ResumeFlight() { if (auto* PC = Cast<ADroneTestPlayerContr
 void UDronePauseMenu::RestartFlight() { if (auto* PC = Cast<ADroneTestPlayerController>(GetOwningPlayer())) PC->RestartFlight(); }
 void UDronePauseMenu::OpenCalibration() { if (auto* PC = Cast<ADroneTestPlayerController>(GetOwningPlayer())) PC->show_calibration_menu(); }
 FString UDronePauseMenu::GetStatusText() const { return Status ? Status->GetText().ToString() : FString(); }
+
+void UDronePauseMenu::SourceChanged(FString Selected, ESelectInfo::Type SelectionType)
+{
+    if (!Settings || !SourcePicker) return;
+    const int32 Index=SourcePicker->FindOptionIndex(Selected);
+    if (SourceIds.IsValidIndex(Index)) { Settings->SetDraftControlSource(SourceIds[Index]); SelectSection(2); }
+}
+void UDronePauseMenu::GamepadDeadzoneChanged(float Value)
+{
+    if (Settings) { auto Gamepad=Settings->GetDraft().Gamepad; Gamepad.Deadzone=Value; Settings->SetDraftGamepad(Gamepad); }
+}
+void UDronePauseMenu::GamepadPitchChanged(bool Value)
+{
+    if (Settings) { auto Gamepad=Settings->GetDraft().Gamepad; Gamepad.InvertPitch=Value; Settings->SetDraftGamepad(Gamepad); }
+}
+
+void UDronePauseMenu::ResetGamepadLayout()
+{
+    if (Settings) { Settings->SetDraftGamepad(FDroneGamepadSettings()); SelectSection(2); }
+}

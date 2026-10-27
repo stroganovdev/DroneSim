@@ -5,6 +5,8 @@
 #include "DroneInputTypes.h"
 #include "DroneInputSubsystem.generated.h"
 
+class IDroneControlSource;
+class FDroneGamepadSource;
 class FDroneInputProcessor;
 class FDroneInputCalibrator;
 class FDroneInputProfileManager;
@@ -53,6 +55,19 @@ public:
     UFUNCTION(BlueprintPure, Category = "Drone Input")
     float get_calibrated_axis_value(EDroneInputAxis axis, EThrottleCalibrationSpace throttle_calibration_space = EThrottleCalibrationSpace::PositiveOnly) const;
 
+    // Explicit routing: adding a provider makes it available in the menu without changing flight physics.
+    bool RegisterControlSource(TSharedRef<IDroneControlSource> Source);
+    UFUNCTION(BlueprintPure) TArray<FDroneControlSourceInfo> GetControlSources() const;
+    UFUNCTION(BlueprintCallable) bool SetControlSource(FName Id);
+    void ClearControlSource() { ActiveControlSource = NAME_None; WaitingForNeutral = true; SourceWasAvailable = false; }
+    UFUNCTION(BlueprintPure) FName GetControlSource() const { return ActiveControlSource; }
+    UFUNCTION(BlueprintCallable) void ConfigureGamepad(FDroneGamepadSettings Settings);
+    UFUNCTION(BlueprintPure) FString GetControlSourceStatus(FName Id) const;
+    UFUNCTION(BlueprintPure) float PreviewControlAxis(FName Id, EDroneInputAxis Axis) const;
+    UFUNCTION(BlueprintPure) bool IsWaitingForNeutral() const { return WaitingForNeutral; }
+    int32 GetRadioDeviceId() const;
+    float ReadRadioAxis(EDroneInputAxis Axis, EThrottleCalibrationSpace Space) const;
+
     // Access raw values for UI
     UFUNCTION(BlueprintPure, Category = "Drone Input")
     float get_raw_axis_value(int32 device_id, FName axis_name) const;
@@ -100,6 +115,13 @@ protected:
     TSharedPtr<FDroneInputProfileManager> profile_manager;
 
     void reset_calibration_state_for_device(int32 device_id);
+
+    TArray<TSharedPtr<IDroneControlSource>> ControlSources;
+    TSharedPtr<FDroneGamepadSource> GamepadSource;
+    FName ActiveControlSource = TEXT("Radio");
+    bool WaitingForNeutral = false;
+    bool SourceWasAvailable = true;
+    const IDroneControlSource* FindControlSource(FName Id) const;
 
     EDroneInputPrecisionMode precision_mode = EDroneInputPrecisionMode::LowPrecision;
 };

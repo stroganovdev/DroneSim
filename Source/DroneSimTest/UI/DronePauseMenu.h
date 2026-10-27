@@ -1,6 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/ComboBoxString.h"
+#include "DroneSimulatorInput/Public/DroneInputTypes.h"
 #include "DronePauseMenu.generated.h"
 class UDroneSettingsSubsystem;
 class UVerticalBox;
@@ -16,6 +18,16 @@ public:
     UPROPERTY() TObjectPtr<UDroneSettingsSubsystem> Settings;
     FName Key;
     UFUNCTION() void Changed(float Value);
+};
+
+UCLASS()
+class UDroneGamepadAxisBinding : public UObject
+{
+    GENERATED_BODY()
+public:
+    UPROPERTY() TObjectPtr<UDroneSettingsSubsystem> Settings;
+    EDroneInputAxis Axis = EDroneInputAxis::None;
+    UFUNCTION() void Changed(FString Selected, ESelectInfo::Type SelectionType);
 };
 
 UCLASS()
@@ -39,6 +51,13 @@ private:
     UPROPERTY() TObjectPtr<UTextBlock> Status;
     UPROPERTY() TObjectPtr<UTextBlock> DeviceReadout;
     UPROPERTY() TArray<TObjectPtr<UDroneSettingBinding>> Bindings;
+    UPROPERTY() TArray<TObjectPtr<UDroneGamepadAxisBinding>> AxisBindings;
+    UPROPERTY() TObjectPtr<UComboBoxString> SourcePicker;
+    TArray<FName> SourceIds;
+    UFUNCTION() void SourceChanged(FString Selected, ESelectInfo::Type SelectionType);
+    UFUNCTION() void GamepadDeadzoneChanged(float Value);
+    UFUNCTION() void GamepadPitchChanged(bool Value);
+    UFUNCTION() void ResetGamepadLayout();
     int32 ActiveSection = 0;
     UFUNCTION() void Controls() { SelectSection(0); }
     UFUNCTION() void Aircraft() { SelectSection(1); }

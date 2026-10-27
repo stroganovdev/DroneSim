@@ -1,4 +1,5 @@
 #include "DroneInputSubsystem.h"
+#include "DroneControlSources.h"
 #include "DroneInputCalibrator.h"
 #include "DroneInputProcessor.h"
 #include "DroneInputProfileManager.h"
@@ -36,6 +37,9 @@ void UDroneInputSubsystem::Initialize(FSubsystemCollectionBase &Collection) {
 		FSlateApplication::Get().RegisterInputPreProcessor(this->input_processor);
 	}
 
+    RegisterControlSource(MakeShared<FDroneRadioSource>(this));
+    GamepadSource = MakeShared<FDroneGamepadSource>();
+    RegisterControlSource(GamepadSource.ToSharedRef());
 	FHIDInputManager::get().initialize();
 	UE_LOG(LogDroneSimulatorInput, Log, TEXT("UDroneInputManager::Initialize - Input System Initialized"));
 }
@@ -46,6 +50,8 @@ void UDroneInputSubsystem::Deinitialize() {
 	if (FSlateApplication::IsInitialized() && this->input_processor.IsValid()) {
 		FSlateApplication::Get().UnregisterInputPreProcessor(this->input_processor);
 	}
+	ControlSources.Empty();
+    GamepadSource.Reset();
 	this->input_processor.Reset();
 	this->calibrator.Reset();
 	this->profile_manager.Reset();
@@ -63,11 +69,20 @@ void UDroneInputSubsystem::Tick(float DeltaTime) {
 		device_pair.Value.raw_int_axes.Empty();
 	}
 
-	if (!calibrator.IsValid()) {
-		return;
-	}
-
-	FHIDInputManager::get().poll_devices(this);
+    if (calibrator.IsValid()) FHIDInputManager::get().poll_devices(this);
+    for (const auto& Source : ControlSources) Source->Tick();
+    const auto* Source = FindControlSource(ActiveControlSource);
+    const bool Available = Source && Source->IsAvailable();
+    if (!Available || !SourceWasAvailable) WaitingForNeutral = true;
+    SourceWasAvailable = Available;
+    if (Available && WaitingForNeutral)
+    {
+        const bool Neutral = Source->ReadAxis(EDroneInputAxis::Throttle, EThrottleCalibrationSpace::PositiveOnly) <= 0.05f
+            && FMath::Abs(Source->ReadAxis(EDroneInputAxis::Yaw, EThrottleCalibrationSpace::PositiveOnly)) <= 0.05f
+            && FMath::Abs(Source->ReadAxis(EDroneInputAxis::Pitch, EThrottleCalibrationSpace::PositiveOnly)) <= 0.05f
+            && FMath::Abs(Source->ReadAxis(EDroneInputAxis::Roll, EThrottleCalibrationSpace::PositiveOnly)) <= 0.05f;
+        if (Neutral) WaitingForNeutral = false;
+    }
 }
 
 static float apply_unsigned_axis_invert(float calibrated_value,
@@ -182,9 +197,12 @@ static float calibrate_axis_value(EDroneInputAxis axis, float raw_value, const F
 
 void UDroneInputSubsystem::handle_raw_analog_input(int32 device_id, FKey key,
 																									 float analog_value) {
-	if (!calibrator.IsValid()) {
-		return;
-	}
+    if (key.IsGamepadKey())
+    {
+        if (GamepadSource) GamepadSource->Analog(device_id, key, analog_value);
+        return; // Standard gamepads never participate in HID calibration.
+    }
+	if (!calibrator.IsValid()) return;
 
 	// 1. Update Device Raw Data
 	register_device(device_id);
@@ -310,7 +328,7 @@ void UDroneInputSubsystem::set_axis_mapping(int32 device_id, FName axis_name,
 	}
 }
 
-float UDroneInputSubsystem::get_calibrated_axis_value(
+float UDroneInputSubsystem::ReadRadioAxis(
 		EDroneInputAxis axis,
 		EThrottleCalibrationSpace throttle_calibration_space) const {
 	if (!calibrator.IsValid() ||
@@ -318,8 +336,10 @@ float UDroneInputSubsystem::get_calibrated_axis_value(
 		return 0.0f;
 	}
 
+    const int32 SelectedRadio = GetRadioDeviceId();
 	for (const auto &device_mapping_pair : device_mappings) {
 		const int32 device_id = device_mapping_pair.Key;
+        if (device_id != SelectedRadio) continue;
 		const TMap<FName, FInputAxisMapping> &mappings = device_mapping_pair.Value;
 
 		for (const auto &mapping_pair : mappings) {
@@ -425,4 +445,76 @@ void UDroneInputSubsystem::set_precision_mode(EDroneInputPrecisionMode in_precis
 EDroneInputPrecisionMode UDroneInputSubsystem::get_precision_mode() const
 {
 	return this->precision_mode;
+}
+
+const IDroneControlSource* UDroneInputSubsystem::FindControlSource(FName Id) const
+{
+    for (const auto& Source : ControlSources) if (Source->GetId() == Id) return Source.Get();
+    return nullptr;
+}
+bool UDroneInputSubsystem::RegisterControlSource(TSharedRef<IDroneControlSource> Source)
+{
+    if (Source->GetId().IsNone() || FindControlSource(Source->GetId())) return false;
+    ControlSources.Add(Source); return true;
+}
+TArray<FDroneControlSourceInfo> UDroneInputSubsystem::GetControlSources() const
+{
+    TArray<FDroneControlSourceInfo> Result;
+    for (const auto& Source : ControlSources)
+    {
+        FDroneControlSourceInfo Info; Info.Id = Source->GetId(); Info.Label = Source->GetLabel(); Result.Add(Info);
+    }
+    return Result;
+}
+bool UDroneInputSubsystem::SetControlSource(FName Id)
+{
+    const auto* Source = FindControlSource(Id);
+    if (!Source) return false;
+    if (ActiveControlSource != Id)
+    {
+        ActiveControlSource = Id; WaitingForNeutral = true; SourceWasAvailable = false;
+        for (const auto& Item : ControlSources) if (Item->GetId() == Id) Item->Reset();
+    }
+    return true;
+}
+void UDroneInputSubsystem::ConfigureGamepad(FDroneGamepadSettings Settings)
+{
+    Settings.Sanitize();
+    if (GamepadSource && !(GamepadSource->Settings == Settings))
+    {
+        GamepadSource->Settings = Settings; GamepadSource->Reset();
+        if (ActiveControlSource == TEXT("Gamepad")) WaitingForNeutral = true;
+    }
+}
+int32 UDroneInputSubsystem::GetRadioDeviceId() const
+{
+    int32 Selected = MAX_int32;
+    for (const auto& Pair : devices)
+        if (!Pair.Value.device_uid.IsEmpty() && is_device_calibrated(Pair.Key)) Selected = FMath::Min(Selected, Pair.Key);
+    return Selected == MAX_int32 ? INDEX_NONE : Selected;
+}
+float UDroneInputSubsystem::get_calibrated_axis_value(EDroneInputAxis Axis, EThrottleCalibrationSpace Space) const
+{
+    const auto* Source = FindControlSource(ActiveControlSource);
+    if (!Source || !Source->IsAvailable() || WaitingForNeutral)
+        return Axis == EDroneInputAxis::Throttle && Space == EThrottleCalibrationSpace::PositiveNegative ? -1.f : 0.f;
+    const float Value = Source->ReadAxis(Axis, Space);
+    if (!FMath::IsFinite(Value)) return Axis == EDroneInputAxis::Throttle && Space == EThrottleCalibrationSpace::PositiveNegative ? -1.f : 0.f;
+    return FMath::Clamp(Value, Axis == EDroneInputAxis::Throttle && Space == EThrottleCalibrationSpace::PositiveOnly ? 0.f : -1.f, 1.f);
+}
+float UDroneInputSubsystem::PreviewControlAxis(FName Id, EDroneInputAxis Axis) const
+{
+    const auto* Source = FindControlSource(Id);
+    return Source && Source->IsAvailable() ? Source->ReadAxis(Axis, EThrottleCalibrationSpace::PositiveOnly) : 0.f;
+}
+FString UDroneInputSubsystem::GetControlSourceStatus(FName Id) const
+{
+    const auto* Source = FindControlSource(Id);
+    if (!Source) return TEXT("Источник управления недоступен.");
+    FString Result = Source->GetLabel().ToString();
+    if (!Source->IsAvailable()) return Result + TEXT(" — нет данных. Подключите устройство; для Xbox пошевелите стик.");
+    Result += TEXT(" — подключён");
+    if (Id == TEXT("Radio")) Result += TEXT(" • ") + get_device(GetRadioDeviceId()).device_name;
+    if (Id == ActiveControlSource && WaitingForNeutral) Result += TEXT(". Газ в ноль, стики в центр для включения управления.");
+    return Result;
 }

@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "DroneSimulatorInput/Public/DroneInputTypes.h"
 #include "DroneFlightSettings.generated.h"
 
 class APawn;
@@ -14,6 +15,8 @@ USTRUCT(BlueprintType)
 struct FDroneFlightSettings
 {
     GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FName ControlSource = TEXT("Radio");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FDroneGamepadSettings Gamepad;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) bool Acro = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) float RollRate = 670.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) float PitchRate = 670.f;
@@ -58,8 +61,10 @@ public:
     UFUNCTION(BlueprintPure) FDroneFlightSettings GetSettings() const { return Current; }
     UFUNCTION(BlueprintPure) FDroneFlightSettings GetDraft() const { return Draft; }
     UFUNCTION(BlueprintCallable) void BeginEditing() { Draft = Current; }
-    UFUNCTION(BlueprintCallable) void ResetDraft() { Draft = FDroneFlightSettings(); }
+    UFUNCTION(BlueprintCallable) void ResetDraft() { const FName Source = Draft.ControlSource; const auto Gamepad = Draft.Gamepad; Draft = FDroneFlightSettings(); Draft.ControlSource = Source; Draft.Gamepad = Gamepad; }
     UFUNCTION(BlueprintCallable) bool CommitDraft();
+    UFUNCTION(BlueprintCallable) void SetDraftControlSource(FName Id) { Draft.ControlSource = Id; }
+    UFUNCTION(BlueprintCallable) void SetDraftGamepad(FDroneGamepadSettings Value) { Value.Sanitize(); Draft.Gamepad = Value; }
     UFUNCTION(BlueprintCallable) void SetDraftAcro(bool Value) { Draft.Acro = Value; }
     UFUNCTION(BlueprintCallable) void SetDraftNumber(FName Key, float Value);
     UFUNCTION(BlueprintPure) float GetDraftNumber(FName Key) const;

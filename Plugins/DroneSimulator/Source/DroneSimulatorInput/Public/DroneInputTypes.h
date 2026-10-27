@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputCoreTypes.h"
 #include "DroneInputTypes.generated.h"
 
 UENUM(BlueprintType)
@@ -90,4 +91,29 @@ struct FDroneInputDevice
     // Raw Integer values for debugging
     UPROPERTY(BlueprintReadOnly)
     TMap<FName, int32> raw_int_axes;
+};
+
+// Standard Unreal gamepad axes; independent of USB/Bluetooth transport and HID calibration.
+USTRUCT(BlueprintType)
+struct DRONESIMULATORINPUT_API FDroneGamepadSettings
+{
+    GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Throttle = EKeys::Gamepad_RightTriggerAxis;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Yaw = EKeys::Gamepad_LeftX;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Pitch = EKeys::Gamepad_RightY;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) FKey Roll = EKeys::Gamepad_RightX;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) float Deadzone = 0.12f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame) bool InvertPitch = false;
+    static TArray<FKey> AxisKeys();
+    void Sanitize();
+    float Normalize(float Value, bool ThrottleAxis) const;
+    bool operator==(const FDroneGamepadSettings& Other) const;
+};
+
+USTRUCT(BlueprintType)
+struct FDroneControlSourceInfo
+{
+    GENERATED_BODY()
+    UPROPERTY(BlueprintReadOnly) FName Id;
+    UPROPERTY(BlueprintReadOnly) FText Label;
 };

@@ -1,4 +1,5 @@
 #include "DroneFlightSettings.h"
+#include "DroneSimulatorInput/Public/DroneInputSubsystem.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Pawn.h"
 #include "Camera/CameraComponent.h"
@@ -51,6 +52,8 @@ const TArray<FDroneSettingDescriptor>& UDroneSettingsSubsystem::Descriptors()
 }
 void UDroneSettingsSubsystem::Sanitize(FDroneFlightSettings& Settings)
 {
+    Settings.Gamepad.Sanitize();
+    if (Settings.ControlSource.IsNone()) Settings.ControlSource = TEXT("Radio");
     const FDroneFlightSettings Defaults;
     for (const auto& D : Descriptors())
     {
@@ -101,6 +104,10 @@ bool UDroneSettingsSubsystem::NeedsRestart() const
 bool UDroneSettingsSubsystem::CommitDraft()
 {
     if (FutureVersion) return false;
+    auto* Input = GetGameInstance()->GetSubsystem<UDroneInputSubsystem>();
+    bool Known = false;
+    if (Input) for (const auto& Source : Input->GetControlSources()) Known |= Source.Id == Draft.ControlSource;
+    if (!Known) { LastError = TEXT("Выбранный источник управления недоступен."); return false; }
     Sanitize(Draft);
     auto* Saved = Cast<UDroneFlightSettingsSave>(UGameplayStatics::CreateSaveGameObject(UDroneFlightSettingsSave::StaticClass()));
     Saved->Settings = Draft;
@@ -116,6 +123,11 @@ bool UDroneSettingsSubsystem::CommitDraft()
 void UDroneSettingsSubsystem::ApplyToPawn(APawn* Pawn)
 {
     if (!Pawn) return;
+    if (auto* Input = GetGameInstance()->GetSubsystem<UDroneInputSubsystem>())
+    {
+        Input->ConfigureGamepad(Current.Gamepad);
+        if (!Input->SetControlSource(Current.ControlSource)) Input->ClearControlSource();
+    }
     auto* Movement = Pawn->FindComponentByClass<UDroneMovementComponent>();
     if (!Movement) return;
     if (PreparedPawn.Get() != Pawn)
