@@ -1,0 +1,1203 @@
+{
+  "schemaVersion": 1,
+  "id": "20261031-075020-third-person-walk",
+  "title": "Прогулка от третьего лица и переключение на коптер",
+  "created": "2026-10-31T07:50:20.3053485+03:00",
+  "risk": "foundation",
+  "status": "verified",
+  "baseline": {
+    "revision": "1145944b63a9611778fdbe2df18ff6a2fa6ee5e9",
+    "existingChanges": [
+      "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset"
+    ]
+  },
+  "request": "Добавить стандартного персонажа Unreal Third Person для прогулки по текущей карте, с дефолтным управлением клавиатурой и Xbox, сохранив полёт.",
+  "acceptance": [
+    "Используются реальные ассеты установленного Epic Third Person без новой карты или перезаписи контента",
+    "Стандартные Move/Look/Jump работают через Enhanced Input",
+    "Переключение сохраняет один коптер и одного персонажа, физика коптера припаркована в прогулке",
+    "Apply/Restart/пауза и повторные переключения не ломают режим; потеря персонажа позволяет вернуться к коптеру",
+    "Возврат к полёту восстанавливает контексты и нейтральный барьер ввода"
+  ],
+  "changes": [
+    "Импортированы 138 стандартных ассетов Epic Third Person без новой карты",
+    "Добавлены прогулка, F/Xbox Menu и кнопка в меню, отдельные Enhanced Input контексты",
+    "Коптер припаркован, ввод изолирован; Apply/reset и потеря персонажа обработаны",
+    "HUD коптера скрывается в прогулке и восстанавливается в полёте",
+    "Добавлены тест интеграции и инструкция, обновлён Windows-билд"
+  ],
+  "decisions": [
+    "Сохранён стандартный Blueprint персонажа Epic, управление клавиатуры не меняется",
+    "Старт остаётся в полёте; F/Xbox Menu и меню паузы переключают режим",
+    "Коптер при прогулке возвращается на исходный старт и отключает симуляцию, вместо полёта без игрока",
+    "Карта L_DroneTest не редактируется; персонаж создаётся в свободном месте у старта"
+  ],
+  "files": [
+    "Source/DroneSimTest/DroneTestPlayerController.h",
+    "Source/DroneSimTest/DroneTestPlayerController.cpp",
+    "Source/DroneSimTest/UI/DronePauseMenu.h",
+    "Source/DroneSimTest/UI/DronePauseMenu.cpp",
+    "Scripts/ImportThirdPersonTemplate.ps1",
+    "Scripts/TestThirdPersonPIE.py",
+    "ThirdPersonWalk.md",
+    "QualityBacklog.md",
+    "Content/Characters/Mannequins/Anims/Death/MM_Death_Back_01.uasset",
+    "Content/Characters/Mannequins/Anims/Death/MM_Death_Front_01.uasset",
+    "Content/Characters/Mannequins/Anims/Death/MM_Death_Front_02.uasset",
+    "Content/Characters/Mannequins/Anims/Death/MM_Death_Front_03.uasset",
+    "Content/Characters/Mannequins/Anims/Death/MM_Death_Left_01.uasset",
+    "Content/Characters/Mannequins/Anims/Death/MM_Death_Right_01.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/MF_Pistol_Idle_ADS.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_DryFire.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Equip.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Fire_Montage.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Fire.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Reload.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Aim/AO_Pistol.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CD.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CU.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS1.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Fall_Loop.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_RecoveryAdditive.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Start.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/MF_Rifle_Idle_ADS.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_DryFire.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Equip.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Fire.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Reload.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/AIM/AO_Rifle.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CC.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CD.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CU.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Back_Med_01.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Hvy_01.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_01.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_02.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_03.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_04.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_01.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_02.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_RecoveryAdditive.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/ABP_Unarmed.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/BS_Idle_Walk_Run.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/MM_Idle.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_01.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_02.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_03.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_ChargedAttack.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Dash.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Fall_Loop.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Jump.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Land.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_WallJump.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Right.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Left.uasset",
+    "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Right.uasset",
+    "Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+    "Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+    "Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+    "Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_01.uasset",
+    "Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_02.uasset",
+    "Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+    "Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+    "Content/Characters/Mannequins/Meshes/SKM_Quinn_Simple.uasset",
+    "Content/Characters/Mannequins/Rigs/CR_Mannequin_Body.uasset",
+    "Content/Characters/Mannequins/Rigs/CR_Mannequin_FootIK.uasset",
+    "Content/Characters/Mannequins/Rigs/CR_Mannequin_Procedural.uasset",
+    "Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+    "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+    "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+    "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+    "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+    "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+    "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+    "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_N.uasset",
+    "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_D.uasset",
+    "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_MRA.uasset",
+    "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_N.uasset",
+    "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_D.uasset",
+    "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_MRA.uasset",
+    "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_N.uasset",
+    "Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+    "Content/Input/IMC_Default.uasset",
+    "Content/Input/IMC_MouseLook.uasset",
+    "Content/Input/Actions/IA_Jump.uasset",
+    "Content/Input/Actions/IA_Look.uasset",
+    "Content/Input/Actions/IA_MouseLook.uasset",
+    "Content/Input/Actions/IA_Move.uasset",
+    "Content/Input/Touch/BPI_TouchInterface.uasset",
+    "Content/Input/Touch/UI_Thumbstick.uasset",
+    "Content/Input/Touch/UI_TouchSimple.uasset",
+    "Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset"
+  ],
+  "checks": [
+    {
+      "name": "editor-build",
+      "method": "compiler",
+      "status": "passed",
+      "evidence": "Saved/QualityHarness/20261031-075020-third-person-walk/20261031-082245-828/editor-build.log",
+      "sha256": "8746499F09C3316CB5A393633B16D73E58452425DF27B3BA9FFBE3F439438D7F",
+      "detail": "Exit=0; build script: Scripts/BuildDroneSimTestEditor.ps1",
+      "revision": "1145944b63a9611778fdbe2df18ff6a2fa6ee5e9",
+      "scope": [
+        " M QualityBacklog.md",
+        " M Source/DroneSimTest/DroneTestPlayerController.cpp",
+        " M Source/DroneSimTest/DroneTestPlayerController.h",
+        " M Source/DroneSimTest/UI/DronePauseMenu.cpp",
+        " M Source/DroneSimTest/UI/DronePauseMenu.h",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Back_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Front_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Front_02.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Front_03.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Left_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Right_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Aim/AO_Pistol.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS1.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CD.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CU.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Fall_Loop.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_RecoveryAdditive.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Start.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MF_Pistol_Idle_ADS.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_DryFire.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Equip.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Fire.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Fire_Montage.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Reload.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/AIM/AO_Rifle.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CC.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CD.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CU.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Back_Med_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Hvy_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_02.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_03.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_04.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_02.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_RecoveryAdditive.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MF_Rifle_Idle_ADS.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_DryFire.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Equip.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Fire.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Reload.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/ABP_Unarmed.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_02.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_03.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_ChargedAttack.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/BS_Idle_Walk_Run.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Dash.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Fall_Loop.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Jump.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Land.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_WallJump.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/MM_Idle.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Right.uasset",
+        "?? Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+        "?? Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+        "?? Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+        "?? Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_01.uasset",
+        "?? Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_02.uasset",
+        "?? Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+        "?? Content/Characters/Mannequins/Meshes/SKM_Quinn_Simple.uasset",
+        "?? Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+        "?? Content/Characters/Mannequins/Rigs/CR_Mannequin_Body.uasset",
+        "?? Content/Characters/Mannequins/Rigs/CR_Mannequin_FootIK.uasset",
+        "?? Content/Characters/Mannequins/Rigs/CR_Mannequin_Procedural.uasset",
+        "?? Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_02_N.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_D.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_MRA.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_N.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_D.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_MRA.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_N.uasset",
+        "?? Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+        "?? Content/Input/Actions/IA_Jump.uasset",
+        "?? Content/Input/Actions/IA_Look.uasset",
+        "?? Content/Input/Actions/IA_MouseLook.uasset",
+        "?? Content/Input/Actions/IA_Move.uasset",
+        "?? Content/Input/IMC_Default.uasset",
+        "?? Content/Input/IMC_MouseLook.uasset",
+        "?? Content/Input/Touch/BPI_TouchInterface.uasset",
+        "?? Content/Input/Touch/UI_Thumbstick.uasset",
+        "?? Content/Input/Touch/UI_TouchSimple.uasset",
+        "?? Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
+        "?? Development/Changes/20261031-075020-third-person-walk.json",
+        "?? Development/Reviews/2026-10-31-third-person.md",
+        "?? QualityReports/2026-10-31-ThirdPerson-PIE.json",
+        "?? QualityReports/2026-10-31-ThirdPerson.md",
+        "?? Scripts/ImportThirdPersonTemplate.ps1",
+        "?? Scripts/TestThirdPersonPIE.py",
+        "?? ThirdPersonWalk.md"
+      ]
+    },
+    {
+      "name": "native-tests",
+      "method": "automation",
+      "status": "passed",
+      "evidence": "Saved/QualityHarness/20261031-075020-third-person-walk/20261031-082245-828/Automation/index.json",
+      "sha256": "D033B0FA40AB27789A39A347DFF613F16EF1602F0962155AB6152B430125D1AF",
+      "detail": "DroneSimTest suite: passed=3, failed=0, notRun=0",
+      "revision": "1145944b63a9611778fdbe2df18ff6a2fa6ee5e9",
+      "scope": [
+        " M QualityBacklog.md",
+        " M Source/DroneSimTest/DroneTestPlayerController.cpp",
+        " M Source/DroneSimTest/DroneTestPlayerController.h",
+        " M Source/DroneSimTest/UI/DronePauseMenu.cpp",
+        " M Source/DroneSimTest/UI/DronePauseMenu.h",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Back_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Front_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Front_02.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Front_03.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Left_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Death/MM_Death_Right_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Aim/AO_Pistol.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS1.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CD.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CU.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Fall_Loop.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_RecoveryAdditive.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Start.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MF_Pistol_Idle_ADS.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_DryFire.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Equip.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Fire.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Fire_Montage.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Reload.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/AIM/AO_Rifle.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CC.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CD.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CU.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Back_Med_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Hvy_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_02.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_03.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_04.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_02.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_RecoveryAdditive.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MF_Rifle_Idle_ADS.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_DryFire.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Equip.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Fire.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Reload.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/ABP_Unarmed.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_01.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_02.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_03.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_ChargedAttack.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/BS_Idle_Walk_Run.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Dash.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Fall_Loop.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Jump.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Land.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_WallJump.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/MM_Idle.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Right.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Left.uasset",
+        "?? Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Right.uasset",
+        "?? Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+        "?? Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+        "?? Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+        "?? Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_01.uasset",
+        "?? Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_02.uasset",
+        "?? Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+        "?? Content/Characters/Mannequins/Meshes/SKM_Quinn_Simple.uasset",
+        "?? Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+        "?? Content/Characters/Mannequins/Rigs/CR_Mannequin_Body.uasset",
+        "?? Content/Characters/Mannequins/Rigs/CR_Mannequin_FootIK.uasset",
+        "?? Content/Characters/Mannequins/Rigs/CR_Mannequin_Procedural.uasset",
+        "?? Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+        "?? Content/Characters/Mannequins/Textures/Manny/T_Manny_02_N.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_D.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_MRA.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_N.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_D.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_MRA.uasset",
+        "?? Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_N.uasset",
+        "?? Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+        "?? Content/Input/Actions/IA_Jump.uasset",
+        "?? Content/Input/Actions/IA_Look.uasset",
+        "?? Content/Input/Actions/IA_MouseLook.uasset",
+        "?? Content/Input/Actions/IA_Move.uasset",
+        "?? Content/Input/IMC_Default.uasset",
+        "?? Content/Input/IMC_MouseLook.uasset",
+        "?? Content/Input/Touch/BPI_TouchInterface.uasset",
+        "?? Content/Input/Touch/UI_Thumbstick.uasset",
+        "?? Content/Input/Touch/UI_TouchSimple.uasset",
+        "?? Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
+        "?? Development/Changes/20261031-075020-third-person-walk.json",
+        "?? Development/Reviews/2026-10-31-third-person.md",
+        "?? QualityReports/2026-10-31-ThirdPerson-PIE.json",
+        "?? QualityReports/2026-10-31-ThirdPerson.md",
+        "?? Scripts/ImportThirdPersonTemplate.ps1",
+        "?? Scripts/TestThirdPersonPIE.py",
+        "?? ThirdPersonWalk.md"
+      ]
+    },
+    {
+      "name": "walk-pie",
+      "method": "integration-actions",
+      "status": "passed",
+      "evidence": "QualityReports/2026-10-31-ThirdPerson-PIE.json",
+      "sha256": "A6B518B8B27DC558A6EA0D15AF3E00AE8BADE4BD58E3A8CB4F5F02BA17CF5574",
+      "detail": "All assertions passed including template Move/Look/Jump, real key mappings, HUD, repeated transitions, pawn counts, Apply/reset, destroyed walker, pause and no asset writes. Test excludes recorder only via unsaved GameStateBase CDO."
+    },
+    {
+      "name": "windows-package",
+      "method": "cook-and-package",
+      "status": "passed",
+      "evidence": "Saved/BuildLogs/PackageDevelopment_20261031_080809.log",
+      "sha256": "B98737B1481DFECD1F64FB53624798BE9E562B4A08F5A418582EDB2296579D8F",
+      "detail": "Full BuildCookRun succeeded, exit0; existing L_DroneTest and actual character dependencies cooked."
+    },
+    {
+      "name": "windows-final-update",
+      "method": "runtime-build",
+      "status": "passed",
+      "evidence": "Saved/BuildLogs/ThirdPersonFinalPackage.log",
+      "sha256": "D2D6398E335A143F4972CEE15C9264A36BC7D2A5574B23E7F388E1BAC7ED1135",
+      "detail": "Final HUD code packaged with previously cooked unchanged assets, BUILD SUCCESSFUL exit0."
+    },
+    {
+      "name": "packaged-visual",
+      "method": "manual-ui",
+      "status": "passed",
+      "evidence": "QualityReports/2026-10-31-ThirdPerson.md",
+      "sha256": "55AD48A799483EA89B0091FFBF8E82CA3B480D88D279DD68EE696B9706A16E9A",
+      "detail": "Observed character/camera, F roundtrip, Space jump, restored HUD, clean walking HUD, pause-mode label and actual menu switch click. Final executable left paused walking."
+    },
+    {
+      "name": "runtime-log",
+      "method": "log-inspection",
+      "status": "passed",
+      "evidence": "Saved/QualityEvidence/ThirdPerson/PackagedFinal-snapshot.log",
+      "sha256": "040AA68577C83AC85E46AC6D18E959F507C83C8AE7C0F1E7351009B157DF3746",
+      "detail": "Frozen current runtime log has zero Accessed None/LogScript Error/fatal matches after walk/flight/menu transitions."
+    },
+    {
+      "name": "diff-review",
+      "method": "scope-review",
+      "status": "passed",
+      "evidence": "Development/Reviews/2026-10-31-third-person.md",
+      "sha256": "76B5F587B4F260ED72EBE624637A97A80EF49EBFBAE5AB61FC403AE9598691AB",
+      "detail": "Reviewed source diff and dependencies; no map/GameMode asset edits, imported 138 standard Epic assets unchanged, original nine recordings preserved."
+    },
+    {
+      "name": "physical-xbox",
+      "method": "hardware-session",
+      "status": "not-run",
+      "required": false,
+      "evidence": "",
+      "detail": "Actual Xbox walk session and USB/Bluetooth reconnect not exercised. Default axes/A verified in real mapping context; injected actions and keyboard UI tests passed."
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer": "author-self-review",
+      "method": "contract-and-failure-review",
+      "status": "passed",
+      "evidence": "Development/Reviews/2026-10-31-third-person.md",
+      "detail": "Input separation, parking/restoration, reset/apply, failed preflight and destroyed walker inspected and exercised."
+    },
+    {
+      "reviewer": "independent-agent:review_third_person",
+      "method": "consumer-compatibility-review",
+      "status": "passed",
+      "evidence": "Development/Reviews/2026-10-31-third-person.md",
+      "detail": "Separate agent source review, same available model. Three initial findings fixed; final HUD/isolation review found no blocking findings. Agent did not execute tests."
+    }
+  ],
+  "limitations": [
+    "Реальная сессия Xbox и USB/Bluetooth не проверены; стандартные назначения и Enhanced Input действия проверены",
+    "Shipping, мультиплеер и длительная сессия не проверялись",
+    "Headless PIE использует временный GameStateBase только для исключения старого менеджера записи; packaged проверен с настоящим GameState",
+    "Остались предупреждения MSVC14.51 и deprecated wrapper GetMovementBase в Engine Character.h"
+  ],
+  "contentNotes": [
+    "По текущему полигону теперь можно ходить стандартным манекеном, осматривать препятствия и возвращаться к коптеру",
+    "Независимое ревью нашло проблему рестарта при прогулке: исправили до выпуска, тест считает Pawn после повторных переходов",
+    "Визуальная проверка нашла старый HUD поверх персонажа — теперь он переключается вместе с режимом",
+    "Идея видео: F, прогулка и прыжок между кубами, Tab с кнопкой возврата, F обратно к коптеру"
+  ],
+  "sourceHashes": [
+    {
+      "path": "Source/DroneSimTest/DroneTestPlayerController.h",
+      "sha256": "07A15C9C2A741C8E7F3F9B991D6C948978D23CF48A11BC8DBAE93896198E62C8"
+    },
+    {
+      "path": "Source/DroneSimTest/DroneTestPlayerController.cpp",
+      "sha256": "D2AAB1DE53BC8E6CAA604CB55E5107AE6119B640DA943A9098B450C1BD9334E5"
+    },
+    {
+      "path": "Source/DroneSimTest/UI/DronePauseMenu.h",
+      "sha256": "7EB97AD3C57DDDC3019E0BC98DE4306DF9CEF4F7C8C37509B7C1EBEDEE0A4052"
+    },
+    {
+      "path": "Source/DroneSimTest/UI/DronePauseMenu.cpp",
+      "sha256": "EBE6774D2F5DB1FD72DA7EC186125820135C9EBDA2A88BEC594C34960EFC155D"
+    },
+    {
+      "path": "Scripts/ImportThirdPersonTemplate.ps1",
+      "sha256": "7041A20295089B0D1A974D8217B70BF87199F4C1129D63B05CEC7702FB51A07A"
+    },
+    {
+      "path": "Scripts/TestThirdPersonPIE.py",
+      "sha256": "40DCBB335696F63B4DE890CD4968E9FBD1B1ACD138298E9421C50D3AE18150D1"
+    },
+    {
+      "path": "ThirdPersonWalk.md",
+      "sha256": "BA8AD2EFE8D7CDBC1778F67C2710FA0BE082035AA7043EB7694E1BD6F5626D24"
+    },
+    {
+      "path": "QualityBacklog.md",
+      "sha256": "CDF207BABF6C42C34798224B36FFE91C7BE399183082406B01B80FA400272C72"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Death/MM_Death_Back_01.uasset",
+      "sha256": "FDEE63C4A4DC23076DDA04B32EB8505BCD41FB791E574A264026C43E700BF923"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Death/MM_Death_Front_01.uasset",
+      "sha256": "C9DAA694DDA4639B106A29401712B03376344B301B6161955A92BA64EA60AE6D"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Death/MM_Death_Front_02.uasset",
+      "sha256": "DDA4F9D6A4C8FC3BF79458D4D2F490965FF01401256E90FDF98A938A58C61986"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Death/MM_Death_Front_03.uasset",
+      "sha256": "BF3A411D465002756EB1A19CDB2BEF63B75A57A9FAB7CE121EE71941E010D2CC"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Death/MM_Death_Left_01.uasset",
+      "sha256": "712A25024FE931BD518FFF6C935B82BC0EE2070A77CAEF63EDD0D6FC7FF66508"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Death/MM_Death_Right_01.uasset",
+      "sha256": "7968E7E1BC3D8E33C3F0D8479E6753D011CED0E05A831EB7F10E28CEB536B9A4"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/MF_Pistol_Idle_ADS.uasset",
+      "sha256": "766A02544F06604946D8C47C47C6BB877E14208904306188BC1F5B174FD7715B"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_DryFire.uasset",
+      "sha256": "64B3C6DC7357F8A1B380057EF76E1CBB984D69E7D0732EAEFD70BEFE2BE7B67F"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Equip.uasset",
+      "sha256": "7F5A1ED2C1B72A9BB27B417CB0D5315440AF2B22B7B846254FBCE50E2FBB3D17"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Fire_Montage.uasset",
+      "sha256": "2EABACC1911BE6C5B0DFF7CF8A5C29C0506A25FFA6F3E7FA5946E76F992E38EE"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Fire.uasset",
+      "sha256": "EBD8467DBB3DE5BA0E1B2EAC0092352E270B37E616BC443872341CDE2F5C22D8"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/MM_Pistol_Reload.uasset",
+      "sha256": "A821A774302CE5121EFFF744620DA09587752290E35E4413B8E40DB8AD9C0391"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Aim/AO_Pistol.uasset",
+      "sha256": "A4F2FCA2458488BE2D05CB2188BD641293D06BDCC4E598FEEE59BA1B23156C24"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CD.uasset",
+      "sha256": "2898B38D8EF305D1D2E285F519BE72CDE7E2B0106BB85657FDA47E35DC27B15D"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CU.uasset",
+      "sha256": "E5C5855B58743D51BF1ABE11B470749F50AE6074FAC734DA446D1C4A9B076650"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS1.uasset",
+      "sha256": "4D7113F1799219DB01D8394C2984D5AFD2957DE07D66CFA463C9C33822E11D89"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd_Left.uasset",
+      "sha256": "DC8A45C6259A8A51808FF3DE4688302A65CE4988A05A5B0F70FBCED01001EA6B"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd_Right.uasset",
+      "sha256": "E6F80EB946A12E3056A53D67B8134F5E9BD028EB66333A8A665C13D6CF14D1EE"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Bwd.uasset",
+      "sha256": "F93AACABF40A36D906896E5C5998E4A63445749EFA25C973092B9AE82EF1477F"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd_Left.uasset",
+      "sha256": "8ED2295BBFBBE7800395B2FC2023E082F6C9B2B7127DD6CEB5C7EC055486C39B"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd_Right.uasset",
+      "sha256": "D80C0C9BB0A8FAE52095506F7F83C42BDD11B4D62EBFE57B1D9C7F40E8A9478A"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Fwd.uasset",
+      "sha256": "CABA32A2584600031BCA7CEC76875E50EB80E4C1D6FEA3E249F2532388D4F221"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Left.uasset",
+      "sha256": "4D8FCF3A8B6E581F4D06BC4FE2B307E1DCDCC7432CC114173C201A0115CAD2C9"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jog/MF_Pistol_Jog_Right.uasset",
+      "sha256": "017F902B0A80B4FFF2115C5C39F640B7622AD562A0EC137D25AAE61D511D0B53"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Fall_Loop.uasset",
+      "sha256": "7B01836FA36515FCB523644E82F2F130289A69A14314B6B939D5A580B3C5950E"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_RecoveryAdditive.uasset",
+      "sha256": "E9935321B5EE3FE9445CFA2A6C9F0D0391D888FBB9DB71B1EAF76B3BC5345D6D"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Start.uasset",
+      "sha256": "58C1E69B2690611740C465F92E3763FD9747B9A6E75FE6A7629B16C5FCC37E7A"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd_Left.uasset",
+      "sha256": "FFF084ED3CA270A8D926F810F078A69347507851744CF399F3142C97E36E2FA6"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd_Right.uasset",
+      "sha256": "26A82255DB90C0DC4E8C01D52A55F73B5F5A532EF161812FAF63BE65869F3504"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Bwd.uasset",
+      "sha256": "704DD7E116A755B086A8D685321F23E332BBA6CB77DD6AE95542D38C462FEB9B"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd_Left.uasset",
+      "sha256": "BDD682C2A45CF6A73A34DF6499F8BB4CCF8B68A42B8888C47B8532BFECB200D1"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd_Right.uasset",
+      "sha256": "B9B42E230D6FDF9F4F836592507C3F8A17DFD76D7B054B78B633A11722F94100"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Fwd.uasset",
+      "sha256": "7AC6171E3B841B09FFF67DC4162B0C70F99F3107F549A20A213D5E05405DC69E"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Left.uasset",
+      "sha256": "BC5F5B9F355E755023D1AA153070A073156F6D902B08E7CF78463F5E0BC8F629"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Pistol/Walk/MF_Pistol_Walk_Right.uasset",
+      "sha256": "E72F68C9A306EC44F7BC4F37E3533F2918EE19D99A1D8E60986036F2A4405D68"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/MF_Rifle_Idle_ADS.uasset",
+      "sha256": "CFA32B19207A25546BB5BC2DDE8454DC633CC27C3DE45747E941756E23DA5D4D"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_DryFire.uasset",
+      "sha256": "131E01F0A31F999E7FD09EF190B314314C851F39101412161DABDB00D2DDA801"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Equip.uasset",
+      "sha256": "136B19498B8BAC4119DDE48236D22127E8463C0BECFF775069E0B6399B7939D6"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Fire.uasset",
+      "sha256": "1C5B983BD6C09431C83866F772CCF13871AD9626426C86CC08A0C87C150555F7"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Reload.uasset",
+      "sha256": "AC1E17D2ACB7E3CEA6E4C9CA967400DC3052D5EC6514E155B33D8E4701E80784"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/AIM/AO_Rifle.uasset",
+      "sha256": "A3CFB9E380D881FA8561DF0515F4FF24D96AF4D3E1430DF829C7EDE641A12B1D"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CC.uasset",
+      "sha256": "9521C1941980DC784CEDB3DF736D7C1EDF56AFAA0201F28B41C5AE9923E88BBB"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CD.uasset",
+      "sha256": "09B2C98AA7778B6A970B0D90882555CF920C03D761F1E50BB3FEAF0E3C9A6FEF"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CU.uasset",
+      "sha256": "60969C39FF3C1BD1E30E7C728A9DBE49C236857659B1AE8D20AE7605D8152324"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Back_Med_01.uasset",
+      "sha256": "ECB41AE9339D797408A7B9C0270DC1F917B680A21F1C189AC0E3890F41185E0B"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Hvy_01.uasset",
+      "sha256": "E5CAF5938C73D131C9254C1AF09CB7FD4335516C9A406BE77C17AD5E1F2CDEBE"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_01.uasset",
+      "sha256": "AE8728F698434DD1E63978D5D92C5984D086D7EE39CE618598122B6FA87DC820"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_02.uasset",
+      "sha256": "DCB6C068D81D5BE1D84C88895805EB29C2F3F345668A10884836F00759B0647B"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_03.uasset",
+      "sha256": "3949DF1228E6C14047477538424F9440216915A0637DA33CF6C7298400128073"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_04.uasset",
+      "sha256": "E0ED26DE9C333968631CC040E82AEBAC289A2FD655A1F348A3B09CE3B40F1EF5"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_01.uasset",
+      "sha256": "CCA3C893D68D8270A9EEC9EB7572F7ED6BFCFDF6CE6345DC8B2860D6135DBE00"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_02.uasset",
+      "sha256": "3ACB6956F9EB6512E386B575C4C3E390F7D0280B037CA52E0EEF813FB1F729D6"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset",
+      "sha256": "C3939C4AA298E6BE0834256EF6F642CFF0465A40D676EC7E464AAF504B44F729"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset",
+      "sha256": "907CB106C1C466AAC0B38753B7551AF73A09C082A652C82C43DF5418EB33B089"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset",
+      "sha256": "0FD489F5C8D4D63E84F8A25C2DB46C3AE54EAE828212B2A32622726E593B5D3C"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset",
+      "sha256": "4103EA6388D484E8F71CD30B955C3C954750D922A0C030BF3D902BDB3E02C13D"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset",
+      "sha256": "2CA8D8EC88D086D4CB6027A2EEFDDE258142587BCA40E98DEE021ABE9C8824F8"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset",
+      "sha256": "287D39883A65CCF6F89D91C7CA13B23184F04AE6EB5CC3867DD7EF7CFB35EC1C"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset",
+      "sha256": "4FEAF1BD5B370E28F5DCE611B28D955BBF84BBEB72B7E22972A0E143022621A7"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset",
+      "sha256": "E3C5CAE5448DBB8C4E3BDA5406202A8E55B08247695082270E1FEF3DBDD6E533"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset",
+      "sha256": "39ACBD6BCFC5EC2795EE2497BB353FBE954766BDA545C3318C3CD6EE5F1EE008"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset",
+      "sha256": "CE74E83B9B88FA3722951C1C6B2CC36AE7159B8141F5347E5B47D760CEE41C42"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset",
+      "sha256": "D17C0A4FE1D9BB970B3208909E1C35B7183568C7968A0D6D0DE391CCA216B472"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_RecoveryAdditive.uasset",
+      "sha256": "9D663743AC0FD361303751C55688A34053FBED145AAA88A004ABD7B02533D5E5"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset",
+      "sha256": "C2DA3D291DF2070E1AAA62A45E445A7979948489B9E811E0D17F94B3E627D14E"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset",
+      "sha256": "925F27182BE45054A1BBB5D458CB53D38773B356DD61E18B82FA9A72880DC8E7"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset",
+      "sha256": "8D535EB181E756F56974EFAE068F34DA050747FD8836FE2BB5F0C693F51325C2"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset",
+      "sha256": "6E0BD9B3BA2E982AC9FFD60A643DAB78CF886D194A26AF518170A02DC4F3EAC0"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset",
+      "sha256": "E1400DC7A7BFCA224E0AA7796E5C230236AD634C808B2A1540CBAD8903FA897B"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset",
+      "sha256": "F7797A7841CB86C3DC9E68DCDF968E538C9A7335ABB1B0D9DB95E0983B2226D7"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset",
+      "sha256": "787C7B69A054C6F2850503C016A2EF2FADE7AD0941375C8E521C3534BF695D12"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset",
+      "sha256": "540A6A77C48027E13BE84D483C6AFD18D82FB115B7532334597EBEFE2249ECD0"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset",
+      "sha256": "A99D18722E504801616E1C0C495711C43C2D82C4465F7F388CDAE8A45502BD1E"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset",
+      "sha256": "2C2C12D6A959D69C96962CA340BDFE984942DF621EE2FF7E7E955662DDAEE52A"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/ABP_Unarmed.uasset",
+      "sha256": "60AE8C970189979D9E070BEB0FD8675F4AFB2B04D8AAA8D11A0F03C5B7EBF4B2"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/BS_Idle_Walk_Run.uasset",
+      "sha256": "BC71AF8768B569695D4BCB69C79867F998E085693F5E8230854D228DE359F5BB"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/MM_Idle.uasset",
+      "sha256": "11EE7FDEB84DB89C1A66785B43B9BFC1415782122B8AC229517F4C5125D9CB0D"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_01.uasset",
+      "sha256": "F796113F17C91ECA7E48EF57BBADC4FC36245A86B127E75A34CA4771500639ED"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_02.uasset",
+      "sha256": "FB3C74B8E32FB5A88C6D659CAE8717294AF85D4EAA7F684B2A36C36D245559DC"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_03.uasset",
+      "sha256": "1C66016FC3BD386453AC7FB1229A5F0644C6BD5F98EAD29F6E6A1BE80632BA1F"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Attack/MM_ChargedAttack.uasset",
+      "sha256": "5D9B0FC6892519095CB6930ABA5C0DD063ACF647612A06E0F2F7E19C463223EE"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Left.uasset",
+      "sha256": "E6E68E6CF4175F85C0E16A60F80335A1FAB3F8C76A014D02BC0CD18AABE3314A"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Right.uasset",
+      "sha256": "EE3137FF2B7D2CB721C935E2DE91D55479E20F030FF230E9F912F6B70658C399"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd.uasset",
+      "sha256": "1F6E9448F0E0737F506D9E8F11B8D661D6D65C818F0E3160938F1E24082B16C3"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Left.uasset",
+      "sha256": "12EE5A11F277AF90429980F120026F430AE1E438F6EAE42C10222E175F9DBE12"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Right.uasset",
+      "sha256": "66A7561D60453794864EDD7E0C55487817068B6B66E31E179C98B9F2BAB4C76B"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd.uasset",
+      "sha256": "0CCBE851F85A6D4CD7C6438C219CB6AF8E281784107B5BE8E9B052E4DF3069CB"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Left.uasset",
+      "sha256": "F7842445F0C2B2F8D3CD9D43B9F58BC3EA888ADEB1E161398B492097358431BD"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Right.uasset",
+      "sha256": "208F642310D9627D12A5125889B480E051A1F1FC5397A10B83975903A0C59AEA"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Dash.uasset",
+      "sha256": "8A1C964403B7B1D9D9F5E0DD8C20C1AE809606C5E8021B2983EDFC65AC0A66F0"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Fall_Loop.uasset",
+      "sha256": "408BE742C63ADFFE8C6C1D22442E99EA34A7618CD33C6E78E0EED3D7DB877433"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Jump.uasset",
+      "sha256": "252CBF69B07B797D3C3C6177D3AE9DF17E9873F4872C4FA040C0D441DC3B3CEF"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Land.uasset",
+      "sha256": "A00DE25A6BECA56FF6D8077081531E5CEF238C92825B6C184351D0AA99EF3FCB"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_WallJump.uasset",
+      "sha256": "E29AF6DC13219CB813097E596C143D964A18C118CACA138015574009E50859C0"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Left.uasset",
+      "sha256": "7C25A8EEBB9883085AC8F82DE3C83FC34FD19B02567F17FAFDE9DD60C09CF3E5"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Right.uasset",
+      "sha256": "8C71B9BBF7B15D75CACDDBEB8827E22888CFA63A359ECBC0E017AEC822D1A522"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd.uasset",
+      "sha256": "AE0C2EE1C1178FD1B9493F6C327E52D10A3D6BBDE29EAE54DCB07C13A27DCF46"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Left.uasset",
+      "sha256": "A7D8FF5A55EB0C445DA2C74B2FD9460B6A3AFF0DB206BE9E99AED319158D5770"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Right.uasset",
+      "sha256": "67D3D4FED066023A14220277F5598DB83F19EFEE97DE908B1397B0AE998E5599"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd.uasset",
+      "sha256": "C74B2FC0CB651C4924804B364E534856A1B44DEE818127C408DC055E4BDA5ED9"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Left.uasset",
+      "sha256": "81500E4FCDD9AE9AA6433E652E67DEA8F9DD9FA7B9EF1714E29F6AB0A1BB9D97"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Right.uasset",
+      "sha256": "F5922B4E632351353224B32F719AF97E85512AB4F6553B15315CF14AD04F675F"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+      "sha256": "D7FFE412D906380BD5BD4462F464B2A1FE48FDB79B9077F29BD0F958A782035C"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+      "sha256": "9F1E4ED382304D020B750C81505140FC1DE4D339B0909430ADB5380A6BB89B65"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+      "sha256": "26389DB06F0B7928B487494BEF3320D6B0E6BCCD58193BCCEDD67C2C89132A46"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_01.uasset",
+      "sha256": "62A3050EF24B823F9FE84AC5D9C477099494982D35DAFCC3D8078F32B0D4A865"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_02.uasset",
+      "sha256": "6AEC77489FDFAB0E1EA299DE60FBD4F332FACE4495BBBD20B97FB0308BB9C5B4"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+      "sha256": "22029D47455F24471195B26A0E04A1E1389F27D6A924E88C9F46A0F600C9A530"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "sha256": "BE9F011191EE1887B97CD13BCE09886A6066C2FD62C619991070EC142184E1BF"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Meshes/SKM_Quinn_Simple.uasset",
+      "sha256": "1EF45D92507A76D74A5E06737F94CAD40EB7D5F5769DFBB63F7F74E784A178C6"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Rigs/CR_Mannequin_Body.uasset",
+      "sha256": "57F84458A160C35B77F0442D2AF41054E41E021EBBB496C2C76DEA76D1D89580"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Rigs/CR_Mannequin_FootIK.uasset",
+      "sha256": "AA01BE065D2EFA2DFD3B258F60B94B09FCD5D351356D16BB52578EF5BCBFB5C5"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Rigs/CR_Mannequin_Procedural.uasset",
+      "sha256": "057818DD3E0E16FF90C147E25A8FC5AB309C49C4C60360477CF4742E767D151E"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "sha256": "C0CEAF003947088FF076555B81A46E5CCB11149C94025EB2A9E74263FBAA0D67"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+      "sha256": "2F623209571ECBD8185B5B463786BE033C3284190B4FC7B249E8D1D2ED995FD8"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+      "sha256": "6AE0F4F9908C30ECC9AEDF1EBB442E4983E526A7832EC791542064C7853F9999"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+      "sha256": "3E42E888AED8AEFFF68DA7D7DDA4F177C5647B19473E4E913F61375C1319ABD8"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+      "sha256": "C9575D21C9E2872B3358C0EFB9E202535CE2EFCE94C338B9D3BD04CB9831E353"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+      "sha256": "474728713232C6833F55C041548F555BC62C5C49E74082A5D16E68A5CE488CFE"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+      "sha256": "6697972EAF2DFE201923DBA6A302F024B0EF4C4E46B4ECF578178717098E8277"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_N.uasset",
+      "sha256": "61A9DB73F72FE2D7D8821B33A79F57F3F11DF9DA9455822392B84B199C78E8DF"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_D.uasset",
+      "sha256": "04E5ED207B7DF0D2AD1BBC668916BCF170545FC2A72875E49EC99C6E2667002F"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_MRA.uasset",
+      "sha256": "0988D4D9F25597224910E1043591CB2A089A8607A4FE4A63CBC68F3EB2AB473E"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_N.uasset",
+      "sha256": "10FBE9AC3E18E0A890D19756D3470CA372A1AEAFFEFBE9A22D6B0E6182293551"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_D.uasset",
+      "sha256": "F0CCB2F465894C6F9FF4DD142351ED33186C5F861283A75F3E08D1531A253C49"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_MRA.uasset",
+      "sha256": "9F7E495CBE0430AED7084B5508F87186F98346EB04F003734C9B378891DA7887"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_N.uasset",
+      "sha256": "0BC26466E9FDC954CC276BB6AC1350E22C3DABBE1B54B6BF78ED5AE2E339D9FC"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+      "sha256": "34E6FA3414C04A86B7A5287E5569EA9D6E53C319D6E7DBFC8B09DAB5B70611A6"
+    },
+    {
+      "path": "Content/Input/IMC_Default.uasset",
+      "sha256": "133BDA6567AAEEA1AAE05C03597345E4B1D9EF24D868A0275203B3203A7AAE98"
+    },
+    {
+      "path": "Content/Input/IMC_MouseLook.uasset",
+      "sha256": "6A00157CD520EDCF0B037D7091BFE188FA6EB7C48465F695981F7CBE5FB4CC80"
+    },
+    {
+      "path": "Content/Input/Actions/IA_Jump.uasset",
+      "sha256": "73C14789FEE45A6E1EFF57F3304A0BAFEE23790CC8EA6A6A5BF0056E75D7B3E4"
+    },
+    {
+      "path": "Content/Input/Actions/IA_Look.uasset",
+      "sha256": "0D4A2CB59DB11A0A080834E1B292207E530B8DF217446AFB46E382D9FA12F5A9"
+    },
+    {
+      "path": "Content/Input/Actions/IA_MouseLook.uasset",
+      "sha256": "2901132A04CEB384E2693107B8F5455DE48B7C325D6CC5CE07556C6425C19F48"
+    },
+    {
+      "path": "Content/Input/Actions/IA_Move.uasset",
+      "sha256": "85567B9D91FFD9F7106C3062557A6FA864A791233380353F63EB563470985ADD"
+    },
+    {
+      "path": "Content/Input/Touch/BPI_TouchInterface.uasset",
+      "sha256": "E778AE087305A34CD6957FCF9B29670F0A2A01BE96BAD89C79B83286496EC45F"
+    },
+    {
+      "path": "Content/Input/Touch/UI_Thumbstick.uasset",
+      "sha256": "49C8C04B2E8C88BEB55935B05D9AF72C35D89512EA6435F20D5E3123BE139F8B"
+    },
+    {
+      "path": "Content/Input/Touch/UI_TouchSimple.uasset",
+      "sha256": "81F45F11E73180F0964EE3F59F77C8C55E61D355E5C69427E1DE67E5AA5DB77B"
+    },
+    {
+      "path": "Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
+      "sha256": "5B2F02DAF78EA15EFC4E83FC78E7E30CCFE73B6540DC213D099AE72458E7D645"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "flight_hud_count": 1,
+  "initial_flight_context": true,
+  "move_keys": [
+    "W",
+    "S",
+    "A",
+    "D",
+    "Up",
+    "Down",
+    "Right",
+    "Left",
+    "Gamepad_Left2D"
+  ],
+  "jump_keys": [
+    "SpaceBar",
+    "Gamepad_FaceButton_Bottom"
+  ],
+  "spawn_and_isolation": true,
+  "failure_keeps_drone_and_error": true,
+  "enhanced_input_move_and_look": true,
+  "enhanced_input_jump": true,
+  "apply_and_reset_while_walking": true,
+  "repeated_switch_and_neutral_gate": true,
+  "destroyed_walker_recovery": true,
+  "pause_in_walk": true,
+  "no_record_assets_created": true,
+  "success": true,
+  "error": ""
+}

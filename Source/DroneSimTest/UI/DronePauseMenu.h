@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/ComboBoxString.h"
@@ -43,6 +43,7 @@ public:
     UFUNCTION(BlueprintCallable) void ResetMeteorDraft();
     UFUNCTION(BlueprintCallable) void ResumeFlight();
     UFUNCTION(BlueprintCallable) void RestartFlight();
+    UFUNCTION(BlueprintCallable) void SwitchPlayMode();
     UFUNCTION(BlueprintCallable) void OpenCalibration();
     UFUNCTION(BlueprintPure) FString GetStatusText() const;
 private:

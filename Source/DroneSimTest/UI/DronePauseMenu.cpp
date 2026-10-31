@@ -1,4 +1,4 @@
-#include "DronePauseMenu.h"
+﻿#include "DronePauseMenu.h"
 #include "../DroneTestPlayerController.h"
 #include "../Settings/DroneFlightSettings.h"
 #include "Blueprint/WidgetTree.h"
@@ -99,8 +99,8 @@ void UDronePauseMenu::NativeOnInitialized()
     auto* Panel = WidgetTree->ConstructWidget<UBorder>();
     Panel->SetPadding(FMargin(26)); Panel->SetBrushColor(FLinearColor(0.025f, 0.045f, 0.070f, 1)); Size->SetContent(Panel);
     auto* Layout = WidgetTree->ConstructWidget<UVerticalBox>(); Panel->SetContent(Layout);
-    Layout->AddChildToVerticalBox(Text(WidgetTree, TEXT("ПАУЗА  /  НАСТРОЙКИ ПОЛЁТА"), 27))->SetPadding(FMargin(0, 0, 0, 5));
-    auto* Subtitle = Text(WidgetTree, TEXT("METEOR75 PRO     •     Полёт приостановлен     •     TAB — продолжить"), 14);
+    Layout->AddChildToVerticalBox(Text(WidgetTree, TEXT("ПАУЗА  /  НАСТРОЙКИ"), 27))->SetPadding(FMargin(0, 0, 0, 5));
+    auto* Subtitle = Text(WidgetTree, (Cast<ADroneTestPlayerController>(GetOwningPlayer())->IsWalkingMode() ? TEXT("ПРОГУЛКА     •     TAB — продолжить") : TEXT("METEOR75 PRO     •     Полёт приостановлен     •     TAB — продолжить")), 14);
     Subtitle->SetColorAndOpacity(FSlateColor(FLinearColor(0.40f, 0.72f, 0.82f)));
     Layout->AddChildToVerticalBox(Subtitle)->SetPadding(FMargin(0, 0, 0, 20));
     auto* Tabs = WidgetTree->ConstructWidget<UHorizontalBox>(); Layout->AddChildToVerticalBox(Tabs)->SetPadding(FMargin(0, 0, 0, 18));
@@ -130,6 +130,11 @@ void UDronePauseMenu::SelectSection(int32 Section)
     Content->AddChildToVerticalBox(Text(WidgetTree, Names[ActiveSection], 23))->SetPadding(FMargin(0, 0, 0, 8));
     if (ActiveSection == 0)
     {
+        auto* PC=Cast<ADroneTestPlayerController>(GetOwningPlayer());
+        auto* Switch=Button(WidgetTree,PC && PC->IsWalkingMode() ? TEXT("Вернуться к коптеру") : TEXT("Гулять от третьего лица"),TEXT("WalkModeButton"));
+        Switch->OnClicked.AddDynamic(this,&UDronePauseMenu::SwitchPlayMode);
+        Content->AddChildToVerticalBox(Switch)->SetPadding(FMargin(0,0,0,8));
+        Content->AddChildToVerticalBox(Text(WidgetTree,TEXT("F / Xbox Menu — прогулка или полёт. WASD / левый стик — ходьба; мышь / правый стик — камера; Space / A — прыжок. При прогулке коптер возвращается на старт и замирает. Переключение отменяет несохранённые настройки."),14))->SetPadding(FMargin(0,0,0,12));
         auto* Mode = WidgetTree->ConstructWidget<UCheckBox>(UCheckBox::StaticClass(), TEXT("AcroCheckBox"));
         Mode->SetIsChecked(Settings->GetDraft().Acro);
         Mode->SetContent(Text(WidgetTree, TEXT("Acro — сохранять наклон. Выключено: Angle — выравнивать коптер."), 16));
@@ -213,7 +218,9 @@ void UDronePauseMenu::NativeTick(const FGeometry& Geometry, float DeltaTime)
     Super::NativeTick(Geometry, DeltaTime);
     if (Settings && Status)
     {
-        const FString Error = Settings->GetLastError();
+        const auto* PC=Cast<ADroneTestPlayerController>(GetOwningPlayer());
+        const FString ModeError=PC ? PC->GetPlayModeError() : FString();
+        const FString Error = !ModeError.IsEmpty() ? ModeError : Settings->GetLastError();
         Status->SetText(FText::FromString(!Error.IsEmpty() ? Error : Settings->NeedsRestart()
             ? TEXT("После применения коптер вернётся на старт. Настройки сохранятся между запусками.")
             : TEXT("Изменения сохранятся только по кнопке «Применить». TAB / «Продолжить» — без применения.")));
@@ -231,6 +238,8 @@ void UDronePauseMenu::NativeTick(const FGeometry& Geometry, float DeltaTime)
 }
 FReply UDronePauseMenu::NativeOnPreviewKeyDown(const FGeometry& Geometry, const FKeyEvent& Event)
 {
+    if (Event.GetKey()==EKeys::F || Event.GetKey()==EKeys::Gamepad_Special_Right)
+    { SwitchPlayMode(); return FReply::Handled(); }
     if (Event.GetKey() == EKeys::Tab || Event.GetKey() == EKeys::Gamepad_Special_Left)
     {
         ResumeFlight(); return FReply::Handled();
@@ -245,13 +254,27 @@ void UDronePauseMenu::ApplyAndResume()
     const bool Restart = Settings->NeedsRestart();
     if (!Settings->CommitDraft()) return;
     if (Restart) PC->RestartFlight();
-    else { Settings->ApplyToPawn(PC->GetPawn()); PC->ClosePauseMenu(); }
+    else { PC->ApplyFlightSettings(); PC->ClosePauseMenu(); }
+}
+void UDronePauseMenu::SwitchPlayMode()
+{
+    if (auto* PC=Cast<ADroneTestPlayerController>(GetOwningPlayer()))
+        if (!PC->SetWalkingMode(!PC->IsWalkingMode()) && Status) Status->SetText(FText::FromString(PC->GetPlayModeError()));
 }
 void UDronePauseMenu::ResetMeteorDraft() { if (Settings) { Settings->ResetDraft(); SelectSection(ActiveSection); } }
 void UDronePauseMenu::ResumeFlight() { if (auto* PC = Cast<ADroneTestPlayerController>(GetOwningPlayer())) PC->ClosePauseMenu(); }
 void UDronePauseMenu::RestartFlight() { if (auto* PC = Cast<ADroneTestPlayerController>(GetOwningPlayer())) PC->RestartFlight(); }
 void UDronePauseMenu::OpenCalibration() { if (auto* PC = Cast<ADroneTestPlayerController>(GetOwningPlayer())) PC->show_calibration_menu(); }
-FString UDronePauseMenu::GetStatusText() const { return Status ? Status->GetText().ToString() : FString(); }
+FString UDronePauseMenu::GetStatusText() const
+{
+    const auto* PC=Cast<ADroneTestPlayerController>(GetOwningPlayer());
+    if (PC && !PC->GetPlayModeError().IsEmpty()) return PC->GetPlayModeError();
+    if (!Settings) return FString();
+    if (!Settings->GetLastError().IsEmpty()) return Settings->GetLastError();
+    return Settings->NeedsRestart()
+        ? TEXT("После применения коптер вернётся на старт. Настройки сохранятся между запусками.")
+        : TEXT("Изменения сохранятся только по кнопке «Применить». TAB / «Продолжить» — без применения.");
+}
 
 void UDronePauseMenu::SourceChanged(FString Selected, ESelectInfo::Type SelectionType)
 {
