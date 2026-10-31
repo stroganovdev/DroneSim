@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "id": "20261031-074707-journal-output-fix",
+  "title": "Форматирование выжимки журнала",
+  "created": "2026-10-31T07:47:07.2553183+03:00",
+  "risk": "normal",
+  "status": "verified",
+  "baseline": {
+    "revision": "481e302d5fb4b93dea21796efd2c4c75c93b0118",
+    "existingChanges": [
+      " M DevelopmentWorkflow.md",
+      " M Scripts/Invoke-QualityHarness.ps1",
+      "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset"
+    ]
+  },
+  "request": "Исправить найденные финальной diff-проверкой пробелы и перенос ссылки на редактируемый JSON.",
+  "acceptance": [
+    "Markdown содержит цельную строку Editable source без хвостовых пробелов",
+    "Harness самотесты проходят после исправления"
+  ],
+  "changes": [
+    "Исправлена интерполяция строки в генераторе Markdown и конец документа"
+  ],
+  "decisions": [
+    "Отдельная итерация сохраняет доказательства предыдущей проверки без обновления старых хешей задним числом"
+  ],
+  "files": [
+    "Scripts/Invoke-QualityHarness.ps1",
+    "DevelopmentWorkflow.md"
+  ],
+  "checks": [
+    {
+      "name": "editor-build",
+      "method": "compiler",
+      "status": "passed",
+      "evidence": "Saved/QualityHarness/20261031-074707-journal-output-fix/20261031-074711-975/editor-build.log",
+      "sha256": "0B7D86EE592A685034A8139A3E5213202583A2D3964FE525B7DEB936714D4057",
+      "detail": "Exit=0; build script: Scripts/BuildDroneSimTestEditor.ps1",
+      "revision": "481e302d5fb4b93dea21796efd2c4c75c93b0118",
+      "scope": [
+        " M DevelopmentWorkflow.md",
+        " M Scripts/Invoke-QualityHarness.ps1",
+        "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+        "?? Development/Changes/20261031-074707-journal-output-fix.json"
+      ]
+    },
+    {
+      "name": "diff-review",
+      "method": "output-review",
+      "status": "passed",
+      "evidence": "Development/Reviews/journal-output-fix.md",
+      "detail": "Inspected the formatter-only diff and preserved historical record source hashes."
+    },
+    {
+      "name": "harness-self-tests",
+      "method": "negative-tests",
+      "status": "passed",
+      "evidence": "Saved/QualityHarness/SelfTestResults.json",
+      "sha256": "D879624A025CCDC0EE49FFC035115644A076C9EDFA2C39159387C64A6E1B794E",
+      "detail": "All ten positive and negative harness cases passed after formatter change."
+    }
+  ],
+  "reviews": [],
+  "limitations": [
+    "Игровые исходники не менялись; три native-теста предыдущей итерации остаются проверкой игры, не генератора текста"
+  ],
+  "contentNotes": [
+    "Финальная проверка нашла небольшую ошибку оформления журнала; исправление тоже зафиксировано"
+  ],
+  "sourceHashes": [
+    {
+      "path": "Scripts/Invoke-QualityHarness.ps1",
+      "sha256": "2898E95FF034D5936A2BF0253B73D27E857857794B16DC7F3B05B535538D56D6"
+    },
+    {
+      "path": "DevelopmentWorkflow.md",
+      "sha256": "C132E7A02AC477A77375893B256D46AC32734682E536ACB3A7906C136D45B6DC"
+    }
+  ]
+}

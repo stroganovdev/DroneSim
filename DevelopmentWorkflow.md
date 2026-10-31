@@ -80,4 +80,3 @@ as relevant by a hash. A baseline is not proof of full coverage.
 Checks are required by default. Only explicitly optional checks may set required=false; explain why
 and retain the gap in limitations. A required not-run check prevents verified.
 Run Scripts/TestQualityHarness.ps1 after changing this process.
-

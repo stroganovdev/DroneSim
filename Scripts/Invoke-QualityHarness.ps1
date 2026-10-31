@@ -146,7 +146,7 @@ try {
     }
     $Lines+=@('','## Checks and reviews','')
     foreach($Item in @($Record.checks)+@($Record.reviews)){$Lines+="- [$($Item.status)] $($Item.method) $($Item.reviewer): $($Item.detail) (evidence: $($Item.evidence))"}
-    $Lines+=@('','Editable source: '+$ChangeId+'.json. Raw Saved evidence is local and not versioned.')
+    $Lines+=@('',"Editable source: $ChangeId.json. Raw Saved evidence is local and not versioned.")
     $Lines | Set-Content -LiteralPath ([IO.Path]::ChangeExtension($RecordPath,'.md')) -Encoding UTF8
     Write-Output "VALID: $RecordPath"
     exit 0
