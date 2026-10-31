@@ -1,0 +1,3217 @@
+{
+  "success": true,
+  "backup": "E:\\UnrealProjects\\DroneGame\\DroneSimTest\\Backup\\FlightYard_20261031_083554",
+  "new_actor_count": 222,
+  "existing_actor_count": 45,
+  "existing_poses_preserved": true,
+  "game_mode_preserved": true,
+  "clearance_radius_cm": 45,
+  "routes": {
+    "house_window_stairs_window": [
+      [
+        1900,
+        -2225,
+        800
+      ],
+      [
+        3900,
+        -2225,
+        800
+      ],
+      [
+        3725,
+        -2225,
+        700
+      ],
+      [
+        3225,
+        -2225,
+        504.3478260869565
+      ],
+      [
+        2625,
+        -2225,
+        269.5652173913044
+      ],
+      [
+        2400,
+        -2225,
+        250
+      ],
+      [
+        2400,
+        -3000,
+        330
+      ],
+      [
+        4500,
+        -3000,
+        330
+      ]
+    ],
+    "tower_side_to_vertical": [
+      [
+        -1800,
+        -2400,
+        900
+      ],
+      [
+        -1100,
+        -2400,
+        900
+      ],
+      [
+        -1100,
+        -2400,
+        1600
+      ]
+    ],
+    "rings": [
+      [
+        400,
+        -1200,
+        450
+      ],
+      [
+        800,
+        -1200,
+        450
+      ],
+      [
+        1300,
+        -1200,
+        650
+      ],
+      [
+        1800,
+        -1200,
+        450
+      ],
+      [
+        2100,
+        -1200,
+        450
+      ]
+    ]
+  },
+  "parts": [
+    {
+      "name": "FlightYard_House_Ground0",
+      "center": [
+        3200.0,
+        -2600.0,
+        115.0
+      ],
+      "size": [
+        2000,
+        1600,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_Upper0",
+      "center": [
+        2325.0,
+        -2600.0,
+        565.0
+      ],
+      "size": [
+        250,
+        1600,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_Upper1",
+      "center": [
+        4075.0,
+        -2600.0,
+        565.0
+      ],
+      "size": [
+        250,
+        1600,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_Upper2",
+      "center": [
+        3200.0,
+        -2950.0,
+        565.0
+      ],
+      "size": [
+        1500,
+        900,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_Upper3",
+      "center": [
+        3200.0,
+        -1875.0,
+        565.0
+      ],
+      "size": [
+        1500,
+        150,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_Roof0",
+      "center": [
+        2305.0,
+        -2600.0,
+        1015.0
+      ],
+      "size": [
+        290,
+        1680,
+        30
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_Roof1",
+      "center": [
+        4095.0,
+        -2600.0,
+        1015.0
+      ],
+      "size": [
+        290,
+        1680,
+        30
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_Roof2",
+      "center": [
+        3200.0,
+        -2970.0,
+        1015.0
+      ],
+      "size": [
+        1500,
+        940,
+        30
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_Roof3",
+      "center": [
+        3200.0,
+        -1855.0,
+        1015.0
+      ],
+      "size": [
+        1500,
+        190,
+        30
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_WestLower0",
+      "center": [
+        2200,
+        -3260.0,
+        290.0
+      ],
+      "size": [
+        20,
+        280,
+        320
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestLower1",
+      "center": [
+        2200,
+        -3260.0,
+        500.0
+      ],
+      "size": [
+        20,
+        280,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestLower2",
+      "center": [
+        2200,
+        -3000.0,
+        500.0
+      ],
+      "size": [
+        20,
+        240,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestLower3",
+      "center": [
+        2200,
+        -2340.0,
+        290.0
+      ],
+      "size": [
+        20,
+        1080,
+        320
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestLower4",
+      "center": [
+        2200,
+        -2340.0,
+        500.0
+      ],
+      "size": [
+        20,
+        1080,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastLower0",
+      "center": [
+        4200,
+        -3325.0,
+        165.0
+      ],
+      "size": [
+        20,
+        150,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastLower1",
+      "center": [
+        4200,
+        -3325.0,
+        335.0
+      ],
+      "size": [
+        20,
+        150,
+        270
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastLower2",
+      "center": [
+        4200,
+        -3325.0,
+        510.0
+      ],
+      "size": [
+        20,
+        150,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastLower3",
+      "center": [
+        4200,
+        -3000.0,
+        165.0
+      ],
+      "size": [
+        20,
+        500,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastLower4",
+      "center": [
+        4200,
+        -3000.0,
+        510.0
+      ],
+      "size": [
+        20,
+        500,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastLower5",
+      "center": [
+        4200,
+        -2275.0,
+        165.0
+      ],
+      "size": [
+        20,
+        950,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastLower6",
+      "center": [
+        4200,
+        -2275.0,
+        335.0
+      ],
+      "size": [
+        20,
+        950,
+        270
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastLower7",
+      "center": [
+        4200,
+        -2275.0,
+        510.0
+      ],
+      "size": [
+        20,
+        950,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower0",
+      "center": [
+        2300.0,
+        -3400,
+        165.0
+      ],
+      "size": [
+        200,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower1",
+      "center": [
+        2300.0,
+        -3400,
+        335.0
+      ],
+      "size": [
+        200,
+        20,
+        270
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower2",
+      "center": [
+        2300.0,
+        -3400,
+        510.0
+      ],
+      "size": [
+        200,
+        20,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower3",
+      "center": [
+        2600.0,
+        -3400,
+        165.0
+      ],
+      "size": [
+        400,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower4",
+      "center": [
+        2600.0,
+        -3400,
+        510.0
+      ],
+      "size": [
+        400,
+        20,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower5",
+      "center": [
+        3150.0,
+        -3400,
+        165.0
+      ],
+      "size": [
+        700,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower6",
+      "center": [
+        3150.0,
+        -3400,
+        335.0
+      ],
+      "size": [
+        700,
+        20,
+        270
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower7",
+      "center": [
+        3150.0,
+        -3400,
+        510.0
+      ],
+      "size": [
+        700,
+        20,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower8",
+      "center": [
+        3700.0,
+        -3400,
+        165.0
+      ],
+      "size": [
+        400,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower9",
+      "center": [
+        3700.0,
+        -3400,
+        510.0
+      ],
+      "size": [
+        400,
+        20,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower10",
+      "center": [
+        4050.0,
+        -3400,
+        165.0
+      ],
+      "size": [
+        300,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower11",
+      "center": [
+        4050.0,
+        -3400,
+        335.0
+      ],
+      "size": [
+        300,
+        20,
+        270
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthLower12",
+      "center": [
+        4050.0,
+        -3400,
+        510.0
+      ],
+      "size": [
+        300,
+        20,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthLower0",
+      "center": [
+        2525.0,
+        -1800,
+        165.0
+      ],
+      "size": [
+        650,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthLower1",
+      "center": [
+        2525.0,
+        -1800,
+        335.0
+      ],
+      "size": [
+        650,
+        20,
+        270
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthLower2",
+      "center": [
+        2525.0,
+        -1800,
+        510.0
+      ],
+      "size": [
+        650,
+        20,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthLower3",
+      "center": [
+        3100.0,
+        -1800,
+        165.0
+      ],
+      "size": [
+        500,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthLower4",
+      "center": [
+        3100.0,
+        -1800,
+        510.0
+      ],
+      "size": [
+        500,
+        20,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthLower5",
+      "center": [
+        3775.0,
+        -1800,
+        165.0
+      ],
+      "size": [
+        850,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthLower6",
+      "center": [
+        3775.0,
+        -1800,
+        335.0
+      ],
+      "size": [
+        850,
+        20,
+        270
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthLower7",
+      "center": [
+        3775.0,
+        -1800,
+        510.0
+      ],
+      "size": [
+        850,
+        20,
+        80
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestUpper0",
+      "center": [
+        2200,
+        -2937.5,
+        615.0
+      ],
+      "size": [
+        20,
+        925,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestUpper1",
+      "center": [
+        2200,
+        -2937.5,
+        775.0
+      ],
+      "size": [
+        20,
+        925,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestUpper2",
+      "center": [
+        2200,
+        -2937.5,
+        950.0
+      ],
+      "size": [
+        20,
+        925,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestUpper3",
+      "center": [
+        2200,
+        -2225.0,
+        615.0
+      ],
+      "size": [
+        20,
+        500,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestUpper4",
+      "center": [
+        2200,
+        -2225.0,
+        950.0
+      ],
+      "size": [
+        20,
+        500,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestUpper5",
+      "center": [
+        2200,
+        -1887.5,
+        615.0
+      ],
+      "size": [
+        20,
+        175,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestUpper6",
+      "center": [
+        2200,
+        -1887.5,
+        775.0
+      ],
+      "size": [
+        20,
+        175,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_WestUpper7",
+      "center": [
+        2200,
+        -1887.5,
+        950.0
+      ],
+      "size": [
+        20,
+        175,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastUpper0",
+      "center": [
+        4200,
+        -3325.0,
+        615.0
+      ],
+      "size": [
+        20,
+        150,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastUpper1",
+      "center": [
+        4200,
+        -3325.0,
+        775.0
+      ],
+      "size": [
+        20,
+        150,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastUpper2",
+      "center": [
+        4200,
+        -3325.0,
+        950.0
+      ],
+      "size": [
+        20,
+        150,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastUpper3",
+      "center": [
+        4200,
+        -3000.0,
+        615.0
+      ],
+      "size": [
+        20,
+        500,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastUpper4",
+      "center": [
+        4200,
+        -3000.0,
+        950.0
+      ],
+      "size": [
+        20,
+        500,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastUpper5",
+      "center": [
+        4200,
+        -2275.0,
+        615.0
+      ],
+      "size": [
+        20,
+        950,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastUpper6",
+      "center": [
+        4200,
+        -2275.0,
+        775.0
+      ],
+      "size": [
+        20,
+        950,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_EastUpper7",
+      "center": [
+        4200,
+        -2275.0,
+        950.0
+      ],
+      "size": [
+        20,
+        950,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper0",
+      "center": [
+        2300.0,
+        -3400,
+        615.0
+      ],
+      "size": [
+        200,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper1",
+      "center": [
+        2300.0,
+        -3400,
+        775.0
+      ],
+      "size": [
+        200,
+        20,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper2",
+      "center": [
+        2300.0,
+        -3400,
+        950.0
+      ],
+      "size": [
+        200,
+        20,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper3",
+      "center": [
+        2600.0,
+        -3400,
+        615.0
+      ],
+      "size": [
+        400,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper4",
+      "center": [
+        2600.0,
+        -3400,
+        950.0
+      ],
+      "size": [
+        400,
+        20,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper5",
+      "center": [
+        3150.0,
+        -3400,
+        615.0
+      ],
+      "size": [
+        700,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper6",
+      "center": [
+        3150.0,
+        -3400,
+        775.0
+      ],
+      "size": [
+        700,
+        20,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper7",
+      "center": [
+        3150.0,
+        -3400,
+        950.0
+      ],
+      "size": [
+        700,
+        20,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper8",
+      "center": [
+        3700.0,
+        -3400,
+        615.0
+      ],
+      "size": [
+        400,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper9",
+      "center": [
+        3700.0,
+        -3400,
+        950.0
+      ],
+      "size": [
+        400,
+        20,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper10",
+      "center": [
+        4050.0,
+        -3400,
+        615.0
+      ],
+      "size": [
+        300,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper11",
+      "center": [
+        4050.0,
+        -3400,
+        775.0
+      ],
+      "size": [
+        300,
+        20,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_SouthUpper12",
+      "center": [
+        4050.0,
+        -3400,
+        950.0
+      ],
+      "size": [
+        300,
+        20,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthUpper0",
+      "center": [
+        2525.0,
+        -1800,
+        615.0
+      ],
+      "size": [
+        650,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthUpper1",
+      "center": [
+        2525.0,
+        -1800,
+        775.0
+      ],
+      "size": [
+        650,
+        20,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthUpper2",
+      "center": [
+        2525.0,
+        -1800,
+        950.0
+      ],
+      "size": [
+        650,
+        20,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthUpper3",
+      "center": [
+        3100.0,
+        -1800,
+        615.0
+      ],
+      "size": [
+        500,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthUpper4",
+      "center": [
+        3100.0,
+        -1800,
+        950.0
+      ],
+      "size": [
+        500,
+        20,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthUpper5",
+      "center": [
+        3775.0,
+        -1800,
+        615.0
+      ],
+      "size": [
+        850,
+        20,
+        70
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthUpper6",
+      "center": [
+        3775.0,
+        -1800,
+        775.0
+      ],
+      "size": [
+        850,
+        20,
+        250
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_NorthUpper7",
+      "center": [
+        3775.0,
+        -1800,
+        950.0
+      ],
+      "size": [
+        850,
+        20,
+        100
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_House_IN_Jamb0",
+      "center": [
+        2195,
+        -2483,
+        775.0
+      ],
+      "size": [
+        30,
+        16,
+        282
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_House_IN_Jamb1",
+      "center": [
+        2195,
+        -1967,
+        775.0
+      ],
+      "size": [
+        30,
+        16,
+        282
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_House_IN_Lintel0",
+      "center": [
+        2195,
+        -2225.0,
+        642
+      ],
+      "size": [
+        30,
+        500,
+        16
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_House_IN_Lintel1",
+      "center": [
+        2195,
+        -2225.0,
+        908
+      ],
+      "size": [
+        30,
+        500,
+        16
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_House_OUT_Jamb0",
+      "center": [
+        4205,
+        -3258,
+        335.0
+      ],
+      "size": [
+        30,
+        16,
+        302
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_OUT_Jamb1",
+      "center": [
+        4205,
+        -2742,
+        335.0
+      ],
+      "size": [
+        30,
+        16,
+        302
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_OUT_Lintel0",
+      "center": [
+        4205,
+        -3000.0,
+        192
+      ],
+      "size": [
+        30,
+        500,
+        16
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_OUT_Lintel1",
+      "center": [
+        4205,
+        -3000.0,
+        478
+      ],
+      "size": [
+        30,
+        500,
+        16
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_Corner0",
+      "center": [
+        2200,
+        -3400,
+        565
+      ],
+      "size": [
+        40,
+        40,
+        870
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_Corner1",
+      "center": [
+        2200,
+        -1800,
+        565
+      ],
+      "size": [
+        40,
+        40,
+        870
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_Corner2",
+      "center": [
+        4200,
+        -3400,
+        565
+      ],
+      "size": [
+        40,
+        40,
+        870
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_Corner3",
+      "center": [
+        4200,
+        -1800,
+        565
+      ],
+      "size": [
+        40,
+        40,
+        870
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_StairLanding0",
+      "center": [
+        3975.0,
+        -2225.0,
+        565.0
+      ],
+      "size": [
+        450,
+        400,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread01",
+      "center": [
+        2625.0,
+        -2225,
+        139.56521739130434
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread02",
+      "center": [
+        2675.0,
+        -2225,
+        159.1304347826087
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread03",
+      "center": [
+        2725.0,
+        -2225,
+        178.69565217391306
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread04",
+      "center": [
+        2775.0,
+        -2225,
+        198.26086956521738
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread05",
+      "center": [
+        2825.0,
+        -2225,
+        217.82608695652175
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread06",
+      "center": [
+        2875.0,
+        -2225,
+        237.3913043478261
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread07",
+      "center": [
+        2925.0,
+        -2225,
+        256.95652173913044
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread08",
+      "center": [
+        2975.0,
+        -2225,
+        276.52173913043475
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread09",
+      "center": [
+        3025.0,
+        -2225,
+        296.0869565217391
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread10",
+      "center": [
+        3075.0,
+        -2225,
+        315.6521739130435
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread11",
+      "center": [
+        3125.0,
+        -2225,
+        335.2173913043478
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread12",
+      "center": [
+        3175.0,
+        -2225,
+        354.7826086956522
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread13",
+      "center": [
+        3225.0,
+        -2225,
+        374.3478260869565
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread14",
+      "center": [
+        3275.0,
+        -2225,
+        393.9130434782609
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread15",
+      "center": [
+        3325.0,
+        -2225,
+        413.4782608695652
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread16",
+      "center": [
+        3375.0,
+        -2225,
+        433.04347826086956
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread17",
+      "center": [
+        3425.0,
+        -2225,
+        452.60869565217394
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread18",
+      "center": [
+        3475.0,
+        -2225,
+        472.17391304347825
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread19",
+      "center": [
+        3525.0,
+        -2225,
+        491.7391304347826
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread20",
+      "center": [
+        3575.0,
+        -2225,
+        511.304347826087
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread21",
+      "center": [
+        3625.0,
+        -2225,
+        530.8695652173913
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread22",
+      "center": [
+        3675.0,
+        -2225,
+        550.4347826086956
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Tread23",
+      "center": [
+        3725.0,
+        -2225,
+        570.0
+      ],
+      "size": [
+        50,
+        400,
+        20
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Stairs_Stringer0",
+      "center": [
+        3180.0,
+        -2445.0,
+        340.0
+      ],
+      "size": [
+        1262.8935030318273,
+        20,
+        20
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_Handrail0",
+      "center": [
+        3175.0,
+        -2445.0,
+        465.0
+      ],
+      "size": [
+        1234.908903522847,
+        14,
+        14
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost0_0",
+      "center": [
+        2600,
+        -2445,
+        180.0
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost0_1",
+      "center": [
+        2900,
+        -2445,
+        297.3913043478261
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost0_2",
+      "center": [
+        3200,
+        -2445,
+        414.7826086956522
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost0_3",
+      "center": [
+        3500,
+        -2445,
+        532.1739130434783
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost0_4",
+      "center": [
+        3750,
+        -2445,
+        630.0
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_Stringer1",
+      "center": [
+        3180.0,
+        -2005.0,
+        340.0
+      ],
+      "size": [
+        1262.8935030318273,
+        20,
+        20
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_Handrail1",
+      "center": [
+        3175.0,
+        -2005.0,
+        465.0
+      ],
+      "size": [
+        1234.908903522847,
+        14,
+        14
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost1_0",
+      "center": [
+        2600,
+        -2005,
+        180.0
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost1_1",
+      "center": [
+        2900,
+        -2005,
+        297.3913043478261
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost1_2",
+      "center": [
+        3200,
+        -2005,
+        414.7826086956522
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost1_3",
+      "center": [
+        3500,
+        -2005,
+        532.1739130434783
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Stairs_RailPost1_4",
+      "center": [
+        3750,
+        -2005,
+        630.0
+      ],
+      "size": [
+        12,
+        12,
+        100
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_UpperGuard0",
+      "center": [
+        3200,
+        -2515,
+        690
+      ],
+      "size": [
+        1500,
+        14,
+        14
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_House_UpperGuardPost0_0",
+      "center": [
+        2470,
+        -2515,
+        635
+      ],
+      "size": [
+        12,
+        12,
+        110
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_UpperGuardPost0_1",
+      "center": [
+        2950,
+        -2515,
+        635
+      ],
+      "size": [
+        12,
+        12,
+        110
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_UpperGuardPost0_2",
+      "center": [
+        3450,
+        -2515,
+        635
+      ],
+      "size": [
+        12,
+        12,
+        110
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_UpperGuardPost0_3",
+      "center": [
+        3930,
+        -2515,
+        635
+      ],
+      "size": [
+        12,
+        12,
+        110
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_UpperGuard1",
+      "center": [
+        3200,
+        -1935,
+        690
+      ],
+      "size": [
+        1500,
+        14,
+        14
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_House_UpperGuardPost1_0",
+      "center": [
+        2470,
+        -1935,
+        635
+      ],
+      "size": [
+        12,
+        12,
+        110
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_UpperGuardPost1_1",
+      "center": [
+        2950,
+        -1935,
+        635
+      ],
+      "size": [
+        12,
+        12,
+        110
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_UpperGuardPost1_2",
+      "center": [
+        3450,
+        -1935,
+        635
+      ],
+      "size": [
+        12,
+        12,
+        110
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_House_UpperGuardPost1_3",
+      "center": [
+        3930,
+        -1935,
+        635
+      ],
+      "size": [
+        12,
+        12,
+        110
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Tower_Post0",
+      "center": [
+        -1400,
+        -2700,
+        775
+      ],
+      "size": [
+        35,
+        35,
+        1350
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Tower_Post1",
+      "center": [
+        -1400,
+        -2100,
+        775
+      ],
+      "size": [
+        35,
+        35,
+        1350
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Tower_Post2",
+      "center": [
+        -800,
+        -2700,
+        775
+      ],
+      "size": [
+        35,
+        35,
+        1350
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Tower_Post3",
+      "center": [
+        -800,
+        -2100,
+        775
+      ],
+      "size": [
+        35,
+        35,
+        1350
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Tower_Deck0_0",
+      "center": [
+        -1352.5,
+        -2400.0,
+        635.0
+      ],
+      "size": [
+        145,
+        650,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_Deck0_1",
+      "center": [
+        -847.5,
+        -2400.0,
+        635.0
+      ],
+      "size": [
+        145,
+        650,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_Deck0_2",
+      "center": [
+        -1100.0,
+        -2652.5,
+        635.0
+      ],
+      "size": [
+        360,
+        145,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_Deck0_3",
+      "center": [
+        -1100.0,
+        -2147.5,
+        635.0
+      ],
+      "size": [
+        360,
+        145,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_Ring0_0",
+      "center": [
+        -1100,
+        -2710,
+        760
+      ],
+      "size": [
+        650,
+        18,
+        18
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Tower_Ring0_1",
+      "center": [
+        -1100,
+        -2090,
+        760
+      ],
+      "size": [
+        650,
+        18,
+        18
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Tower_Deck1_0",
+      "center": [
+        -1352.5,
+        -2400.0,
+        1135.0
+      ],
+      "size": [
+        145,
+        650,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_Deck1_1",
+      "center": [
+        -847.5,
+        -2400.0,
+        1135.0
+      ],
+      "size": [
+        145,
+        650,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_Deck1_2",
+      "center": [
+        -1100.0,
+        -2652.5,
+        1135.0
+      ],
+      "size": [
+        360,
+        145,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_Deck1_3",
+      "center": [
+        -1100.0,
+        -2147.5,
+        1135.0
+      ],
+      "size": [
+        360,
+        145,
+        30
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_Ring1_0",
+      "center": [
+        -1100,
+        -2710,
+        1260
+      ],
+      "size": [
+        650,
+        18,
+        18
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Tower_Ring1_1",
+      "center": [
+        -1100,
+        -2090,
+        1260
+      ],
+      "size": [
+        650,
+        18,
+        18
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Tower_BackBrace0",
+      "center": [
+        -1100.0,
+        -2100.0,
+        375.0
+      ],
+      "size": [
+        813.9410298049853,
+        22,
+        22
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Tower_BackBrace1",
+      "center": [
+        -1100.0,
+        -2100.0,
+        900.0
+      ],
+      "size": [
+        781.0249675906655,
+        22,
+        22
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Tower_BackBrace2",
+      "center": [
+        -1100.0,
+        -2100.0,
+        1300.0
+      ],
+      "size": [
+        670.820393249937,
+        22,
+        22
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRail0",
+      "center": [
+        -1190,
+        -2760,
+        775
+      ],
+      "size": [
+        15,
+        15,
+        1350
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRail1",
+      "center": [
+        -1010,
+        -2760,
+        775
+      ],
+      "size": [
+        15,
+        15,
+        1350
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung00",
+      "center": [
+        -1100,
+        -2760,
+        130
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung01",
+      "center": [
+        -1100,
+        -2760,
+        190
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung02",
+      "center": [
+        -1100,
+        -2760,
+        250
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung03",
+      "center": [
+        -1100,
+        -2760,
+        310
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung04",
+      "center": [
+        -1100,
+        -2760,
+        370
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung05",
+      "center": [
+        -1100,
+        -2760,
+        430
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung06",
+      "center": [
+        -1100,
+        -2760,
+        490
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung07",
+      "center": [
+        -1100,
+        -2760,
+        550
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung08",
+      "center": [
+        -1100,
+        -2760,
+        610
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung09",
+      "center": [
+        -1100,
+        -2760,
+        670
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung10",
+      "center": [
+        -1100,
+        -2760,
+        730
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung11",
+      "center": [
+        -1100,
+        -2760,
+        790
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung12",
+      "center": [
+        -1100,
+        -2760,
+        850
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung13",
+      "center": [
+        -1100,
+        -2760,
+        910
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung14",
+      "center": [
+        -1100,
+        -2760,
+        970
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung15",
+      "center": [
+        -1100,
+        -2760,
+        1030
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung16",
+      "center": [
+        -1100,
+        -2760,
+        1090
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung17",
+      "center": [
+        -1100,
+        -2760,
+        1150
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung18",
+      "center": [
+        -1100,
+        -2760,
+        1210
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung19",
+      "center": [
+        -1100,
+        -2760,
+        1270
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung20",
+      "center": [
+        -1100,
+        -2760,
+        1330
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Tower_LadderRung21",
+      "center": [
+        -1100,
+        -2760,
+        1390
+      ],
+      "size": [
+        180,
+        16,
+        16
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment00",
+      "center": [
+        800.0,
+        -976.0769515458674,
+        510.0
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment01",
+      "center": [
+        800.0,
+        -1036.0769515458674,
+        613.9230484541326
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment02",
+      "center": [
+        800.0,
+        -1140.0,
+        673.9230484541326
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment03",
+      "center": [
+        800.0,
+        -1260.0,
+        673.9230484541326
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment04",
+      "center": [
+        800.0,
+        -1363.9230484541326,
+        613.9230484541326
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment05",
+      "center": [
+        800.0,
+        -1423.9230484541326,
+        510.0
+      ],
+      "size": [
+        124.23314164920991,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment06",
+      "center": [
+        800.0,
+        -1423.9230484541326,
+        390.00000000000006
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment07",
+      "center": [
+        800.0,
+        -1363.9230484541326,
+        286.0769515458674
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment08",
+      "center": [
+        800.0,
+        -1260.0,
+        226.0769515458674
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment09",
+      "center": [
+        800.0,
+        -1140.0,
+        226.07695154586736
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment10",
+      "center": [
+        800.0,
+        -1036.0769515458674,
+        286.0769515458673
+      ],
+      "size": [
+        124.23314164920987,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Segment11",
+      "center": [
+        800.0,
+        -976.0769515458674,
+        389.9999999999999
+      ],
+      "size": [
+        124.23314164921003,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring1_Support",
+      "center": [
+        800,
+        -1200,
+        155.0
+      ],
+      "size": [
+        30,
+        30,
+        110
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment00",
+      "center": [
+        1300.0,
+        -976.0769515458674,
+        710.0
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment01",
+      "center": [
+        1300.0,
+        -1036.0769515458674,
+        813.9230484541326
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment02",
+      "center": [
+        1300.0,
+        -1140.0,
+        873.9230484541326
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment03",
+      "center": [
+        1300.0,
+        -1260.0,
+        873.9230484541326
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment04",
+      "center": [
+        1300.0,
+        -1363.9230484541326,
+        813.9230484541326
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment05",
+      "center": [
+        1300.0,
+        -1423.9230484541326,
+        710.0
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment06",
+      "center": [
+        1300.0,
+        -1423.9230484541326,
+        590.0
+      ],
+      "size": [
+        124.23314164920986,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment07",
+      "center": [
+        1300.0,
+        -1363.9230484541326,
+        486.0769515458675
+      ],
+      "size": [
+        124.23314164921001,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment08",
+      "center": [
+        1300.0,
+        -1260.0,
+        426.07695154586736
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment09",
+      "center": [
+        1300.0,
+        -1140.0,
+        426.07695154586736
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment10",
+      "center": [
+        1300.0,
+        -1036.0769515458674,
+        486.0769515458673
+      ],
+      "size": [
+        124.2331416492099,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Segment11",
+      "center": [
+        1300.0,
+        -976.0769515458674,
+        589.9999999999999
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Orange"
+    },
+    {
+      "name": "FlightYard_Ring2_Support",
+      "center": [
+        1300,
+        -1200,
+        255.0
+      ],
+      "size": [
+        30,
+        30,
+        310
+      ],
+      "color": "Light"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment00",
+      "center": [
+        1800.0,
+        -976.0769515458674,
+        510.0
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment01",
+      "center": [
+        1800.0,
+        -1036.0769515458674,
+        613.9230484541326
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment02",
+      "center": [
+        1800.0,
+        -1140.0,
+        673.9230484541326
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment03",
+      "center": [
+        1800.0,
+        -1260.0,
+        673.9230484541326
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment04",
+      "center": [
+        1800.0,
+        -1363.9230484541326,
+        613.9230484541326
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment05",
+      "center": [
+        1800.0,
+        -1423.9230484541326,
+        510.0
+      ],
+      "size": [
+        124.23314164920991,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment06",
+      "center": [
+        1800.0,
+        -1423.9230484541326,
+        390.00000000000006
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment07",
+      "center": [
+        1800.0,
+        -1363.9230484541326,
+        286.0769515458674
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment08",
+      "center": [
+        1800.0,
+        -1260.0,
+        226.0769515458674
+      ],
+      "size": [
+        124.23314164920998,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment09",
+      "center": [
+        1800.0,
+        -1140.0,
+        226.07695154586736
+      ],
+      "size": [
+        124.23314164920997,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment10",
+      "center": [
+        1800.0,
+        -1036.0769515458674,
+        286.0769515458673
+      ],
+      "size": [
+        124.23314164920987,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Segment11",
+      "center": [
+        1800.0,
+        -976.0769515458674,
+        389.9999999999999
+      ],
+      "size": [
+        124.23314164921003,
+        28,
+        28
+      ],
+      "color": "Blue"
+    },
+    {
+      "name": "FlightYard_Ring3_Support",
+      "center": [
+        1800,
+        -1200,
+        155.0
+      ],
+      "size": [
+        30,
+        30,
+        110
+      ],
+      "color": "Light"
+    }
+  ],
+  "house_bounds_cm": [
+    2200,
+    4200,
+    -3400,
+    -1800,
+    100,
+    1030
+  ],
+  "stair_step_height_cm": 19.565217391304348,
+  "stair_tread_cm": 50
+}

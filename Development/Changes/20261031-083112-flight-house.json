@@ -1,0 +1,1569 @@
+{
+  "schemaVersion": 1,
+  "id": "20261031-083112-flight-house",
+  "title": "Дом с лестницей, вышка и фигуры для пролётов",
+  "created": "2026-10-31T08:31:12.4014391+03:00",
+  "risk": "normal",
+  "status": "verified",
+  "baseline": {
+    "revision": "8791a6d8f0a852e3f0cc179bd4d36a7d3965239f",
+    "existingChanges": [
+      "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset"
+    ]
+  },
+  "request": "Добавить на существующую карту дом с двумя этажами, окнами и открытой внутренней лестницей для пролёта между этажами, небольшую вышку и фигуры.",
+  "acceptance": [
+    "Существующие акторы, трасса, PlayerStart и GameMode сохранены",
+    "Дом имеет физически открытые окна обоих этажей, лестничный проём и ступени для персонажа",
+    "Маршруты через дом, вышку и кольца имеют проверенный просвет для коптера",
+    "Новая геометрия статична с BlockAll; результат сохраняется на L_DroneTest и проект собирается"
+  ],
+  "changes": [
+    "На L_DroneTest добавлены двухэтажный дом, открытая лестница с площадкой и окнами для пролётов",
+    "Добавлены вышка с двумя кольцевыми площадками и три кольца на разной высоте",
+    "Сохранены старые34препятствия, существующие позы загруженных акторов, старт и GameMode",
+    "Добавлены генератор с резервной копией и отказом дублировать, PIE-верификатор и редакторский просмотр",
+    "Обновлён и запущен Windows-билд, подтверждены222новых объекта"
+  ],
+  "decisions": [
+    "Собственная простая архитектура из реального Engine Cube и существующих материалов, без загрузки нового мира",
+    "Генератор отказывается от повторного запуска по префиксу и сначала копирует карту в Backup",
+    "Проверка маршрутов консервативной сферой радиуса45см; это не ручной полёт"
+  ],
+  "files": [
+    "Content/L_DroneTest.umap",
+    "Scripts/CreateFlightYard.py",
+    "Scripts/VerifyFlightYard.py",
+    "Scripts/PreviewFlightYard.py",
+    "FlightYard.md",
+    "QualityReports/2026-10-31-FlightYard-Setup.json",
+    "Content/__ExternalActors__/L_DroneTest/0/IZ/UIOR47HU9VXHMCBS2U6M84.uasset",
+    "Content/__ExternalActors__/L_DroneTest/0/LH/GXSUS36IUSQT5PQOWUXKB7.uasset",
+    "Content/__ExternalActors__/L_DroneTest/0/PQ/JK2Q7BJHZBM3TXRM98EQLT.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/0J/T6BFJEVITR46Y6IB79PFCY.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/2V/KS29MG7J4UQVK3RRI0SSZA.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/5F/JHFRZUZP9S72GQU2MRVRYE.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/7Z/HW1FSF7EE3DGF3INBVOE0X.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/8V/G9B5TY6P4OI8NKQPX57ZL8.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/CK/A7KE50KB67TCT0YVY6V5CW.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/DA/OEIDO6B7D7AXOH32G2AD7X.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/EA/Z03TQCLJEFEDLDSQO39L3K.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/GA/Y62XN7O450RU689M0F55A3.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/LF/CBMCOPMW3UCCIQ33J8E60V.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/NF/KLZDLIEK6W6MU5JY9JM4W9.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/OU/B8DZ13BKWCXME2VUVT6KEX.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/OZ/THNEM2AK44FY7J2QCSZ9KB.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/T2/FR8YKRZY9JU45X1X7YJDD5.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/VL/135CDAK857OCO86S3UU6R1.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/VM/29GLO3CZ6HOGKR9N9U7232.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/W2/2YEYPBXNX5TTYVEJSAZXG5.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/WM/YYEACG95CS22K7NNFV51KW.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/XM/8WP40VMC0K53H92JDMSSNX.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/Y3/H1QLW2G4UF4DB8RQ4A625G.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/YJ/YL4J5UL40QCS5Q0ZMRM50A.uasset",
+    "Content/__ExternalActors__/L_DroneTest/1/ZI/PMWH5QGGLHS2KJLK7LA6V3.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/1F/OAVHVHAESGOXX6L2T0SY6J.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/27/H0WE23E0551IIIBYZ6WS52.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/2V/JV28BD9TPRI2BPN13H7RF0.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/32/IGXOTOI7318LOKSPFG3GCI.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/6Z/EUUJTN7HIRNPODGK8TY7LV.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/8T/T5XKPVQNLKCGZMH6OPVX09.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/9D/6MCL41K44HF9VGUB1FJ5GQ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/EE/FMUM8G0D0MF5L7VALFLBAM.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/HI/P6XQ4PHN68YNX2742WXDOB.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/IJ/3O32Q1HBVK8RZDHDLW0JEQ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/R2/5L4KG40ECOCXF3J3WDUYC6.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/S9/X18FMCOY9FUSXSJSHRR497.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/VC/109XZRB4MA56YSJXXRKJ8T.uasset",
+    "Content/__ExternalActors__/L_DroneTest/2/YK/6JTD8NTK4AOCGO4E3G8TF4.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/0K/80G248LC9RLQ5CY4PF91CD.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/0U/03Z6NDN42MU5SKFDJ8GUQB.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/BZ/LPXBPNRTUC1F0FEF424HLG.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/C3/ZMFM9FX2N9C0TCPIURWFA9.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/CR/RDNB4ATGS48QW8L8Y1WE0C.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/EI/9HMCNH24MBNPEOGGTBNRP3.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/FS/OCDVMYZWAES4K3FDPKPZXY.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/KV/1VZ947DNT9OO1L5FWN44HR.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/NL/JEGI3U0IINE0N3V79RH7K8.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/OQ/2XODKCXUSXOPXF35SSS17W.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/PB/VEUES806NURG2NYG959QXY.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/QV/JXPMT41099HZUMD2QI77P2.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/TI/1XNXQ6ZH5MNV7LA5SWGUHG.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/TP/EIUHM2MF0I1CQC4J8RCIA7.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/UI/JDGJSB5PQIZTZA0WHMOHGC.uasset",
+    "Content/__ExternalActors__/L_DroneTest/3/XQ/86WO7L0Q800ZIBOZ0LHDDE.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/1S/M954CV6RGZ5YFWN75RMG8F.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/2M/FSW3OK9VHVQP72JOE5NYL8.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/3X/8WPZBES90H7NX9VFLFZTWB.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/54/3NBZK90QPPPVOIKZ6A8S24.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/BM/X6MFR50KIUPMI9AUPVWZU5.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/C7/ZGR23SO7L93O400JJI2ZDG.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/D7/LHGACXQ91WMT2B4EAAK2OI.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/HU/50B3W1KWLES2SBN2Q06N37.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/I5/QUTQHHNJHLKZPGN16FVE17.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/KT/9X8VJWSXZG55FB9Z54P4J8.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/MP/B6A1O06NN0TQF54SP5SVRM.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/RS/YS6CJ1WR9SQGCBGEPGXU89.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/WL/RNCCMQCV4EHD0F1GYXDYTC.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/YH/IHHJ8G733TG0IGISGKAO72.uasset",
+    "Content/__ExternalActors__/L_DroneTest/4/ZU/6V0CS3S1ROUB2E3C3R70DJ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/08/5OTUDRCCVHNT69X4FAOM7C.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/2Z/RJ09GKX53J02QQLS91UHVF.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/90/SVIC42YR4TI1WGOXUGTPUL.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/BO/874AWB5TOBADGYMUCRLH8I.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/DK/11R2TU7MNFBPB1TOPJMNPJ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/HC/LGKDS2W0BOLA7Q45R78KAF.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/HS/BSVMBC1GWXMU3FFUT5VLIH.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/IZ/DP38P9HD55ZL5YVPYR9I1I.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/LD/D0K28XVLOYUXCZNZ6YZ32W.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/RW/H9NK6QUZLMHDID01Q83ZK1.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/SU/GAL5GKKO69IDLYGM76W0VI.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/VK/EESD0VJGINY95SJBRGNFMV.uasset",
+    "Content/__ExternalActors__/L_DroneTest/5/WX/61ONMOJ8303LTMK4XEG0R3.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/0V/Y08WIMX7GPD7DEK5Q2B271.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/1I/YMI1712960PLNDR10BVZDO.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/2E/GAFP8KMU7SST65NWEAL533.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/3C/5497VCYYGBDMPLC5NQUOMO.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/9K/V3ZLCJF7N1CGD8333J5UG2.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/A9/C6W148HP6RZA8J0H7KUR97.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/AU/J8BON6YNH6UQEP7E00Z1HR.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/DP/CBYV0RJPLWZV8MCOF30LR4.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/EK/1TQ3Q5GKBN892G3ELQIQXD.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/GS/SI1BLYQ11JLGTDVE4K74P1.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/KD/3N3DRNU7VX9A63QQIETMQI.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/LI/JPFOV5SE8R1LP1LC1P7NXI.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/QP/41QIW2HDQQF6KW09NGRAXB.uasset",
+    "Content/__ExternalActors__/L_DroneTest/6/R6/MBWKC850ARSNPCVXYSVMMC.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/3W/VCKNSAQ3XLERBXARHZ5EVJ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/46/JHZAOHCUWJGWVT5MPRW3M4.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/6N/2N1PE28UNXINB6BNA0TKS9.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/8A/PNYOX9XRC3CVT0VPLIZCAU.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/9T/9QJPM5VV9B9X2WH73CQ866.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/CR/K485YMWRRHYLEY7ZY5U24Q.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/DF/T1UEKYV9PD0LQDFYYWAYAQ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/EG/TO7ONQUKF8T9H1HDTLSR6G.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/GW/1E2FYJ4BHMXPYXRT6ASQZE.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/HB/5N2TXDDKSVE69RIOSIHS8I.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/IE/FLWU94OAISE407FVYAQDLT.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/IK/GU2O7IJ9PZ66N6VXF9O1C4.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/LK/GRW6O38DC0MV9OUO2V2THF.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/R5/CUYDVXPVV1OQL0WZ17VFQ1.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/TH/622YNTLKSTDDZTBJHHFGMH.uasset",
+    "Content/__ExternalActors__/L_DroneTest/7/UC/IJIJIMJSYFJT7X8E2LOZA7.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/1W/JSFEA649BP866ZC5ZS9FYJ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/3K/NG9AJL5XLWZJA45476U2LH.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/CY/KLA95IHVRQ9VOV92AQ82CM.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/FB/Y1ZNOB6L4ZME5W8UFB6PDR.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/GQ/2Y42L3MV96JQ2IW9NCGS3W.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/JM/RWN69G7MW03SMHJHIJBTFX.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/L8/A8BDPDRQQWTKRUHX54Z98T.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/MB/RKX5CVHM8XD6IQ67NHXKYG.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/Q6/KENZ71T92GHGIF0THWZY8Y.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/SN/X4X0BH9ZRC1QOTXRAKQISO.uasset",
+    "Content/__ExternalActors__/L_DroneTest/8/TS/HBTQXLIQHTL2E8UPYLAT8F.uasset",
+    "Content/__ExternalActors__/L_DroneTest/9/2U/0RDUBIMH3O765KXJGGG2CK.uasset",
+    "Content/__ExternalActors__/L_DroneTest/9/AU/UNNU3AMYLIIBL8BQC5PURI.uasset",
+    "Content/__ExternalActors__/L_DroneTest/9/DZ/6GNVJ5BY9A3VJ2S9UB82Z5.uasset",
+    "Content/__ExternalActors__/L_DroneTest/9/G8/GX2JEL7KRTNEG3STJ4RCG2.uasset",
+    "Content/__ExternalActors__/L_DroneTest/9/O7/UMFKR5QL884BRIR0R4FQCJ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/9/OB/KJVPZB4LF1DT57VA24H45M.uasset",
+    "Content/__ExternalActors__/L_DroneTest/9/OG/SH48UQXZX1JJXPX0Y234Z9.uasset",
+    "Content/__ExternalActors__/L_DroneTest/9/TM/WL4C6BDF5FZVB6KBEXCG4T.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/12/K1RT13D7TOP5C8I6NYA0OM.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/3K/FG4695TD5GX67S941LXLPI.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/4F/83LJJUPQVGSEZMB0VWTOL0.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/4Y/RDSQ6FQS90GZBUNJUTB00H.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/68/EO4PK3ATB867N1EF2ZBEHY.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/82/7QB7B2EHDUAQINEL9ZFHI0.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/8S/3GTKHR5J9Z6S2C9HEXL5PJ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/HE/3WVQQ3T7MLVBTCNUJYD2HM.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/IX/99NRXT0UQ0RJ6BR1BZ4ENF.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/JI/CFM5PPZAI9LXACJ4XFSYJR.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/MZ/3FM8APCGAKCRF0N81ZY8Q1.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/N6/6RZPR46IPL47I7859M0FFN.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/Q5/PJTR5FGRB1GU3L1EEOXGSG.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/QM/MPKGA9OJFVU3HBOC071LF0.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/QV/2TN5633YMBO80DMEQI7HQN.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/SW/55VNVZH1KJZPOMWG1W4ZA8.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/TE/A3D7MYAOESP2T3JJNXHC6L.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/UY/T7MFIZUBA9GRO0P8XU3RZE.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/VZ/PNWIH8FZ84I56RS9I3JHVP.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/WA/CF5E3FNJX8ITGGJYU3YNQ7.uasset",
+    "Content/__ExternalActors__/L_DroneTest/A/YG/GPWF3DPCGS4WYN2DGT8O5K.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/0C/2PWG0XRIXUWRB509XP53DP.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/2H/6TVBNR5ZL8122XT9Y8DGP9.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/5K/SS2YHSZKD62NLDR1TXUKT6.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/73/XJ942W2OJGZ429YQTD5PZN.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/78/NKJ8RUWJSMIJK4Z5W5UF07.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/7P/WSXM6UBG73FEEO97UJV1DL.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/AN/Z32ED38EYR1VUZP6VHWLA8.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/FA/VP17XS2KJKJ74ZMPR342UY.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/H5/SBVPEKB2SRY2PN8A9TONKV.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/I6/YC2DIWJUG0FEAYHTBSAIPT.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/K0/SLBGFC5EW2VY4GQVYCHFRN.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/MT/XRK324AGC8C6XMNNGRA6S7.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/ON/QGVZVDIK5DHAW4YRGYRMTS.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/PV/RUJAQWGYPCIYMDQVBQ3CKS.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/QS/BL48OPYY55F5QTGJ2C5D39.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/QS/XP2P03SYGJ2UWDHTV7EPFX.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/S6/6O6K7B3H303U2AAZK1JKAZ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/T5/BROUI7DIY9SS03JIHA98M4.uasset",
+    "Content/__ExternalActors__/L_DroneTest/B/WA/3PR2K47EFFNIL28TJG7NOH.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/0X/1AKTUHWY3FWJUFCK5YYYTF.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/0Y/JK3O05VYKDI45N0TTSIDDX.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/20/0L4OAQA76RP6XZOXB0UW56.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/6S/2JEGLI9ZNA8BB0S1TTYAPA.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/9L/A2HMH5U830TIDLELIUPUL7.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/9V/CA3TIB1YJ2MU1CAIBYKWGA.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/AQ/69ZLNG7V779V5Y5HT1CQUU.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/B6/H442UZ2P9BZ0W28FP7TRWF.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/D1/18TB8V0DJCUTBS5GKO47NW.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/DT/UH2A3R7OQBTC8SCMQ86YJT.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/E0/KDI373EI1ERMGDFLRO1GB0.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/F3/C6J4SAW7SWVNTT5F78UE91.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/GS/0EV73P37W1CSH2U5H6CZM0.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/IF/NCWICZDPH5L094G34KY2E1.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/KT/EJ4NRVFOC0RVXEVBXGQVEX.uasset",
+    "Content/__ExternalActors__/L_DroneTest/C/ZG/PYW4TQXJP4YV7OG7I9W95X.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/13/ICDNLPMFMHV28WE35ZWZHD.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/1N/RXP0DB5MGCMXBWTDTPB30B.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/22/1CX788LFN8U4F4IGOC2FGW.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/2P/JW8LDATWX62D62U5T9OJHH.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/3G/VDJ6W4CRL498CAUA8Z2H8B.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/3P/WOYO8FLUW2GO33AQ7U0HKC.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/3U/S6HIB1B5ZMICHFM9DGMC63.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/4K/HJRET3EDPAXA0YH7NWA8CK.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/BE/JCYMBKHMVNWRDNLTJ07LP7.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/BI/MECZUNCBOOV2U068FG8ZFL.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/GH/7GPL3Z1GB3WNL0PR9XBQ47.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/J8/N8L74EPF3OFJ6Q8BQ1WCTE.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/LS/77XHYXZ9BQAHAM8K6QMHPQ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/WO/5492E5XUMY94BB3H5RWOLU.uasset",
+    "Content/__ExternalActors__/L_DroneTest/D/Y3/KZHON0DXCFNCPWH7GRG5SK.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/3R/O8F1EY0KKSFC6K8L1RLOFP.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/5E/NYCB7O2ZUPR4GTNI29JWP8.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/61/EC6KYI4WQJSXP0ZEFCNJPN.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/71/P23GJH48801QGBNGE97YX5.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/DD/G9RIGOCKW8AV1GPTAEZOJL.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/IM/VHIB3JN9ZDFWEOU2EFMLA9.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/IW/HO5REA5MZXR1M5H1MGXEKQ.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/IZ/1DWL4ZV1GMM1OQKGOVXXXR.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/K1/4K6VYN5Q8802W8QFSAP38M.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/MN/CA2WR1QKCQSIN2FE9XRJVT.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/PG/1WJTIFMGZRID8P83CJDGVH.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/UY/EUSZHRI3APINN5QLI52YGC.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/WO/KJDHG21KZ1HT4LJRGOQF1F.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/XZ/RGXD0VW75ZZXGC7A61UYXC.uasset",
+    "Content/__ExternalActors__/L_DroneTest/E/Y7/UNLUHUYX3TE3M5EVOUXLAH.uasset",
+    "Content/__ExternalActors__/L_DroneTest/F/0K/71R59Q5TZ2VW503YLYAX4J.uasset",
+    "Content/__ExternalActors__/L_DroneTest/F/2I/YWSTCTLQ0D10EWI0JKLM6T.uasset",
+    "Content/__ExternalActors__/L_DroneTest/F/2V/K0I0VEPHGGTRW6NAS3XNTF.uasset",
+    "Content/__ExternalActors__/L_DroneTest/F/2V/M3ZROL4JJ7Z3JMF8690TCN.uasset",
+    "Content/__ExternalObjects__/L_DroneTest/1/TC/D1HQNEGQW9BLLJUJLBYCQC.uasset",
+    "Content/__ExternalObjects__/L_DroneTest/2/VX/5C53J4RO3E6KV64D9V83FD.uasset",
+    "Content/__ExternalObjects__/L_DroneTest/2/ZP/9VE53P5EF42TM4VR24YR97.uasset",
+    "Content/__ExternalObjects__/L_DroneTest/5/BS/RFLC3H22FUT1YWHGSE4AUR.uasset",
+    "Content/__ExternalObjects__/L_DroneTest/9/ES/LZ1DKH8OEVLTWGAZS9YB6L.uasset",
+    "Content/__ExternalObjects__/L_DroneTest/B/KK/6JMGPEDQRTWWDBGSKUKJPY.uasset",
+    "Content/__ExternalObjects__/L_DroneTest/D/JP/IYMC7XBGQ6G5OJK9LE4OPR.uasset"
+  ],
+  "checks": [
+    {
+      "name": "editor-build",
+      "method": "compiler",
+      "status": "passed",
+      "evidence": "Saved/QualityHarness/20261031-083112-flight-house/20261031-085917-126/editor-build.log",
+      "sha256": "16F226EF822FCB5556603A4079B3DFABFDB3CF8D18541AFB091B7ADE64A860D5",
+      "detail": "Exit=0; build script: Scripts/BuildDroneSimTestEditor.ps1",
+      "revision": "8791a6d8f0a852e3f0cc179bd4d36a7d3965239f",
+      "scope": [
+        " M Content/L_DroneTest.umap",
+        "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/0/IZ/UIOR47HU9VXHMCBS2U6M84.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/0/LH/GXSUS36IUSQT5PQOWUXKB7.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/0/PQ/JK2Q7BJHZBM3TXRM98EQLT.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/0J/T6BFJEVITR46Y6IB79PFCY.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/2V/KS29MG7J4UQVK3RRI0SSZA.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/5F/JHFRZUZP9S72GQU2MRVRYE.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/7Z/HW1FSF7EE3DGF3INBVOE0X.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/8V/G9B5TY6P4OI8NKQPX57ZL8.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/CK/A7KE50KB67TCT0YVY6V5CW.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/DA/OEIDO6B7D7AXOH32G2AD7X.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/EA/Z03TQCLJEFEDLDSQO39L3K.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/GA/Y62XN7O450RU689M0F55A3.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/LF/CBMCOPMW3UCCIQ33J8E60V.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/NF/KLZDLIEK6W6MU5JY9JM4W9.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/OU/B8DZ13BKWCXME2VUVT6KEX.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/OZ/THNEM2AK44FY7J2QCSZ9KB.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/T2/FR8YKRZY9JU45X1X7YJDD5.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/VL/135CDAK857OCO86S3UU6R1.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/VM/29GLO3CZ6HOGKR9N9U7232.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/W2/2YEYPBXNX5TTYVEJSAZXG5.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/WM/YYEACG95CS22K7NNFV51KW.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/XM/8WP40VMC0K53H92JDMSSNX.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/Y3/H1QLW2G4UF4DB8RQ4A625G.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/YJ/YL4J5UL40QCS5Q0ZMRM50A.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/1/ZI/PMWH5QGGLHS2KJLK7LA6V3.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/1F/OAVHVHAESGOXX6L2T0SY6J.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/27/H0WE23E0551IIIBYZ6WS52.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/2V/JV28BD9TPRI2BPN13H7RF0.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/32/IGXOTOI7318LOKSPFG3GCI.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/6Z/EUUJTN7HIRNPODGK8TY7LV.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/8T/T5XKPVQNLKCGZMH6OPVX09.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/9D/6MCL41K44HF9VGUB1FJ5GQ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/EE/FMUM8G0D0MF5L7VALFLBAM.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/HI/P6XQ4PHN68YNX2742WXDOB.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/IJ/3O32Q1HBVK8RZDHDLW0JEQ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/R2/5L4KG40ECOCXF3J3WDUYC6.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/S9/X18FMCOY9FUSXSJSHRR497.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/VC/109XZRB4MA56YSJXXRKJ8T.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/2/YK/6JTD8NTK4AOCGO4E3G8TF4.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/0K/80G248LC9RLQ5CY4PF91CD.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/0U/03Z6NDN42MU5SKFDJ8GUQB.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/BZ/LPXBPNRTUC1F0FEF424HLG.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/C3/ZMFM9FX2N9C0TCPIURWFA9.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/CR/RDNB4ATGS48QW8L8Y1WE0C.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/EI/9HMCNH24MBNPEOGGTBNRP3.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/FS/OCDVMYZWAES4K3FDPKPZXY.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/KV/1VZ947DNT9OO1L5FWN44HR.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/NL/JEGI3U0IINE0N3V79RH7K8.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/OQ/2XODKCXUSXOPXF35SSS17W.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/PB/VEUES806NURG2NYG959QXY.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/QV/JXPMT41099HZUMD2QI77P2.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/TI/1XNXQ6ZH5MNV7LA5SWGUHG.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/TP/EIUHM2MF0I1CQC4J8RCIA7.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/UI/JDGJSB5PQIZTZA0WHMOHGC.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/3/XQ/86WO7L0Q800ZIBOZ0LHDDE.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/1S/M954CV6RGZ5YFWN75RMG8F.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/2M/FSW3OK9VHVQP72JOE5NYL8.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/3X/8WPZBES90H7NX9VFLFZTWB.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/54/3NBZK90QPPPVOIKZ6A8S24.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/BM/X6MFR50KIUPMI9AUPVWZU5.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/C7/ZGR23SO7L93O400JJI2ZDG.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/D7/LHGACXQ91WMT2B4EAAK2OI.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/HU/50B3W1KWLES2SBN2Q06N37.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/I5/QUTQHHNJHLKZPGN16FVE17.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/KT/9X8VJWSXZG55FB9Z54P4J8.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/MP/B6A1O06NN0TQF54SP5SVRM.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/RS/YS6CJ1WR9SQGCBGEPGXU89.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/WL/RNCCMQCV4EHD0F1GYXDYTC.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/YH/IHHJ8G733TG0IGISGKAO72.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/4/ZU/6V0CS3S1ROUB2E3C3R70DJ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/08/5OTUDRCCVHNT69X4FAOM7C.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/2Z/RJ09GKX53J02QQLS91UHVF.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/90/SVIC42YR4TI1WGOXUGTPUL.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/BO/874AWB5TOBADGYMUCRLH8I.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/DK/11R2TU7MNFBPB1TOPJMNPJ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/HC/LGKDS2W0BOLA7Q45R78KAF.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/HS/BSVMBC1GWXMU3FFUT5VLIH.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/IZ/DP38P9HD55ZL5YVPYR9I1I.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/LD/D0K28XVLOYUXCZNZ6YZ32W.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/RW/H9NK6QUZLMHDID01Q83ZK1.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/SU/GAL5GKKO69IDLYGM76W0VI.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/VK/EESD0VJGINY95SJBRGNFMV.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/5/WX/61ONMOJ8303LTMK4XEG0R3.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/0V/Y08WIMX7GPD7DEK5Q2B271.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/1I/YMI1712960PLNDR10BVZDO.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/2E/GAFP8KMU7SST65NWEAL533.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/3C/5497VCYYGBDMPLC5NQUOMO.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/9K/V3ZLCJF7N1CGD8333J5UG2.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/A9/C6W148HP6RZA8J0H7KUR97.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/AU/J8BON6YNH6UQEP7E00Z1HR.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/DP/CBYV0RJPLWZV8MCOF30LR4.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/EK/1TQ3Q5GKBN892G3ELQIQXD.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/GS/SI1BLYQ11JLGTDVE4K74P1.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/KD/3N3DRNU7VX9A63QQIETMQI.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/LI/JPFOV5SE8R1LP1LC1P7NXI.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/QP/41QIW2HDQQF6KW09NGRAXB.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/6/R6/MBWKC850ARSNPCVXYSVMMC.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/3W/VCKNSAQ3XLERBXARHZ5EVJ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/46/JHZAOHCUWJGWVT5MPRW3M4.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/6N/2N1PE28UNXINB6BNA0TKS9.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/8A/PNYOX9XRC3CVT0VPLIZCAU.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/9T/9QJPM5VV9B9X2WH73CQ866.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/CR/K485YMWRRHYLEY7ZY5U24Q.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/DF/T1UEKYV9PD0LQDFYYWAYAQ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/EG/TO7ONQUKF8T9H1HDTLSR6G.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/GW/1E2FYJ4BHMXPYXRT6ASQZE.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/HB/5N2TXDDKSVE69RIOSIHS8I.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/IE/FLWU94OAISE407FVYAQDLT.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/IK/GU2O7IJ9PZ66N6VXF9O1C4.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/LK/GRW6O38DC0MV9OUO2V2THF.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/R5/CUYDVXPVV1OQL0WZ17VFQ1.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/TH/622YNTLKSTDDZTBJHHFGMH.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/7/UC/IJIJIMJSYFJT7X8E2LOZA7.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/1W/JSFEA649BP866ZC5ZS9FYJ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/3K/NG9AJL5XLWZJA45476U2LH.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/CY/KLA95IHVRQ9VOV92AQ82CM.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/FB/Y1ZNOB6L4ZME5W8UFB6PDR.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/GQ/2Y42L3MV96JQ2IW9NCGS3W.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/JM/RWN69G7MW03SMHJHIJBTFX.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/L8/A8BDPDRQQWTKRUHX54Z98T.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/MB/RKX5CVHM8XD6IQ67NHXKYG.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/Q6/KENZ71T92GHGIF0THWZY8Y.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/SN/X4X0BH9ZRC1QOTXRAKQISO.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/8/TS/HBTQXLIQHTL2E8UPYLAT8F.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/9/2U/0RDUBIMH3O765KXJGGG2CK.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/9/AU/UNNU3AMYLIIBL8BQC5PURI.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/9/DZ/6GNVJ5BY9A3VJ2S9UB82Z5.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/9/G8/GX2JEL7KRTNEG3STJ4RCG2.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/9/O7/UMFKR5QL884BRIR0R4FQCJ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/9/OB/KJVPZB4LF1DT57VA24H45M.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/9/OG/SH48UQXZX1JJXPX0Y234Z9.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/9/TM/WL4C6BDF5FZVB6KBEXCG4T.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/12/K1RT13D7TOP5C8I6NYA0OM.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/3K/FG4695TD5GX67S941LXLPI.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/4F/83LJJUPQVGSEZMB0VWTOL0.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/4Y/RDSQ6FQS90GZBUNJUTB00H.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/68/EO4PK3ATB867N1EF2ZBEHY.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/82/7QB7B2EHDUAQINEL9ZFHI0.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/8S/3GTKHR5J9Z6S2C9HEXL5PJ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/HE/3WVQQ3T7MLVBTCNUJYD2HM.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/IX/99NRXT0UQ0RJ6BR1BZ4ENF.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/JI/CFM5PPZAI9LXACJ4XFSYJR.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/MZ/3FM8APCGAKCRF0N81ZY8Q1.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/N6/6RZPR46IPL47I7859M0FFN.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/Q5/PJTR5FGRB1GU3L1EEOXGSG.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/QM/MPKGA9OJFVU3HBOC071LF0.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/QV/2TN5633YMBO80DMEQI7HQN.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/SW/55VNVZH1KJZPOMWG1W4ZA8.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/TE/A3D7MYAOESP2T3JJNXHC6L.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/UY/T7MFIZUBA9GRO0P8XU3RZE.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/VZ/PNWIH8FZ84I56RS9I3JHVP.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/WA/CF5E3FNJX8ITGGJYU3YNQ7.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/A/YG/GPWF3DPCGS4WYN2DGT8O5K.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/0C/2PWG0XRIXUWRB509XP53DP.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/2H/6TVBNR5ZL8122XT9Y8DGP9.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/5K/SS2YHSZKD62NLDR1TXUKT6.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/73/XJ942W2OJGZ429YQTD5PZN.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/78/NKJ8RUWJSMIJK4Z5W5UF07.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/7P/WSXM6UBG73FEEO97UJV1DL.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/AN/Z32ED38EYR1VUZP6VHWLA8.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/FA/VP17XS2KJKJ74ZMPR342UY.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/H5/SBVPEKB2SRY2PN8A9TONKV.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/I6/YC2DIWJUG0FEAYHTBSAIPT.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/K0/SLBGFC5EW2VY4GQVYCHFRN.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/MT/XRK324AGC8C6XMNNGRA6S7.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/ON/QGVZVDIK5DHAW4YRGYRMTS.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/PV/RUJAQWGYPCIYMDQVBQ3CKS.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/QS/BL48OPYY55F5QTGJ2C5D39.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/QS/XP2P03SYGJ2UWDHTV7EPFX.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/S6/6O6K7B3H303U2AAZK1JKAZ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/T5/BROUI7DIY9SS03JIHA98M4.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/B/WA/3PR2K47EFFNIL28TJG7NOH.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/0X/1AKTUHWY3FWJUFCK5YYYTF.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/0Y/JK3O05VYKDI45N0TTSIDDX.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/20/0L4OAQA76RP6XZOXB0UW56.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/6S/2JEGLI9ZNA8BB0S1TTYAPA.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/9L/A2HMH5U830TIDLELIUPUL7.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/9V/CA3TIB1YJ2MU1CAIBYKWGA.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/AQ/69ZLNG7V779V5Y5HT1CQUU.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/B6/H442UZ2P9BZ0W28FP7TRWF.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/D1/18TB8V0DJCUTBS5GKO47NW.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/DT/UH2A3R7OQBTC8SCMQ86YJT.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/E0/KDI373EI1ERMGDFLRO1GB0.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/F3/C6J4SAW7SWVNTT5F78UE91.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/GS/0EV73P37W1CSH2U5H6CZM0.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/IF/NCWICZDPH5L094G34KY2E1.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/KT/EJ4NRVFOC0RVXEVBXGQVEX.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/C/ZG/PYW4TQXJP4YV7OG7I9W95X.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/13/ICDNLPMFMHV28WE35ZWZHD.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/1N/RXP0DB5MGCMXBWTDTPB30B.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/22/1CX788LFN8U4F4IGOC2FGW.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/2P/JW8LDATWX62D62U5T9OJHH.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/3G/VDJ6W4CRL498CAUA8Z2H8B.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/3P/WOYO8FLUW2GO33AQ7U0HKC.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/3U/S6HIB1B5ZMICHFM9DGMC63.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/4K/HJRET3EDPAXA0YH7NWA8CK.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/BE/JCYMBKHMVNWRDNLTJ07LP7.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/BI/MECZUNCBOOV2U068FG8ZFL.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/GH/7GPL3Z1GB3WNL0PR9XBQ47.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/J8/N8L74EPF3OFJ6Q8BQ1WCTE.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/LS/77XHYXZ9BQAHAM8K6QMHPQ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/WO/5492E5XUMY94BB3H5RWOLU.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/D/Y3/KZHON0DXCFNCPWH7GRG5SK.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/3R/O8F1EY0KKSFC6K8L1RLOFP.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/5E/NYCB7O2ZUPR4GTNI29JWP8.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/61/EC6KYI4WQJSXP0ZEFCNJPN.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/71/P23GJH48801QGBNGE97YX5.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/DD/G9RIGOCKW8AV1GPTAEZOJL.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/IM/VHIB3JN9ZDFWEOU2EFMLA9.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/IW/HO5REA5MZXR1M5H1MGXEKQ.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/IZ/1DWL4ZV1GMM1OQKGOVXXXR.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/K1/4K6VYN5Q8802W8QFSAP38M.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/MN/CA2WR1QKCQSIN2FE9XRJVT.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/PG/1WJTIFMGZRID8P83CJDGVH.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/UY/EUSZHRI3APINN5QLI52YGC.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/WO/KJDHG21KZ1HT4LJRGOQF1F.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/XZ/RGXD0VW75ZZXGC7A61UYXC.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/E/Y7/UNLUHUYX3TE3M5EVOUXLAH.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/F/0K/71R59Q5TZ2VW503YLYAX4J.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/F/2I/YWSTCTLQ0D10EWI0JKLM6T.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/F/2V/K0I0VEPHGGTRW6NAS3XNTF.uasset",
+        "?? Content/__ExternalActors__/L_DroneTest/F/2V/M3ZROL4JJ7Z3JMF8690TCN.uasset",
+        "?? Content/__ExternalObjects__/L_DroneTest/1/TC/D1HQNEGQW9BLLJUJLBYCQC.uasset",
+        "?? Content/__ExternalObjects__/L_DroneTest/2/VX/5C53J4RO3E6KV64D9V83FD.uasset",
+        "?? Content/__ExternalObjects__/L_DroneTest/2/ZP/9VE53P5EF42TM4VR24YR97.uasset",
+        "?? Content/__ExternalObjects__/L_DroneTest/5/BS/RFLC3H22FUT1YWHGSE4AUR.uasset",
+        "?? Content/__ExternalObjects__/L_DroneTest/9/ES/LZ1DKH8OEVLTWGAZS9YB6L.uasset",
+        "?? Content/__ExternalObjects__/L_DroneTest/B/KK/6JMGPEDQRTWWDBGSKUKJPY.uasset",
+        "?? Content/__ExternalObjects__/L_DroneTest/D/JP/IYMC7XBGQ6G5OJK9LE4OPR.uasset",
+        "?? Development/Changes/20261031-083112-flight-house.json",
+        "?? Development/Reviews/2026-10-31-flight-yard.md",
+        "?? FlightYard.md",
+        "?? QualityReports/2026-10-31-FlightYard-Runtime.json",
+        "?? QualityReports/2026-10-31-FlightYard-Setup.json",
+        "?? QualityReports/2026-10-31-FlightYard-Verification.json",
+        "?? QualityReports/2026-10-31-FlightYard.md",
+        "?? Scripts/CreateFlightYard.py",
+        "?? Scripts/PreviewFlightYard.py",
+        "?? Scripts/VerifyFlightYard.py"
+      ]
+    },
+    {
+      "name": "saved-geometry",
+      "method": "manifest-reload",
+      "status": "passed",
+      "evidence": "QualityReports/2026-10-31-FlightYard-Setup.json",
+      "sha256": "6525C9B4C30136D648E4E24BC67C69BDD349109062994D6B24DBE2942B4B9F19",
+      "detail": "222 new parts saved; pre-existing loaded poses and GameMode preserved; reload matches manifest and BlockAll."
+    },
+    {
+      "name": "game-world-clearance",
+      "method": "physics-pie",
+      "status": "passed",
+      "evidence": "QualityReports/2026-10-31-FlightYard-Verification.json",
+      "sha256": "4B971F91AB73A4207C910F02D0AFA954A95205939007A9DFBE031BB4F7F243A5",
+      "detail": "PIE control hits a solid wall; all13route sweeps clear at45cm radius. Initial commandlet traces were rejected after failing the control."
+    },
+    {
+      "name": "windows-package",
+      "method": "cook-package",
+      "status": "passed",
+      "evidence": "Saved/BuildLogs/PackageDevelopment_20261031_084223.log",
+      "sha256": "2EF46BECAB2ECADD7A48AEC50520668DD0623FB5EC78B96A24FC67CC901FC8F7",
+      "detail": "BUILD SUCCESSFUL, exit0, 132.50s."
+    },
+    {
+      "name": "runtime-loading",
+      "method": "packaged-tags",
+      "status": "passed",
+      "evidence": "QualityReports/2026-10-31-FlightYard-Runtime.json",
+      "sha256": "925208F2BE72D782D09BAA987ED6A84E6036DFB3CDB93073B64165CE1C6A7C37",
+      "detail": "Actual standalone executable logs222DroneFlightYard tags; new objects visible at start."
+    },
+    {
+      "name": "overview-render",
+      "method": "visual-inspection",
+      "status": "passed",
+      "evidence": "Saved/Screenshots/FlightYardOverview.png",
+      "sha256": "10011F825A2E1D9B69B731739201E301299925EF208BD4F57B002A42A85E1358",
+      "detail": "Inspected house, tower, rings and old obstacle course in saved-map renderer."
+    },
+    {
+      "name": "stairs-render",
+      "method": "visual-inspection",
+      "status": "passed",
+      "evidence": "Saved/Screenshots/FlightHouseStairs.png",
+      "sha256": "E05232B32141D9DD9E7CF9A736435F8C0C67A4A0CA6DE9F3B12DFBF529B53234",
+      "detail": "Inspected roof opening, internal stair, handrails and upper landing."
+    },
+    {
+      "name": "diff-review",
+      "method": "self-review",
+      "status": "passed",
+      "evidence": "Development/Reviews/2026-10-31-flight-yard.md",
+      "sha256": "A05FE17F03D00CC40E8359D7BAFA1962410AD45CD243422A3F8C9321DFBC7857",
+      "detail": "Scope limited to level geometry/scripts/docs; old gameplay sources and user FlightRecords preserved."
+    },
+    {
+      "name": "manual-flight",
+      "method": "human-pilot",
+      "status": "not-run",
+      "required": false,
+      "evidence": "",
+      "detail": "Manual RC flight not performed; this record verifies geometry, collisions and runtime loading."
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer": "author-self-review",
+      "method": "geometry-and-preservation",
+      "status": "passed",
+      "evidence": "Development/Reviews/2026-10-31-flight-yard.md",
+      "detail": "Reviewed preflight backup/duplicate refusal, old transforms, handrail route fix, landing continuity and collision positive control. Normal-risk level change."
+    }
+  ],
+  "limitations": [
+    "Ручной полёт пультом по маршрутам и подъём персонажа по лестнице не выполнялись",
+    "Проверены геометрия, физические sphere sweeps и загрузка объектов; FPS и длительная сессия не измерены",
+    "Лестница на вышке — статическая геометрия без механики лазания",
+    "Для исключения редакторского менеджера записи тест PIE использует временный несохраняемый GameStateBase, готовая игра сохраняет исходный GameState",
+    "Сохранилось предупреждение версии MSVC14.51 относительно рекомендуемой14.50"
+  ],
+  "contentNotes": [
+    "Полигон получил первый дом: вход через окно второго этажа, спуск по открытой лестнице и выход из другого окна",
+    "Добавлены вышка для вертикальных пролётов и три кольца; можно комбинировать со старой трассой",
+    "Проверка просвета поймала перила на маршруте — выход перенесли за окончание поручня",
+    "Контрольный удар в стену выявил недостоверность редакторских трассировок: перенесли проверку в настоящий игровой физический мир",
+    "Материал для девлога: Saved/Screenshots/FlightYardOverview.png и FlightHouseStairs.png"
+  ],
+  "sourceHashes": [
+    {
+      "path": "Content/L_DroneTest.umap",
+      "sha256": "F5A5A1A5138EA03269141163ED84600CDC85538E29F43B7FD5086771CA31C108"
+    },
+    {
+      "path": "Scripts/CreateFlightYard.py",
+      "sha256": "B7B5CC6E517993ED6EA0175803770A27C70E627E7FD6250C30E5FD798387F31F"
+    },
+    {
+      "path": "Scripts/VerifyFlightYard.py",
+      "sha256": "585B95A53F570858FF168794806500885228FF87091ADED05E2B87E0DD92555A"
+    },
+    {
+      "path": "Scripts/PreviewFlightYard.py",
+      "sha256": "F26784F8146C83A39101248AAB032C8B444D17716DCA31EEAD2DE47783BEA403"
+    },
+    {
+      "path": "FlightYard.md",
+      "sha256": "F8CBFC60DE705F7D6738EC34AD2A39DA6D155FC635A660B4D6438E991683129E"
+    },
+    {
+      "path": "QualityReports/2026-10-31-FlightYard-Setup.json",
+      "sha256": "6525C9B4C30136D648E4E24BC67C69BDD349109062994D6B24DBE2942B4B9F19"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/0/IZ/UIOR47HU9VXHMCBS2U6M84.uasset",
+      "sha256": "EF335A1A0B18C3CC54CC7BFE402BEE4D006ECBB4E45BAC7C55E5FBB642E48470"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/0/LH/GXSUS36IUSQT5PQOWUXKB7.uasset",
+      "sha256": "060A2F5417FB2C75A3B1D72E0C59860F06D303B4F471610AA9968B8DEFABB23E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/0/PQ/JK2Q7BJHZBM3TXRM98EQLT.uasset",
+      "sha256": "C48552FE9048228B647F5A7082827A88C2105D2DF102C451266AFAEC54257EF1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/0J/T6BFJEVITR46Y6IB79PFCY.uasset",
+      "sha256": "40B50C7A99F86BB269451A7E32970B6B1C53C4A8CFA9CE7F8ED001247D002BAE"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/2V/KS29MG7J4UQVK3RRI0SSZA.uasset",
+      "sha256": "9B385B08D1C32797F5637CE5BB4FDC13BC3F6C89F663D730A3D52A8D545F7BA8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/5F/JHFRZUZP9S72GQU2MRVRYE.uasset",
+      "sha256": "16EB98644A089E43C40C5676086C00C0D97506AB870D6557937AFC3E537B7204"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/7Z/HW1FSF7EE3DGF3INBVOE0X.uasset",
+      "sha256": "2EBF0665DF91F1530DEE5D3DBE94B3AB593D04CE9505CAFCA7F481DEA95D16CB"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/8V/G9B5TY6P4OI8NKQPX57ZL8.uasset",
+      "sha256": "9C765D0FB795E570A2C6005119797C17CB798568ECE5D561DA01E915E8C5F7DD"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/CK/A7KE50KB67TCT0YVY6V5CW.uasset",
+      "sha256": "DA52C5CB13931CEEEF6D3F41E2585B41F384DD1CF967E0C78ADA840162EBD6CC"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/DA/OEIDO6B7D7AXOH32G2AD7X.uasset",
+      "sha256": "B1D2570130B6EC86D314977077FBC9B269A53240B3B806CCEEAA1F28BABC6A5E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/EA/Z03TQCLJEFEDLDSQO39L3K.uasset",
+      "sha256": "B1D1FC75834A3968CC92A867215CEA15B1A36BDE2A699206D8D8CA528BCE2850"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/GA/Y62XN7O450RU689M0F55A3.uasset",
+      "sha256": "81B125D5717D2FAEB50E5E07F1684B291060D316AE80A0AC9789B4223F4802F2"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/LF/CBMCOPMW3UCCIQ33J8E60V.uasset",
+      "sha256": "95B98D7137FCD5D71F3BAE7FC8A6E02E293C66D5BD4D7716363F0AB1C85003A1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/NF/KLZDLIEK6W6MU5JY9JM4W9.uasset",
+      "sha256": "47662E34E15265859CF4DC198B75F4A8198C711406A16E70894FB86BF10D3023"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/OU/B8DZ13BKWCXME2VUVT6KEX.uasset",
+      "sha256": "A9127D79CC19CF7BBC468AB2813CD6DA8A040E2CC17F88ADAC107832CDC846C4"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/OZ/THNEM2AK44FY7J2QCSZ9KB.uasset",
+      "sha256": "5B7606A09BDEFF6BEB6045A8E2F79F5FB8943EC8AEEA0B7A8D16794E5910F450"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/T2/FR8YKRZY9JU45X1X7YJDD5.uasset",
+      "sha256": "ED0F1F1D8CF46280595F3FF43E01803CEADB7FEB672079DC4F11071D5CB11AA4"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/VL/135CDAK857OCO86S3UU6R1.uasset",
+      "sha256": "1D3E37746B4C2BD55C212658FD53D53A0DC8FA65E375E67CAE0C66BB00E8869F"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/VM/29GLO3CZ6HOGKR9N9U7232.uasset",
+      "sha256": "AB5FF885BBC60B31CCE21B226D9DB3B72E9877CFFB0C9802A13DA18B989951E8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/W2/2YEYPBXNX5TTYVEJSAZXG5.uasset",
+      "sha256": "A5D7DB3BF89A50BF9EA29BB41EEC58C17C96A91CAFBEAA7F8F1B751244CC83EF"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/WM/YYEACG95CS22K7NNFV51KW.uasset",
+      "sha256": "7E8EF0443FB64B7AF53B9C1D5507A41390B8962902DB0977E4F8FA3D957DA78C"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/XM/8WP40VMC0K53H92JDMSSNX.uasset",
+      "sha256": "7C680A69EF9B79A895DBD427C94AFCEC99E302DA47FBE4D2AD8C5B0709320D03"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/Y3/H1QLW2G4UF4DB8RQ4A625G.uasset",
+      "sha256": "AACED2801D45E0A65375AD1F7D485D9E493C0B08B19E19F8E270C3FE298C14CA"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/YJ/YL4J5UL40QCS5Q0ZMRM50A.uasset",
+      "sha256": "1538D3328AC44D15CB19F5EFF0EECDE69605619B124DB67A161A450734157761"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/1/ZI/PMWH5QGGLHS2KJLK7LA6V3.uasset",
+      "sha256": "F7591800F47CB8B0CE3D079C61249B3BBDDC734CC896A8F80D678FFA4E4690D3"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/1F/OAVHVHAESGOXX6L2T0SY6J.uasset",
+      "sha256": "F7FA57D11B50AD07D123640626A84157A095F62AA235461E85E4236A2240A44D"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/27/H0WE23E0551IIIBYZ6WS52.uasset",
+      "sha256": "1A294BE8CDBBC34B8C10D47E77E708E45E37FA3441BF1410EA45D07A42560D78"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/2V/JV28BD9TPRI2BPN13H7RF0.uasset",
+      "sha256": "1C76B997D0E20CC13095E20A324AA26BEBB19AAFE2F367F453832AA35E62CA23"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/32/IGXOTOI7318LOKSPFG3GCI.uasset",
+      "sha256": "55126F8BD93C9D07F68E59BC699F50DB77D918ED54B3EB77BE1539DBBC53B8A7"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/6Z/EUUJTN7HIRNPODGK8TY7LV.uasset",
+      "sha256": "D553B3280555457389779DA61C5A83782313EBE2FD5351F7ABCF656BA9532BA8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/8T/T5XKPVQNLKCGZMH6OPVX09.uasset",
+      "sha256": "B8BC139E9386A7D5A5FC138E8E989AA48BE2F59F36A7F2B66C2D20A27694ACE4"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/9D/6MCL41K44HF9VGUB1FJ5GQ.uasset",
+      "sha256": "8066E7B1541930A25846420EEF86E0E126DC800638F73800561F5ED01480430E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/EE/FMUM8G0D0MF5L7VALFLBAM.uasset",
+      "sha256": "6C16D66B6DB19AEB7C4BBB841B303696284E6A872029D0E26F7167A2EE7ADAF3"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/HI/P6XQ4PHN68YNX2742WXDOB.uasset",
+      "sha256": "04A494C24A3CF3979ACD61B3E811E47E8B7C9BD2833D4261DA2AA85D41E9322E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/IJ/3O32Q1HBVK8RZDHDLW0JEQ.uasset",
+      "sha256": "288B0A324419FBACE0BD8153EEA4933D5543E3745B8A007F2E26E88288DA67BE"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/R2/5L4KG40ECOCXF3J3WDUYC6.uasset",
+      "sha256": "94C04D6265FC6D636CAFA0C98FFB44E909D031C4C36869E3E63A2E1237304A81"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/S9/X18FMCOY9FUSXSJSHRR497.uasset",
+      "sha256": "5B06DB8624D5C9ED526450784C0746D035CABDA5C1CA3056AD2118485FC1AF61"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/VC/109XZRB4MA56YSJXXRKJ8T.uasset",
+      "sha256": "4FC4F453F87C4F543579ED8891FBAF2C5C2F955534AD2E8C5246EC678D2D69DF"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/2/YK/6JTD8NTK4AOCGO4E3G8TF4.uasset",
+      "sha256": "914EF64AC0FDEEB77F964B399BE7373F4BED38E6B2BFB6B03312C6D5AF3862E4"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/0K/80G248LC9RLQ5CY4PF91CD.uasset",
+      "sha256": "71554678875C7ADA46C46BA84943AC598171611C01C86A535B164CA215F85391"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/0U/03Z6NDN42MU5SKFDJ8GUQB.uasset",
+      "sha256": "906C37527CDA8815E193628B7D9D58898F0F9970FA1A474DB766624F7F25BA70"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/BZ/LPXBPNRTUC1F0FEF424HLG.uasset",
+      "sha256": "C30F1A8696274F0874C73469FDEBA5C33746A0E6BDD62024392F7DE3E644B82B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/C3/ZMFM9FX2N9C0TCPIURWFA9.uasset",
+      "sha256": "F300A0B9FF023A847719535C352180249D26A8F5BF7728FEF6818760CCCA4246"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/CR/RDNB4ATGS48QW8L8Y1WE0C.uasset",
+      "sha256": "ED0D6382C418435A63FC398497D935E42EC3A2F5888F3F43D4C13150F433ED8E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/EI/9HMCNH24MBNPEOGGTBNRP3.uasset",
+      "sha256": "2E98F9F613F974796D87785E78E922DFDF485FA8E1BC52C3C6E91D7EED2F1CD4"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/FS/OCDVMYZWAES4K3FDPKPZXY.uasset",
+      "sha256": "372A01D17B319A15A0828284864BC6D5887F27B2413F451A04D1D8A65D42AA23"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/KV/1VZ947DNT9OO1L5FWN44HR.uasset",
+      "sha256": "52958AD378D4EF4AFC27EA808F2D08430A9AE2CA6E661ADC2FB559B76DFEEE08"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/NL/JEGI3U0IINE0N3V79RH7K8.uasset",
+      "sha256": "668EC77631929EB0367245BEE11E9620378EBFD84B3C4E3138C5735483051B04"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/OQ/2XODKCXUSXOPXF35SSS17W.uasset",
+      "sha256": "11EB86BFA4A39D4C5C6315083E108E0C6F3BBB3B0FFB27BC2076219557E13676"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/PB/VEUES806NURG2NYG959QXY.uasset",
+      "sha256": "6E302EB4E86F4EC0ADFDF7E76B4C55DB3E1B9244B7E42385FFA2D36BC280BF24"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/QV/JXPMT41099HZUMD2QI77P2.uasset",
+      "sha256": "D2573A1ED89918E2D2BC4B78F151267EFA25814BBF765101A53EFF4893209EF0"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/TI/1XNXQ6ZH5MNV7LA5SWGUHG.uasset",
+      "sha256": "DF9FEF54393E656C5E36F370875447EA693F22A178BE23D6188A21EBA7AA11DF"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/TP/EIUHM2MF0I1CQC4J8RCIA7.uasset",
+      "sha256": "85CF359EC2333BD540CB1E8A75C9180CBF0508E2850021DC12060A97570538B7"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/UI/JDGJSB5PQIZTZA0WHMOHGC.uasset",
+      "sha256": "8EF49EA1DF083B852BC36540B96317B34B103BA7CC634FB88B5D35493F8BF65C"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/3/XQ/86WO7L0Q800ZIBOZ0LHDDE.uasset",
+      "sha256": "2503EC0EEEB0736DE43F65A15324BE53FBE7833F227A04AFC0EDA9150E0CBBCA"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/1S/M954CV6RGZ5YFWN75RMG8F.uasset",
+      "sha256": "54F1323C25BF3C8A5EAFD42135F6B1964DED13A6029BB3259FEFD763EF34332E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/2M/FSW3OK9VHVQP72JOE5NYL8.uasset",
+      "sha256": "6CED4FB87F8AC6D20F8954507C2C298E4B011F9D958828E950073A99F1AC6AFF"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/3X/8WPZBES90H7NX9VFLFZTWB.uasset",
+      "sha256": "047D4A3ED2984A6DB14804F436029F93BEE587F90F77A47EA52F9F095DFCF4DD"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/54/3NBZK90QPPPVOIKZ6A8S24.uasset",
+      "sha256": "1389AC84F3F76C5D01613188E5DBD7CBCDFFBBF807BE20823402493134525E5E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/BM/X6MFR50KIUPMI9AUPVWZU5.uasset",
+      "sha256": "620A3EB50E46FE65D27A1FA7E6430B2D2BC56A7628E993A8AAAA06A7681862F6"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/C7/ZGR23SO7L93O400JJI2ZDG.uasset",
+      "sha256": "19B5BCEE0776010DE3B0D89ECC560C665E161B4D2F1FB9D061C94323DAE62923"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/D7/LHGACXQ91WMT2B4EAAK2OI.uasset",
+      "sha256": "5BAC3E39D4400F6EAC88165CE4CAB845002DECEF09115A7BF102D3A280CB6CA7"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/HU/50B3W1KWLES2SBN2Q06N37.uasset",
+      "sha256": "5A26F329B1D21FE0401FC2A314723E48736D72E0C8E41D54433B80450AD9F241"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/I5/QUTQHHNJHLKZPGN16FVE17.uasset",
+      "sha256": "FEAEC1BA5791E0ECABB0B25A05EB30E016FBE094F5DF1CC8C607F1034615948E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/KT/9X8VJWSXZG55FB9Z54P4J8.uasset",
+      "sha256": "B2386D0BBE8FABAC5FAD29BBFCDC283BAE66748F9B4B606E8746C943309B6215"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/MP/B6A1O06NN0TQF54SP5SVRM.uasset",
+      "sha256": "9ACF4D0E5901B6884BFA2C7B3962BC371B369A04836C1EF08802FEB723DF8859"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/RS/YS6CJ1WR9SQGCBGEPGXU89.uasset",
+      "sha256": "4BCE97DFA2C38F11079EA710C4369F758737B44D70085D9C3DC4F62BC5CBE096"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/WL/RNCCMQCV4EHD0F1GYXDYTC.uasset",
+      "sha256": "E32474A036C83A46731536C437C24CFCC1BA79710CA0633F850494113B758326"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/YH/IHHJ8G733TG0IGISGKAO72.uasset",
+      "sha256": "1D130E8770019F8B15B30C9A3C843FA44DEAAB30E7DE9DD850F9A3EB5A998D38"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/4/ZU/6V0CS3S1ROUB2E3C3R70DJ.uasset",
+      "sha256": "0CD0361C87942F699197FFDAA252F161327F4B715C312825BC82F8CC5CC39C99"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/08/5OTUDRCCVHNT69X4FAOM7C.uasset",
+      "sha256": "8659BD5A9C8048BCB23FBC0ADE3856FA6E2A17F24E2FECACC4ECB3496C5FAEC9"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/2Z/RJ09GKX53J02QQLS91UHVF.uasset",
+      "sha256": "9FB76BFD62227DA61AC759DB8608FC9860698E53DAB17E0846BEE773E6131CC6"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/90/SVIC42YR4TI1WGOXUGTPUL.uasset",
+      "sha256": "8194F54871370DF75F78F801BCC291C41C69C90E6E8FF5D9B8DE43002E2E5400"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/BO/874AWB5TOBADGYMUCRLH8I.uasset",
+      "sha256": "DD70B73EC1DCD923192B42520FC63A110CC739228B55359FFCA346E936682E4C"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/DK/11R2TU7MNFBPB1TOPJMNPJ.uasset",
+      "sha256": "3D7F32FF91BD11823B6D873EF5AC30E4EC4095811070E3AEE73C5B5255F1743F"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/HC/LGKDS2W0BOLA7Q45R78KAF.uasset",
+      "sha256": "D51843131C5377493AAF28B6904BF2709A960A3FB58F4841EFD2F111F6C01C90"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/HS/BSVMBC1GWXMU3FFUT5VLIH.uasset",
+      "sha256": "8D1BE5F8F187BCA4C479487075F6012C9EB00DF7F08F693E9498A558EF747D2B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/IZ/DP38P9HD55ZL5YVPYR9I1I.uasset",
+      "sha256": "831361FD9B51209FFBE7F0E43CF2CDE143A486E0BC4C4D7AEA1E261C504BAA5D"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/LD/D0K28XVLOYUXCZNZ6YZ32W.uasset",
+      "sha256": "A2DC0CEDB975EA50B18017D50D4BF2E42059D5F7D2E253F1B5A5796FC507B8DB"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/RW/H9NK6QUZLMHDID01Q83ZK1.uasset",
+      "sha256": "55B9D310D61C35F8F534E3AB2AD6913DE126991221ABBB64BAD4C55D1A832CA7"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/SU/GAL5GKKO69IDLYGM76W0VI.uasset",
+      "sha256": "AA362A7BB6BE7403EFC0C59F5C665240A9102E2F9CDC919978C27ED30F9FFCA5"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/VK/EESD0VJGINY95SJBRGNFMV.uasset",
+      "sha256": "581A541D6A4D0054202486CF275E4B6CF66B1D84D60C34C439151A7C8E680C6D"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/5/WX/61ONMOJ8303LTMK4XEG0R3.uasset",
+      "sha256": "2BA3DD7E2255B1B779ED0FFDF0FC0D9EB7B77B3A9FD254078ED80222EACE967F"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/0V/Y08WIMX7GPD7DEK5Q2B271.uasset",
+      "sha256": "7762BDA6D769FD70FC4828BF61EE9C8CB2C117C647316E98DDB901B8F98DBDCD"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/1I/YMI1712960PLNDR10BVZDO.uasset",
+      "sha256": "A255E73F4E517AF01E9E5F76CE7EFEA2574E49E1CF0A4E8D5438D5EDBD84D9D8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/2E/GAFP8KMU7SST65NWEAL533.uasset",
+      "sha256": "D2A1F76FDBBEEF6554778E6A29F5470DAD672B822C2C36D75FE02045858D279C"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/3C/5497VCYYGBDMPLC5NQUOMO.uasset",
+      "sha256": "204E0D10F0C7077E6F0B93A1C89F9301D68D0E97D928A547E59CA6E8F968BD7B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/9K/V3ZLCJF7N1CGD8333J5UG2.uasset",
+      "sha256": "834F670AF33386362B132E2CB2740322C4CCE9A025B4CC2457991DA33697E240"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/A9/C6W148HP6RZA8J0H7KUR97.uasset",
+      "sha256": "E015336FCDE841544F6B84D5495A5FB2784E8A1ABECA25A42CCA0E197762CC4B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/AU/J8BON6YNH6UQEP7E00Z1HR.uasset",
+      "sha256": "A4B2B8B371F05D7010C28EB5E8005789AE5A01E243BC1793F9CB314516053840"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/DP/CBYV0RJPLWZV8MCOF30LR4.uasset",
+      "sha256": "3DC25EA542D051A354B31FE638E39AE1F964D199DEB8E157DDC5FD1B3B9AA5BC"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/EK/1TQ3Q5GKBN892G3ELQIQXD.uasset",
+      "sha256": "C0651E009BFD8457B3E48B906BA21D0251F24BD65C8E6572BAE2669C2AA7F310"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/GS/SI1BLYQ11JLGTDVE4K74P1.uasset",
+      "sha256": "BD736843F642E135768C5C26C07015098AE3324EBBB6B46CE901A2240B3CC40C"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/KD/3N3DRNU7VX9A63QQIETMQI.uasset",
+      "sha256": "187F2467D6E26142EA9B07D50415C0E3AE0A5D6EDC6D1F76DEDCA8506167ECE8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/LI/JPFOV5SE8R1LP1LC1P7NXI.uasset",
+      "sha256": "C78706940E9D1D28E76C7B47DEB4151A0766497EDE1A878A97CD371298DC2B14"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/QP/41QIW2HDQQF6KW09NGRAXB.uasset",
+      "sha256": "BCE575DF2200A200A84066B044A1D4FD09D7C24C17E91783DFA1753F33D56DB4"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/6/R6/MBWKC850ARSNPCVXYSVMMC.uasset",
+      "sha256": "B7CE7E000FE52A6B04EC285AD04AFDDE6B8CB4DF2399BEF6E78B526931BCB54E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/3W/VCKNSAQ3XLERBXARHZ5EVJ.uasset",
+      "sha256": "AF80A28DF98924D5C1EC91D0EA05A8C03C68A13A62CC30A2C603A20769112ADE"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/46/JHZAOHCUWJGWVT5MPRW3M4.uasset",
+      "sha256": "0AC1797729C7066B6500B2797F404E6F048DF3BAD44CDAE8BFA0A04D81CAD2E7"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/6N/2N1PE28UNXINB6BNA0TKS9.uasset",
+      "sha256": "2BE60AE45041AD505AB25312CEE34596EDC060CD9DDE83CFCBE1490B93799AEB"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/8A/PNYOX9XRC3CVT0VPLIZCAU.uasset",
+      "sha256": "091B75BE2445E6B269CB4A6D0D214C4447DC5ED3D851A19EA4EEFC9926C4C712"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/9T/9QJPM5VV9B9X2WH73CQ866.uasset",
+      "sha256": "6964DFF5E0BB872821E3C60E60D8641E76EDF5837242609D96E553791554270B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/CR/K485YMWRRHYLEY7ZY5U24Q.uasset",
+      "sha256": "51759AEE0B308497A78E01F6A38E683259BD06122A5C99FA5AA659A0187986EE"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/DF/T1UEKYV9PD0LQDFYYWAYAQ.uasset",
+      "sha256": "B04790401B989FCE0F368952305143F95B78502A2E693664A1B9AAF85274D919"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/EG/TO7ONQUKF8T9H1HDTLSR6G.uasset",
+      "sha256": "81ADD8D9547DC2267E903AE71A8DCB01661D34A37EE23D31EC2D63719838248F"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/GW/1E2FYJ4BHMXPYXRT6ASQZE.uasset",
+      "sha256": "54DD01A43A992369E402CF90BEDC4440E4343716E9EE4E8F6BEB39C324A7BD40"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/HB/5N2TXDDKSVE69RIOSIHS8I.uasset",
+      "sha256": "0AD3D8E9EA18950D1221F09A5AACFF5C36DAD240B7C0B8347CF5F072F7D11BB1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/IE/FLWU94OAISE407FVYAQDLT.uasset",
+      "sha256": "A1632008065A7CB91DCA7528DA50C2D9371F910F3A38D3C2DD741356828C2DB0"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/IK/GU2O7IJ9PZ66N6VXF9O1C4.uasset",
+      "sha256": "72F828F99F6ADAB2AB37302C4DE285FBC5C4CC462381F7A6B66ED5688B798A97"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/LK/GRW6O38DC0MV9OUO2V2THF.uasset",
+      "sha256": "C6D29D8E2EB7D9CE50EEB4C470522A2C13289FF5991AE1C1191B8EE67F692C14"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/R5/CUYDVXPVV1OQL0WZ17VFQ1.uasset",
+      "sha256": "988F9A823FCE379530401587E46AF85FC49E6DC52646FABE2732296E3C66AD1E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/TH/622YNTLKSTDDZTBJHHFGMH.uasset",
+      "sha256": "24CE8F402A51CA146E4BE3AA2C4482025FABAB846D54E933FED13BCC469D483B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/7/UC/IJIJIMJSYFJT7X8E2LOZA7.uasset",
+      "sha256": "844D63263138DB385ED623BCB0CAFEF5E220624BB96355D610EE06DB0B833598"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/1W/JSFEA649BP866ZC5ZS9FYJ.uasset",
+      "sha256": "FDFF294D2C643D3C9DEA5F7916AC4EC5056DA31F62E53E9510D0753F745ADFAC"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/3K/NG9AJL5XLWZJA45476U2LH.uasset",
+      "sha256": "7D6AAA6ACE52B39D93918A3FEE86705CBDE6FD7540740426491367F06AD8F7E1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/CY/KLA95IHVRQ9VOV92AQ82CM.uasset",
+      "sha256": "92464EC920ED6190014DBA7636AE7131FBDC05C19DF04E5EFE5B98AF0E278D4A"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/FB/Y1ZNOB6L4ZME5W8UFB6PDR.uasset",
+      "sha256": "37151A57A699AB32F4DF68D1C45C6467CFDA5D701DA961BF999975D205DD39EA"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/GQ/2Y42L3MV96JQ2IW9NCGS3W.uasset",
+      "sha256": "0CDBF2CB109E72C859C6CCA740EC06C9DE80D77FEC3305B74DEB045FD9473D6B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/JM/RWN69G7MW03SMHJHIJBTFX.uasset",
+      "sha256": "213DEC08F07BC36EBFF7EEA23F687C88F37503026F3AD51A21D754FE776EA4F8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/L8/A8BDPDRQQWTKRUHX54Z98T.uasset",
+      "sha256": "4371758A93142BF05A961684B39071D3D75B5DAED0CEF13EA50CAC76CD950FF0"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/MB/RKX5CVHM8XD6IQ67NHXKYG.uasset",
+      "sha256": "E32C40E4F8E51A5E6C59EA64E275B918DE8ECB9EC02667428FFCB4BA91771B84"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/Q6/KENZ71T92GHGIF0THWZY8Y.uasset",
+      "sha256": "386A6FDD356366496375D8979387991066420FC0FA621D331AC726613E7EEB55"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/SN/X4X0BH9ZRC1QOTXRAKQISO.uasset",
+      "sha256": "F9436AEBD9F6FB5043167946FDC9BC97C11DD6126EF9ADE8D6BAB939203BBAFD"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/8/TS/HBTQXLIQHTL2E8UPYLAT8F.uasset",
+      "sha256": "3FADD83748FB4AD645EE32B87CAB2557EA65701D11B9A1EF3768C036FC9330E5"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/9/2U/0RDUBIMH3O765KXJGGG2CK.uasset",
+      "sha256": "444659AB3A01261A4E82ECDE104B9490C3BAAEFF0BB2437C101D31C370B5CA95"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/9/AU/UNNU3AMYLIIBL8BQC5PURI.uasset",
+      "sha256": "CB6C02CE3A402750CDB15FD73E8BA41624EF675BF5E3A1813E7EC4EB9CD301AC"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/9/DZ/6GNVJ5BY9A3VJ2S9UB82Z5.uasset",
+      "sha256": "C628F68F141E8E7105CABFE762663D9EDD6C2E1B2634DABF2A834EB934B4EC95"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/9/G8/GX2JEL7KRTNEG3STJ4RCG2.uasset",
+      "sha256": "92449E5AAC7B49A41368A2ADA8979281E0215C5F5228C3A124965E04BAD30655"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/9/O7/UMFKR5QL884BRIR0R4FQCJ.uasset",
+      "sha256": "5E14DC273248D6C11BE41C399F27C88A12E2F80B11F0D52774786AB6023E8460"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/9/OB/KJVPZB4LF1DT57VA24H45M.uasset",
+      "sha256": "F56EE5D1CF39CB14A101EE7AA64B3B9B02A499A76C05D4C3A11126461B21C143"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/9/OG/SH48UQXZX1JJXPX0Y234Z9.uasset",
+      "sha256": "3756F0F983D9C80519BDADF7D21503C25721D70E7B108E7850F9BC99114D23F1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/9/TM/WL4C6BDF5FZVB6KBEXCG4T.uasset",
+      "sha256": "E4B55C1DA48A0DA15F08EC3DE5E71DD551F01C0D83641D814163BEA4E2ABB929"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/12/K1RT13D7TOP5C8I6NYA0OM.uasset",
+      "sha256": "0C07268A3B710E178A44A7EB1BADA32BED7D7876340EB6F4906A328FC3840A78"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/3K/FG4695TD5GX67S941LXLPI.uasset",
+      "sha256": "FC2ED37B40F04F566AC76286727AB0F4B09546D604BC16F181FC07F963539677"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/4F/83LJJUPQVGSEZMB0VWTOL0.uasset",
+      "sha256": "A8854079492089694D5293E99B92D3BA8ECB4A38305D12DE9EF1548710F6B553"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/4Y/RDSQ6FQS90GZBUNJUTB00H.uasset",
+      "sha256": "A1B07801BB15E86466F3462875D19C4C6C941F319412F01076B1CD402AAC15FF"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/68/EO4PK3ATB867N1EF2ZBEHY.uasset",
+      "sha256": "16CC954EDB8A1EA425A594003FFC516716028588D78426040794E77A91844F3C"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/82/7QB7B2EHDUAQINEL9ZFHI0.uasset",
+      "sha256": "E4E65EB2BB4657B48BEB5F6D7E9FEC077A67767731967518BC6612668E4BDCA2"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/8S/3GTKHR5J9Z6S2C9HEXL5PJ.uasset",
+      "sha256": "40D1D92D6F3A2F4B5921C514AA69CD04B5731D15A0931612A307793200EE2626"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/HE/3WVQQ3T7MLVBTCNUJYD2HM.uasset",
+      "sha256": "FA5F6AD090A61A2BBB305BBD945465D150FA74F87B6ADBBE8D617D909B55C26F"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/IX/99NRXT0UQ0RJ6BR1BZ4ENF.uasset",
+      "sha256": "DB9D97D1C47369653B1FB9D6CADC055E07CB5A9DE5431B5B823911B3506EBAE7"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/JI/CFM5PPZAI9LXACJ4XFSYJR.uasset",
+      "sha256": "8F16E0864AD2E0E31229D182FDF786C556C60C38BA53749D5AC41959D72034C3"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/MZ/3FM8APCGAKCRF0N81ZY8Q1.uasset",
+      "sha256": "3F36B70F5F5CE35AFC7E98B99F045BED0ED08E4D082830A95CD3564B30AAB85B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/N6/6RZPR46IPL47I7859M0FFN.uasset",
+      "sha256": "860C2ABCF1DD86DE0A88306BBCE624D35EB2FCDBED86D960F03DEDBFB4DFB7EA"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/Q5/PJTR5FGRB1GU3L1EEOXGSG.uasset",
+      "sha256": "F638996F71C296F5D264624A3D609264FA79A539EA6E7789892E6ADF87800090"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/QM/MPKGA9OJFVU3HBOC071LF0.uasset",
+      "sha256": "18064F56C04B68AB7AE9B87947DC7F067D7F608122F22BE480079E00A3941B17"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/QV/2TN5633YMBO80DMEQI7HQN.uasset",
+      "sha256": "8FC847E98766F3FE785F71E6C589A8265F526D3BC7ACB4B2568D816225318CCD"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/SW/55VNVZH1KJZPOMWG1W4ZA8.uasset",
+      "sha256": "E3AF0F8D21AD096C3027B574D39E86AEC07271565D53D76FD96E58672DE57459"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/TE/A3D7MYAOESP2T3JJNXHC6L.uasset",
+      "sha256": "783B850940066B870C887F7858751B769A784DD70ECC9B7C37C2CE151B4A964D"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/UY/T7MFIZUBA9GRO0P8XU3RZE.uasset",
+      "sha256": "3EC96DFF15F20E28117E648786523DBE5DA0FDA93570FD0197029183B8294849"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/VZ/PNWIH8FZ84I56RS9I3JHVP.uasset",
+      "sha256": "F68FDDA6D9A129532B244CC24E858991BAC2615546EC3142B52DDDF435120E89"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/WA/CF5E3FNJX8ITGGJYU3YNQ7.uasset",
+      "sha256": "C31DB5AA1151F2974E9F48F976C35B4D5AA6DB715D28F2B4244FAB666095DD34"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/A/YG/GPWF3DPCGS4WYN2DGT8O5K.uasset",
+      "sha256": "2E97B9FC48709015872F765A813372530F48DEF79A892379A4909A93D72CA813"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/0C/2PWG0XRIXUWRB509XP53DP.uasset",
+      "sha256": "DD93D2B2E279397ECA9E7A3D3DA208639B62D7575BB64E9DB12A32704919DB89"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/2H/6TVBNR5ZL8122XT9Y8DGP9.uasset",
+      "sha256": "2DE245A9BA89A2F1123C63984756E0AD445593425E19880DFB0502DB9978C3E1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/5K/SS2YHSZKD62NLDR1TXUKT6.uasset",
+      "sha256": "F6ADFBAA37DB67717CAB260FCA57EC98E73E70DE438986855A22663B63A2E0EF"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/73/XJ942W2OJGZ429YQTD5PZN.uasset",
+      "sha256": "7C1227CBA4E2E5BA0345712B6C0D54A4110D3D7B45913714FB4B050CC97544C6"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/78/NKJ8RUWJSMIJK4Z5W5UF07.uasset",
+      "sha256": "D8332D841AB64D9CE2EF17B41A93444C429D7A6D627492227AB5E7751A0952A3"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/7P/WSXM6UBG73FEEO97UJV1DL.uasset",
+      "sha256": "973E61EB645953ACADBD4F33639E0BE08D24FC4C6934E317F449FA5D27FEF4BB"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/AN/Z32ED38EYR1VUZP6VHWLA8.uasset",
+      "sha256": "B4F2615798247A812F4BB81352118E45168BAEE59470F7C3DF23936294F3DB16"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/FA/VP17XS2KJKJ74ZMPR342UY.uasset",
+      "sha256": "4CBE79960D164DFE54D3A842B2BE179435C5525715086877725735626442DC2D"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/H5/SBVPEKB2SRY2PN8A9TONKV.uasset",
+      "sha256": "187200BC4E304167CF11587F8C586A82012BE9D3D451531200B17C4E80C00117"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/I6/YC2DIWJUG0FEAYHTBSAIPT.uasset",
+      "sha256": "1E8A189F3B190575D5EC420E9D31A69D86892BD743A323CC6AE4180FF8E535D0"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/K0/SLBGFC5EW2VY4GQVYCHFRN.uasset",
+      "sha256": "E28F98177F85342EBDB625A181D8E8CCB9DF33962C95FCDFEED54A3C2C6EF97D"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/MT/XRK324AGC8C6XMNNGRA6S7.uasset",
+      "sha256": "017840622A6A6CDE1C295E657B82C12E7CD84C8504AE4DA016B8335317252A84"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/ON/QGVZVDIK5DHAW4YRGYRMTS.uasset",
+      "sha256": "123AC7E22409A05FCDEBB4E2FB1B674C27E37EE3CF96F84318DDF47A9F68BDB2"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/PV/RUJAQWGYPCIYMDQVBQ3CKS.uasset",
+      "sha256": "C76FA95464DF1EACB9BD3657B0688AB78F3F9F3FF5652FBB4A43D51AAFA2EEA9"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/QS/BL48OPYY55F5QTGJ2C5D39.uasset",
+      "sha256": "76EE538B8E9DAE7E21484C540A50175E7906A0294250A22833CC72BF62265CF8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/QS/XP2P03SYGJ2UWDHTV7EPFX.uasset",
+      "sha256": "6C8A27503C463BB8962ACF6620B8172E91D126E5631EF551286930F9A26769C4"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/S6/6O6K7B3H303U2AAZK1JKAZ.uasset",
+      "sha256": "DBBB19F5D76020D26960669E7D76C2CC7899CA72121318687E8F880D89E9B003"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/T5/BROUI7DIY9SS03JIHA98M4.uasset",
+      "sha256": "A7964E4B06E0B08FA3014A168C30F3F67988198D56426C15226067B7C3908F06"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/B/WA/3PR2K47EFFNIL28TJG7NOH.uasset",
+      "sha256": "467859C8027F5A9FD0AA28C8136A555344BB57D7415503D2953A49380BB013F8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/0X/1AKTUHWY3FWJUFCK5YYYTF.uasset",
+      "sha256": "2DC69F5783194BF38EF7D5FD158BD1F5BA7FD67494373CB938757190F5B56242"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/0Y/JK3O05VYKDI45N0TTSIDDX.uasset",
+      "sha256": "6867670FF19470D5D83D6AF27D94115399D5906FFE4FB3C4611DED8546958987"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/20/0L4OAQA76RP6XZOXB0UW56.uasset",
+      "sha256": "D23E51ACFC8B909FEAA3F2CF09011A7683D47D9F2C8118017C80405BA3004AC1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/6S/2JEGLI9ZNA8BB0S1TTYAPA.uasset",
+      "sha256": "98450549374A007FC0364D361792964150A5662C8B01C4288AF299B570A515B6"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/9L/A2HMH5U830TIDLELIUPUL7.uasset",
+      "sha256": "61FB93278D95E345D8127A2B4BCA40D9B806C09E20B58356B2F2AC9FA967F21E"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/9V/CA3TIB1YJ2MU1CAIBYKWGA.uasset",
+      "sha256": "94117EDBB02F02D1A5F0DEAB7AD9B96F44F11B78CF28E135C6D8FC41F1968C6F"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/AQ/69ZLNG7V779V5Y5HT1CQUU.uasset",
+      "sha256": "DF9865C3E91E98B16F1D7BBCC6F202374269978E6EB1E3BEBBAAD4B198EFDC8F"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/B6/H442UZ2P9BZ0W28FP7TRWF.uasset",
+      "sha256": "80BDE25995C210CC1E3FE3C4414DBFC2F919ADCBB28A6675EC380E36029086E8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/D1/18TB8V0DJCUTBS5GKO47NW.uasset",
+      "sha256": "EEA840FCDDB7ABC127C68A0E1604B80EE94B848B6A61DD1B380FFEBA83900A5A"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/DT/UH2A3R7OQBTC8SCMQ86YJT.uasset",
+      "sha256": "208CA2471835A511A2470075BCA9DBE808F989B95F23F7FB60FFCDCC80F9A736"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/E0/KDI373EI1ERMGDFLRO1GB0.uasset",
+      "sha256": "BEDCDAB666AA8D209F3DFDF63EFD304569EB0F0F2617CA42F1AB126EE472EC37"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/F3/C6J4SAW7SWVNTT5F78UE91.uasset",
+      "sha256": "61BEDB222D5DB1424E97DB9C4E5412B9F5BE7B828DBE6945D90AA3A5D365042D"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/GS/0EV73P37W1CSH2U5H6CZM0.uasset",
+      "sha256": "278681369701A9E2963904AE0DA6228AFC3E6C05C8EA64ADB16E14AE09EB57A2"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/IF/NCWICZDPH5L094G34KY2E1.uasset",
+      "sha256": "BEDDCA54F4F0C34BD824E5902A81568D50CF84D9302DD67B932E94E42C09EB26"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/KT/EJ4NRVFOC0RVXEVBXGQVEX.uasset",
+      "sha256": "1774117148341DED43F14D9B631861BA96B8E1135559DD010A2707CE59A1AD81"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/C/ZG/PYW4TQXJP4YV7OG7I9W95X.uasset",
+      "sha256": "3461327C79F2DFED802C8ACE6FAF1F164934EB1EB89D051578B0A5740E221BC8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/13/ICDNLPMFMHV28WE35ZWZHD.uasset",
+      "sha256": "F561881CB024453423FE06EAFADA751E0CEB3112D79B23F370F01712DEB1765C"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/1N/RXP0DB5MGCMXBWTDTPB30B.uasset",
+      "sha256": "31A31D80DBCE08249ACC0F5D6D6B0549F027553BBBA0E00357E8C3C09362BB6B"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/22/1CX788LFN8U4F4IGOC2FGW.uasset",
+      "sha256": "4BD9C8F385131CC5C67B55E75FD2BBEA0DA5BBAB1ED1D7F24A899678E6B4AA6C"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/2P/JW8LDATWX62D62U5T9OJHH.uasset",
+      "sha256": "F5E8B257CA73E7050761BE05575681958D5A8EE5CE37DE3774D995F29190F1B2"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/3G/VDJ6W4CRL498CAUA8Z2H8B.uasset",
+      "sha256": "AB8E2FBA6ADBBA0CC009B6B66F3FB4CE5917404B1DE19743E2AB9FD40125D0B1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/3P/WOYO8FLUW2GO33AQ7U0HKC.uasset",
+      "sha256": "96B7187C4FF30012E09785585471C0322838C3A9F4B33A23FF9E3942CCBEEFEB"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/3U/S6HIB1B5ZMICHFM9DGMC63.uasset",
+      "sha256": "6B4618252E5EC48B3D3C8293FAA4B00E52B681D93C62179C4DD1204DA1357DEA"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/4K/HJRET3EDPAXA0YH7NWA8CK.uasset",
+      "sha256": "5B189992FEBB38C84800F81E90DFA4EC04433703B165EDCA74D33038D5D22DE1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/BE/JCYMBKHMVNWRDNLTJ07LP7.uasset",
+      "sha256": "968A16169EF98031DAEF1B6472EFEF9C167E5A5534ED379F766D31C310AD52D8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/BI/MECZUNCBOOV2U068FG8ZFL.uasset",
+      "sha256": "B166B5887B5C81687C4D5C42720811F7457D4BD24070FB42772604AF69636D01"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/GH/7GPL3Z1GB3WNL0PR9XBQ47.uasset",
+      "sha256": "844E5BA6156D4D7A0004B9CE2A671E448D25670125FF9659459438F8499C2FF7"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/J8/N8L74EPF3OFJ6Q8BQ1WCTE.uasset",
+      "sha256": "3D08C5B8F3B3D7E3082A790BD75691EECB8BA47B6019A35C09D0D48B121637F4"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/LS/77XHYXZ9BQAHAM8K6QMHPQ.uasset",
+      "sha256": "A3C4DEBEC0DB48AA25C84D8B251C1EA40FF7E4F8AE182FA3FD2BF0141EF2C724"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/WO/5492E5XUMY94BB3H5RWOLU.uasset",
+      "sha256": "15D9CB55ED6534D029C7FF3DF31AE88ED2CF373C6A431A699507B0D732B03584"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/D/Y3/KZHON0DXCFNCPWH7GRG5SK.uasset",
+      "sha256": "A65277E293B2A0D7A66756126668880E36F6BE74ACF2975ACEF7D1BF67ED85E5"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/3R/O8F1EY0KKSFC6K8L1RLOFP.uasset",
+      "sha256": "1961AB13BB585452049B0403A3CCE8A1F8AE1F552A0D09E5AC909E6BA4A76E5A"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/5E/NYCB7O2ZUPR4GTNI29JWP8.uasset",
+      "sha256": "FC858BE12780EB6E58BEA4BE3F9B82CBF352EFA1ADC9951F4445B2D16A818343"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/61/EC6KYI4WQJSXP0ZEFCNJPN.uasset",
+      "sha256": "F4E08022965B0CEA6EFF20AC590119FA3D188DC605A27D658806EC533A499931"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/71/P23GJH48801QGBNGE97YX5.uasset",
+      "sha256": "0122E6350B409C682BE758FE5C88B2C4B26AC26573BA53E18B77BC0699A1FDAA"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/DD/G9RIGOCKW8AV1GPTAEZOJL.uasset",
+      "sha256": "B86C16B3C546EAA2BA64804CF5FE655ACF848B43F571D593A17E4337B3488BF0"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/IM/VHIB3JN9ZDFWEOU2EFMLA9.uasset",
+      "sha256": "918E380C075D261EE0F033EF2E79B12F4197FCCCEECA906569638B22E3FDAAD5"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/IW/HO5REA5MZXR1M5H1MGXEKQ.uasset",
+      "sha256": "1CF2DC8856D5D5C0CFF06E8203F130315969D59758039665BE7FBCD6D398DE81"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/IZ/1DWL4ZV1GMM1OQKGOVXXXR.uasset",
+      "sha256": "1F04B96D94589588EF7DFA356B5137D771905462EE55FC33BA2D67638AAF2927"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/K1/4K6VYN5Q8802W8QFSAP38M.uasset",
+      "sha256": "BC5B1FB3EB30D413B1A6F39722FA1FA27FBA4621B0C69D84399CBABF79939080"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/MN/CA2WR1QKCQSIN2FE9XRJVT.uasset",
+      "sha256": "86E80A8FBECE10DBCC518F660EB3C81F756140FE6D7C623177314F7A547C9EA8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/PG/1WJTIFMGZRID8P83CJDGVH.uasset",
+      "sha256": "786003357E28265DAFC013B27F95CBC6C99FED5737DA9BBE98C2BDD72DB620D1"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/UY/EUSZHRI3APINN5QLI52YGC.uasset",
+      "sha256": "91729FEC7AC31011EB33B4AE70862E6CE7E915FEA6173E69E1754EC64CC9FDB8"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/WO/KJDHG21KZ1HT4LJRGOQF1F.uasset",
+      "sha256": "9DADBD74ADAAD45448AD7589F9EEF8130C87409D7B19BA8B482DBF04EDB95392"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/XZ/RGXD0VW75ZZXGC7A61UYXC.uasset",
+      "sha256": "0F53FE5766D15505615E8053FFA7D593DD7B29F2C8025A52A8753170D2716567"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/E/Y7/UNLUHUYX3TE3M5EVOUXLAH.uasset",
+      "sha256": "05879AA771DE43C87DF68245A71202A1937728CB3066991A0C5B687C1ED40138"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/F/0K/71R59Q5TZ2VW503YLYAX4J.uasset",
+      "sha256": "00C52ECA7EDCAD8BECF09D7066AE644D2744D0B90C416D3F74E508501F9970D9"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/F/2I/YWSTCTLQ0D10EWI0JKLM6T.uasset",
+      "sha256": "B60AA85C180499E1966833FB5D43941663F60F97CD3CABEA096EE4232FA19FF2"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/F/2V/K0I0VEPHGGTRW6NAS3XNTF.uasset",
+      "sha256": "C01419BF28F29C4D41761D25A5AD6A5A2F2333143486610C56B79FD91155A734"
+    },
+    {
+      "path": "Content/__ExternalActors__/L_DroneTest/F/2V/M3ZROL4JJ7Z3JMF8690TCN.uasset",
+      "sha256": "325F740C2D7E59568DDF3FED2615D01395BB00CCABE4083BFA45065B45DD3168"
+    },
+    {
+      "path": "Content/__ExternalObjects__/L_DroneTest/1/TC/D1HQNEGQW9BLLJUJLBYCQC.uasset",
+      "sha256": "FA66A38F8D815140453B6C433444FFBEFAA41F3D236726373597FCEC71C088C6"
+    },
+    {
+      "path": "Content/__ExternalObjects__/L_DroneTest/2/VX/5C53J4RO3E6KV64D9V83FD.uasset",
+      "sha256": "34165BFB7F2495F59A59135CA14EEDD1DEB39D47AC1A55E7002308FC0B190AAC"
+    },
+    {
+      "path": "Content/__ExternalObjects__/L_DroneTest/2/ZP/9VE53P5EF42TM4VR24YR97.uasset",
+      "sha256": "E0842104E31F177543AE6870EB239A9CAE078F518AE3431E01588C121159EAA1"
+    },
+    {
+      "path": "Content/__ExternalObjects__/L_DroneTest/5/BS/RFLC3H22FUT1YWHGSE4AUR.uasset",
+      "sha256": "FFD02E6F9A0336CB35B4B079AFA9CA07280A98DC64AC1795B4E91DDB22A2E830"
+    },
+    {
+      "path": "Content/__ExternalObjects__/L_DroneTest/9/ES/LZ1DKH8OEVLTWGAZS9YB6L.uasset",
+      "sha256": "D1D0A958689123484CFADC671993AE210A8E146CD0849A5B527290952EFC360A"
+    },
+    {
+      "path": "Content/__ExternalObjects__/L_DroneTest/B/KK/6JMGPEDQRTWWDBGSKUKJPY.uasset",
+      "sha256": "40285229B0096C529D33E4C928181CBE3F1029F21EA62932223B6CDF3A99B348"
+    },
+    {
+      "path": "Content/__ExternalObjects__/L_DroneTest/D/JP/IYMC7XBGQ6G5OJK9LE4OPR.uasset",
+      "sha256": "84BAECAE1D8CC825E4B864D005BCCA27500EC84F1BBD3B0D020274B81A43CE2B"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "reloaded_actor_count": 222,
+  "old_course_actors": 34,
+  "collision_profiles": "BlockAll",
+  "sphere_radius_cm": 45,
+  "solid_wall_control_hit": true,
+  "physics_world": "PIE",
+  "physics_sweeps": [
+    {
+      "route": "house_window_stairs_window",
+      "segment": 0,
+      "clear": true
+    },
+    {
+      "route": "house_window_stairs_window",
+      "segment": 1,
+      "clear": true
+    },
+    {
+      "route": "house_window_stairs_window",
+      "segment": 2,
+      "clear": true
+    },
+    {
+      "route": "house_window_stairs_window",
+      "segment": 3,
+      "clear": true
+    },
+    {
+      "route": "house_window_stairs_window",
+      "segment": 4,
+      "clear": true
+    },
+    {
+      "route": "house_window_stairs_window",
+      "segment": 5,
+      "clear": true
+    },
+    {
+      "route": "house_window_stairs_window",
+      "segment": 6,
+      "clear": true
+    },
+    {
+      "route": "tower_side_to_vertical",
+      "segment": 0,
+      "clear": true
+    },
+    {
+      "route": "tower_side_to_vertical",
+      "segment": 1,
+      "clear": true
+    },
+    {
+      "route": "rings",
+      "segment": 0,
+      "clear": true
+    },
+    {
+      "route": "rings",
+      "segment": 1,
+      "clear": true
+    },
+    {
+      "route": "rings",
+      "segment": 2,
+      "clear": true
+    },
+    {
+      "route": "rings",
+      "segment": 3,
+      "clear": true
+    }
+  ],
+  "stair_step_geometry_compatible_with_default_character": true,
+  "manual_flight_test": false,
+  "recorder_excluded_in_unsaved_test_cdo": true,
+  "success": true,
+  "error": ""
+}
