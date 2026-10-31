@@ -1,0 +1,55 @@
+﻿{
+    "success":  true,
+    "tests":  [
+                  {
+                      "name":  "Valid low-risk record renders",
+                      "passed":  true,
+                      "exitCode":  0
+                  },
+                  {
+                      "name":  "Missing acceptance rejected",
+                      "passed":  true,
+                      "exitCode":  1
+                  },
+                  {
+                      "name":  "Stale source snapshot rejected",
+                      "passed":  true,
+                      "exitCode":  1
+                  },
+                  {
+                      "name":  "Failed check cannot be verified",
+                      "passed":  true,
+                      "exitCode":  1
+                  },
+                  {
+                      "name":  "Foundation without review rejected",
+                      "passed":  true,
+                      "exitCode":  1
+                  },
+                  {
+                      "name":  "Two reviews without behavior rejected",
+                      "passed":  true,
+                      "exitCode":  1
+                  },
+                  {
+                      "name":  "Foundation with distinct evidence accepted structurally",
+                      "passed":  true,
+                      "exitCode":  0
+                  },
+                  {
+                      "name":  "Required skipped check rejected",
+                      "passed":  true,
+                      "exitCode":  1
+                  },
+                  {
+                      "name":  "Tampered evidence rejected",
+                      "passed":  true,
+                      "exitCode":  1
+                  },
+                  {
+                      "name":  "Partial remains explicit",
+                      "passed":  true,
+                      "exitCode":  0
+                  }
+              ]
+}

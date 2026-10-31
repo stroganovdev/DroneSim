@@ -1,0 +1,165 @@
+﻿{
+    "schemaVersion":  1,
+    "id":  "20261031-074100-quality-workflow",
+    "title":  "Журнал изменений и проверочный процесс",
+    "created":  "2026-10-31T07:41:00.4982669+03:00",
+    "risk":  "foundation",
+    "status":  "partial",
+    "baseline":  {
+                     "revision":  "c1cf39133b117bf20b0a33ddfa9c81e82bf8a6d5",
+                     "existingChanges":  [
+                                             " M .gitignore",
+                                             "?? .agents/skills/drone-quality/SKILL.md",
+                                             "?? AGENTS.md",
+                                             "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+                                             "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+                                             "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+                                             "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+                                             "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+                                             "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+                                             "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+                                             "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+                                             "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+                                             "?? DevelopmentWorkflow.md",
+                                             "?? Scripts/Invoke-QualityHarness.ps1",
+                                             "?? Scripts/New-ChangeRecord.ps1",
+                                             "?? Scripts/TestQualityHarness.ps1"
+                                         ]
+                 },
+    "request":  "Создать обязательный журнал значимых изменений, материал для девлога и повторную/независимую проверку основ будущих функций.",
+    "acceptance":  [
+                       "Запись не перезаписывает существующий журнал и фиксирует исходное состояние Git",
+                       "Провал/пропуск обязательной проверки и изменённый исходник запрещают verified",
+                       "Фундаментальные задачи требуют поведения и двух разных ревью",
+                       "Процесс сохраняется в репозитории, не меняет пользовательские записи/сохранения"
+                   ],
+    "changes":  [
+                    "Добавлены AGENTS.md, проектный навык и инструкция процесса",
+                    "Добавлены создание записи, сборка/тесты с доказательствами, валидация и Markdown-выжимка",
+                    "Добавлены отрицательные самотесты и независимое ревью harness"
+                ],
+    "decisions":  [
+                      "Одна запись на значимую задачу; не журнал каждого клика",
+                      "Никакой автоматической публикации, Git hooks или фонового слежения",
+                      "Независимый агент использует доступную модель; иной провайдер не подключается",
+                      "Завершённый JSON редактируемый, Markdown генерируется; сырьевые логи локальны"
+                  ],
+    "files":  [
+                  ".gitignore",
+                  "AGENTS.md",
+                  ".agents/skills/drone-quality/SKILL.md",
+                  "DevelopmentWorkflow.md",
+                  "Scripts/New-ChangeRecord.ps1",
+                  "Scripts/Invoke-QualityHarness.ps1",
+                  "Scripts/TestQualityHarness.ps1",
+                  "Development/Reviews/quality-workflow-review.md"
+              ],
+    "checks":  [
+                   {
+                       "name":  "editor-build",
+                       "method":  "compiler",
+                       "status":  "passed",
+                       "evidence":  "Saved/QualityHarness/20261031-074100-quality-workflow/20261031-074235-563/editor-build.log",
+                       "sha256":  "47E05B1E189396399B560A168BDDC666A5C317950CF333DA5FEDE43F50A09257",
+                       "detail":  "Exit=0; build script: Scripts/BuildDroneSimTestEditor.ps1",
+                       "revision":  "c1cf39133b117bf20b0a33ddfa9c81e82bf8a6d5",
+                       "scope":  [
+                                     " M .gitignore",
+                                     "?? .agents/skills/drone-quality/SKILL.md",
+                                     "?? AGENTS.md",
+                                     "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+                                     "?? Development/Changes/20261031-074100-quality-workflow.json",
+                                     "?? Development/Reviews/quality-workflow-review.md",
+                                     "?? DevelopmentWorkflow.md",
+                                     "?? Scripts/Invoke-QualityHarness.ps1",
+                                     "?? Scripts/New-ChangeRecord.ps1",
+                                     "?? Scripts/TestQualityHarness.ps1"
+                                 ]
+                   },
+                   {
+                       "name":  "native-tests",
+                       "method":  "automation",
+                       "status":  "passed",
+                       "evidence":  "Saved/QualityHarness/20261031-074100-quality-workflow/20261031-074235-563/Automation/index.json",
+                       "sha256":  "D4BD3A76BAB410D6F6281A65C5DD3CBEED9404F634E58835EAAF2DA17D2BB543",
+                       "detail":  "DroneSimTest suite: passed=3, failed=0, notRun=0",
+                       "revision":  "c1cf39133b117bf20b0a33ddfa9c81e82bf8a6d5",
+                       "scope":  [
+                                     " M .gitignore",
+                                     "?? .agents/skills/drone-quality/SKILL.md",
+                                     "?? AGENTS.md",
+                                     "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+                                     "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+                                     "?? Development/Changes/20261031-074100-quality-workflow.json",
+                                     "?? Development/Reviews/quality-workflow-review.md",
+                                     "?? DevelopmentWorkflow.md",
+                                     "?? Scripts/Invoke-QualityHarness.ps1",
+                                     "?? Scripts/New-ChangeRecord.ps1",
+                                     "?? Scripts/TestQualityHarness.ps1"
+                                 ]
+                   }
+               ],
+    "reviews":  [
+
+                ],
+    "limitations":  [
+                        "Структурная валидация не доказывает истинность ручных записей и полноту охвата",
+                        "Git hook/CI не установлены, процесс запускается агентом по AGENTS.md или вручную",
+                        "Старые задачи не восстановлены задним числом; старые отчёты остаются отдельными",
+                        "Реальные полёты, HID и Xbox этим harness автоматически не тестируются"
+                    ],
+    "contentNotes":  [
+                         "Разработка получила журнал с причинами решений и проверяемыми результатами для девлога",
+                         "Независимое ревью обнаружило, что первый валидатор мог пропустить старый зелёный отчёт — добавили хеши исходников",
+                         "Проверяем сам процесс проверок отрицательными сценариями, а не обещаем отсутствие багов"
+                     ],
+    "sourceHashes":  [
+                         {
+                             "path":  ".gitignore",
+                             "sha256":  "DBEB6321CFBF377C636CE17528D7FAAB343A3076C6142930A50E730660ED4B66"
+                         },
+                         {
+                             "path":  "AGENTS.md",
+                             "sha256":  "1ACED59F1E3A22A5C026A63527F709F42D0C497F5F12E5DA1236CD3F62263E2E"
+                         },
+                         {
+                             "path":  ".agents/skills/drone-quality/SKILL.md",
+                             "sha256":  "D2EC0DD9894A6DEA60363BE1C75159DBD8C824F97EC9F4C1FADD73E86049B5D2"
+                         },
+                         {
+                             "path":  "DevelopmentWorkflow.md",
+                             "sha256":  "85B1BB111A39D4705239359641C6BA42832C10129F90DFD46A8E05CD7F0AF316"
+                         },
+                         {
+                             "path":  "Scripts/New-ChangeRecord.ps1",
+                             "sha256":  "6CEFABE89477E6E0B79FCC0B54C2F1A066C795221105D21850968137E9E14952"
+                         },
+                         {
+                             "path":  "Scripts/Invoke-QualityHarness.ps1",
+                             "sha256":  "E61B7F6CBCC8FF8961589E1BCC6EAE002D2BD83C6B5E0E7985825471D8EB3216"
+                         },
+                         {
+                             "path":  "Scripts/TestQualityHarness.ps1",
+                             "sha256":  "83EA66F83B43BD407DA4A73C77FDBA83F5A1471DD8CFD47143D9B374B9A6E975"
+                         },
+                         {
+                             "path":  "Development/Reviews/quality-workflow-review.md",
+                             "sha256":  "3D8B3C1841440CFDC6D2E9651EBE00CB9DC6AF24AE0BFA3F3BDBA650DB999F32"
+                         }
+                     ]
+}
