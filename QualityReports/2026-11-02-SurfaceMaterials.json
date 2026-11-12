@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "asset_count": 3,
+  "dependencies": {
+    "/Game/DroneTest/Materials/Layers/MLB_SurfaceBlend": [
+      "/Engine/EngineResources/WhiteSquareTexture"
+    ],
+    "/Game/DroneTest/Materials/Layers/ML_Surface": [
+      "/Engine/EngineResources/WhiteSquareTexture",
+      "/Engine/EngineMaterials/DefaultNormal",
+      "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB",
+      "/Engine/Functions/Engine_MaterialFunctions01/Texturing/FlattenNormal"
+    ],
+    "/Game/DroneTest/Materials/Masters/MM_Backrooms": [
+      "/Engine/EngineResources/WhiteSquareTexture",
+      "/Game/DroneTest/Materials/Layers/ML_Surface",
+      "/Engine/EngineMaterials/DefaultNormal",
+      "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB",
+      "/Engine/Functions/Engine_MaterialFunctions01/Texturing/FlattenNormal",
+      "/Engine/EngineDebugMaterials/HeatmapGradient"
+    ]
+  },
+  "master_compile_errors": [],
+  "extension_compile_errors": [],
+  "consumer_override_readback": true,
+  "clear_override_recovery": true,
+  "flatness_saturate_connected": true,
+  "master_stats": "<Struct 'MaterialStatistics' (0x0000025633C73280) {num_vertex_shader_instructions: 153, num_pixel_shader_instructions: 221, num_samplers: 4, num_vertex_texture_samples: 3, num_pixel_texture_samples: 3, num_virtual_texture_samples: 0, num_uv_scalars: 2, num_interpolator_scalars: 0}>",
+  "extension_stats": "<Struct 'MaterialStatistics' (0x0000025633C77BE0) {num_vertex_shader_instructions: 155, num_pixel_shader_instructions: 267, num_samplers: 8, num_vertex_texture_samples: 3, num_pixel_texture_samples: 10, num_virtual_texture_samples: 0, num_uv_scalars: 4, num_interpolator_scalars: 0}>",
+  "map_modified": false,
+  "consumer_assets_saved": false
+}

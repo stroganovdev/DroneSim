@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "id": "20261102-081209-material-foundation",
+  "title": "Minimal reusable surface material foundation",
+  "created": "2026-11-02T08:12:09.0008116+03:00",
+  "risk": "foundation",
+  "status": "verified",
+  "baseline": {
+    "revision": "b592b921e5725a8cff221c77d24b34a12b1713bf",
+    "existingChanges": [
+      "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261102_072307.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261102_072703.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261102_072741.uasset",
+      "?? Content/FlightRecords/FlightRecord_20261102_073651.uasset"
+    ]
+  },
+  "request": "Перенести только мастер, базовый слой и blend из AnomalyLoop, без старых текстур и экземпляров; подготовить папку Instances.",
+  "acceptance": [
+    "Only three reusable assets; no AnomalyLoop texture references",
+    "Neutral engine defaults; bounded flatness; readable blend parameters",
+    "Create transient consumer instance and verify compile plus missing-texture recovery",
+    "Existing map and FlightRecords unchanged; Editor build succeeds"
+  ],
+  "changes": [
+    "Added exactly master MM_Backrooms, layer ML_Surface and optional MLB_SurfaceBlend",
+    "Replaced old textures with neutral Engine defaults; flatness bounded0..1 with default0",
+    "Renamed blend parameters, prepared empty Instances folder and authoring guide",
+    "Added disposable consumer/override recovery/two-layer compilation verification"
+  ],
+  "decisions": [
+    "Foundation risk: shared material parameter contract",
+    "Stage only three original packages, duplicate and sanitize in target, remove temporary originals after verification"
+  ],
+  "files": [
+    "Scripts/ImportSurfaceMaterials.py",
+    "Scripts/VerifySurfaceMaterials.py",
+    "SurfaceMaterials.md",
+    "Content/DroneTest/Materials/Instances/.gitkeep",
+    "Content/DroneTest/Materials/Masters/MM_Backrooms.uasset",
+    "Content/DroneTest/Materials/Layers/ML_Surface.uasset",
+    "Content/DroneTest/Materials/Layers/MLB_SurfaceBlend.uasset",
+    "Development/Reviews/2026-11-02-surface-materials.md"
+  ],
+  "checks": [
+    {
+      "name": "editor-build",
+      "method": "compiler",
+      "status": "passed",
+      "evidence": "Saved/QualityHarness/20261102-081209-material-foundation/20261102-082118-650/editor-build.log",
+      "sha256": "301892CBB2F936943787ED3D8EA48DE5E0F34066348BAC468C7F6E5F24B7AFFD",
+      "detail": "Exit=0; build script: Scripts/BuildDroneSimTestEditor.ps1",
+      "revision": "b592b921e5725a8cff221c77d24b34a12b1713bf",
+      "scope": [
+        "?? Content/DroneTest/Materials/Instances/.gitkeep",
+        "?? Content/DroneTest/Materials/Layers/MLB_SurfaceBlend.uasset",
+        "?? Content/DroneTest/Materials/Layers/ML_Surface.uasset",
+        "?? Content/DroneTest/Materials/Masters/MM_Backrooms.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072307.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072703.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072741.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_073651.uasset",
+        "?? Development/Changes/20261102-081209-material-foundation.json",
+        "?? Development/Reviews/2026-11-02-surface-materials.md",
+        "?? QualityReports/2026-11-02-SurfaceMaterials.json",
+        "?? Scripts/ImportSurfaceMaterials.py",
+        "?? Scripts/VerifySurfaceMaterials.py",
+        "?? SurfaceMaterials.md"
+      ]
+    },
+    {
+      "name": "material-consumer",
+      "method": "dx12-sm6-consumer-and-recovery",
+      "status": "passed",
+      "evidence": "QualityReports/2026-11-02-SurfaceMaterials.json",
+      "sha256": "44569A965CF57B73C321310E0C7C883540C0C07F2B72D11C1770EAAA59B9686D",
+      "revision": "b592b921e5725a8cff221c77d24b34a12b1713bf",
+      "scope": [
+        "?? Content/DroneTest/Materials/Instances/.gitkeep",
+        "?? Content/DroneTest/Materials/Layers/MLB_SurfaceBlend.uasset",
+        "?? Content/DroneTest/Materials/Layers/ML_Surface.uasset",
+        "?? Content/DroneTest/Materials/Masters/MM_Backrooms.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072307.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072703.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072741.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_073651.uasset",
+        "?? Development/Changes/20261102-081209-material-foundation.json",
+        "?? Development/Reviews/2026-11-02-surface-materials.md",
+        "?? QualityReports/2026-11-02-SurfaceMaterials.json",
+        "?? Scripts/ImportSurfaceMaterials.py",
+        "?? Scripts/VerifySurfaceMaterials.py",
+        "?? SurfaceMaterials.md"
+      ],
+      "detail": "Final verification after source snapshot: exit0; three foundation assets loaded without old packages; valid stack/root, instance readback, Tiling reset2 to1, optional two-layer compile; no saved test assets. Raw Saved/Logs/VerifySurfaceMaterials-Final.log."
+    },
+    {
+      "name": "diff-review",
+      "method": "scope-and-dependency-review",
+      "status": "passed",
+      "evidence": "Development/Reviews/2026-11-02-surface-materials.md",
+      "sha256": "6FACA9B8F4EC3CD216B60087CCBD99B4CB38E69EF87A19D7D65A14C6DB192FAD",
+      "revision": "b592b921e5725a8cff221c77d24b34a12b1713bf",
+      "scope": [
+        "?? Content/DroneTest/Materials/Instances/.gitkeep",
+        "?? Content/DroneTest/Materials/Layers/MLB_SurfaceBlend.uasset",
+        "?? Content/DroneTest/Materials/Layers/ML_Surface.uasset",
+        "?? Content/DroneTest/Materials/Masters/MM_Backrooms.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261027_100617.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070901.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_070934.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071002.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071152.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071242.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071259.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_071326.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261031_072421.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072307.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072703.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_072741.uasset",
+        "?? Content/FlightRecords/FlightRecord_20261102_073651.uasset",
+        "?? Development/Changes/20261102-081209-material-foundation.json",
+        "?? Development/Reviews/2026-11-02-surface-materials.md",
+        "?? QualityReports/2026-11-02-SurfaceMaterials.json",
+        "?? Scripts/ImportSurfaceMaterials.py",
+        "?? Scripts/VerifySurfaceMaterials.py",
+        "?? SurfaceMaterials.md"
+      ],
+      "detail": "All added implementation files match scoped snapshot. Existing tracked files/map untouched,13original FlightRecords still untracked; source AnomalyLoop git clean."
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer": "author-self-review",
+      "method": "graph-contract-and-failure-inspection",
+      "status": "passed",
+      "evidence": "Development/Reviews/2026-11-02-surface-materials.md",
+      "detail": "Inspected topology, bounded flatness, neutral defaults, saved metadata and foreign dependency closure against accepted minimal contract."
+    },
+    {
+      "reviewer": "independent-agent:/root/review_material_foundation",
+      "method": "independent-future-consumer-review",
+      "status": "passed",
+      "evidence": "Development/Reviews/2026-11-02-surface-materials.md",
+      "detail": "Same-model read-only reviewer inspected source and execution evidence; stack atomicity, future Instances and observable recovery findings resolved; no remaining blockers."
+    }
+  ],
+  "limitations": [
+    "No map assignments, Shipping cook, GPU frame-time profiling or user-artwork visual tuning",
+    "Existing MSVC14.51 newer than preferred14.50 warning; test AssetRegistry string lookup deprecated"
+  ],
+  "contentNotes": [
+    "Из собственного AnomalyLoop перенесена только основа материалов, без старых обоев и ковров",
+    "Один лёгкий слой по умолчанию, дополнительные слои подключаются по необходимости",
+    "Тест нового экземпляра обнаружил особенности Unreal API: false от setter проверяем чтением; стек строим целиком",
+    "Готовая основа для собственных текстур; визуальный стиль уровня пока не изменён"
+  ],
+  "sourceHashes": [
+    {
+      "path": "Scripts/ImportSurfaceMaterials.py",
+      "sha256": "48422C9221F9AABF7D268F1FB3E45C9EB1E847260E18F2896FB02F5DD8B44BD1"
+    },
+    {
+      "path": "Scripts/VerifySurfaceMaterials.py",
+      "sha256": "C046576829B2A77324C996B373E2383A45C3D9EA9F5D59081A3A0664766107DC"
+    },
+    {
+      "path": "SurfaceMaterials.md",
+      "sha256": "CB926B3E6C3F458BFB283997765366DDCD3591B9075793D672D30166BEABE0F4"
+    },
+    {
+      "path": "Content/DroneTest/Materials/Instances/.gitkeep",
+      "sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "path": "Content/DroneTest/Materials/Masters/MM_Backrooms.uasset",
+      "sha256": "173556900BC739FCA0712D02CE7294521700CA868261AFAB82672FD8F9E493E6"
+    },
+    {
+      "path": "Content/DroneTest/Materials/Layers/ML_Surface.uasset",
+      "sha256": "90D3714A4BF3A5AF5BE2121F35871721FE952B97070A3703E5F22080E8EE16BB"
+    },
+    {
+      "path": "Content/DroneTest/Materials/Layers/MLB_SurfaceBlend.uasset",
+      "sha256": "0F52DB1A778E9408DC11DF43486DBE5A93ABCCC9E2D536A67082CDC900CD1CE3"
+    },
+    {
+      "path": "Development/Reviews/2026-11-02-surface-materials.md",
+      "sha256": "6FACA9B8F4EC3CD216B60087CCBD99B4CB38E69EF87A19D7D65A14C6DB192FAD"
+    }
+  ]
+}
